@@ -125,8 +125,9 @@ graph TD
 - Micro SD 卡 (8GB+)
 - USB 線材
 - 網路線 (可選)
+- 無線網卡
 
-### 2. Vivado 專案建置
+### 2. Vivado 專案建置(lab_1)
 ```bash
 # 開啟 Vivado 2020.2
 cd vivado/
@@ -136,21 +137,21 @@ vivado project_1.xpr
 # Implementation → Generate Bitstream
 ```
 
-### 3. Vitis 獨立應用測試
+### 3. Vitis 獨立應用測試(lab_1)
 ```bash
 cd Vitis/final/
 # 在 Vitis 中導入專案並編譯
 # 下載到開發板測試各 IP 功能
 ```
 
-### 4. FreeRTOS 多任務系統
+### 4. FreeRTOS 多任務系統(lab_2)
 ```bash
 cd FreeRTOS/testfinalFreeRTOS*/
 # 編譯並下載 FreeRTOS 應用
 # 觀察多任務執行效果
 ```
 
-### 5. Linux 驅動編譯與載入
+### 5. Linux 驅動編譯與載入(lab_3,4)
 ```bash
 # 編譯驅動模組
 cd Linux_driver_and_application/
@@ -198,7 +199,7 @@ cd work_file/
 - [ ] 優化系統整體性能
 - [ ] 增加圖形化使用者介面
 
-## 開發心得 💭
+## 開發心得 
 
 ### 技術挑戰
 1. **硬體軟體協同設計**：需要同時掌握 FPGA 設計和嵌入式軟體開發
@@ -206,13 +207,8 @@ cd work_file/
 3. **即時系統設計**：FreeRTOS 多任務調度和同步機制
 4. **驅動程式開發**：Linux kernel 模組的開發和除錯
 
-### 收穫總結
-- 深入理解嵌入式系統完整開發流程
-- 掌握 Xilinx 工具鏈的使用方法
-- 學會硬體加速算法的設計實現
-- 提升系統級問題分析和解決能力
 
-## 貢獻指南 🤝
+## 貢獻指南 
 
 歡迎對本專案提出改進建議或提交 Pull Request：
 
@@ -222,17 +218,15 @@ cd work_file/
 4. 推送到分支 (`git push origin feature/AmazingFeature`)
 5. 開啟 Pull Request
 
-## 授權資訊 📄
+## 授權資訊 
 
 本專案採用 MIT 授權 - 詳見 [LICENSE](LICENSE) 檔案
 
-## 聯絡資訊 📧
+## 聯絡資訊 
 
-- **專案作者**：嵌入式系統課程學生
-- **指導教授**：[教授姓名]
-- **學校**：[學校名稱]
+- **電子信箱**：[S1052016@gm.ncue.edu.tw]
 
-## 致謝 🙏
+## 致謝 
 
 感謝以下開源專案和資源：
 - Xilinx Vivado 和 Vitis 開發工具
