@@ -1,0 +1,330 @@
+#include <stdio.h>
+#include <stdint.h>
+#include <unistd.h>
+#include "xil_io.h"
+#include "xparameters.h"
+
+// AES IP Base Address - 根據block design修改為正確的名稱
+#define AES_IP_BASE_ADDR    XPAR_AES_final_0_S00_AXI_BASEADDR
+
+// AES Register Offsets
+#define AES_CONTROL_REG     0x00    // [1:0] = {start, mode}
+#define AES_STATUS_REG      0x04    // [0] = done, [1] = busy
+#define AES_KEY_127_96      0x08    // Key[127:96]
+#define AES_KEY_95_64       0x0C    // Key[95:64]
+#define AES_KEY_63_32       0x10    // Key[63:32]
+#define AES_KEY_31_0        0x14    // Key[31:0]
+#define AES_DATA_IN_127_96  0x18    // Data_In[127:96]
+#define AES_DATA_IN_95_64   0x1C    // Data_In[95:64]
+#define AES_DATA_IN_63_32   0x20    // Data_In[63:32]
+#define AES_DATA_IN_31_0    0x24    // Data_In[31:0]
+#define AES_DATA_OUT_127_96 0x28    // Data_Out[127:96] (Read Only)
+#define AES_DATA_OUT_95_64  0x2C    // Data_Out[95:64] (Read Only)
+#define AES_DATA_OUT_63_32  0x30    // Data_Out[63:32] (Read Only)
+#define AES_DATA_OUT_31_0   0x34    // Data_Out[31:0] (Read Only)
+
+// Control Register Bits
+#define AES_START_BIT       0x01    // bit 0
+#define AES_MODE_BIT        0x02    // bit 1: 1=encrypt, 0=decrypt
+
+// Status Register Bits
+#define AES_DONE_BIT        0x01    // bit 0
+#define AES_BUSY_BIT        0x02    // bit 1
+
+// Test vectors from testbench.vhd
+static const uint32_t TEST_KEY[4] = {
+    0x2b7e1516,     // Key[127:96]
+    0x28aed2a6,     // Key[95:64]
+    0xabf71588,     // Key[63:32]
+    0x09cf4f3c      // Key[31:0]
+};
+
+static const uint32_t TEST_PLAINTEXT[4] = {
+    0x00112233,     // Data[127:96]
+    0x44556677,     // Data[95:64]
+    0x8899aabb,     // Data[63:32]
+    0xccddeeff      // Data[31:0]
+};
+
+static const uint32_t EXPECTED_CIPHER[4] = {
+    0x69c4e0d8,     // Expected[127:96]
+    0x6a7b0430,     // Expected[95:64]
+    0xd8cdb780,     // Expected[63:32]
+    0x70b4c55a      // Expected[31:0]
+};
+
+// Function prototypes
+void aes_write_key(const uint32_t key[4]);
+void aes_write_data(const uint32_t data[4]);
+void aes_read_data(uint32_t data[4]);
+int aes_start_operation(int mode);
+int aes_wait_done(void);
+void print_data(const char* label, const uint32_t data[4]);
+int compare_data(const uint32_t data1[4], const uint32_t data2[4]);
+void debug_print_registers(const char* stage);
+void print_control_status_detail(void);
+
+int main() {
+    printf("=== AES-128 IP Test Program ===\n");
+    printf("Test Key: 2b7e151628aed2a6abf7158809cf4f3c\n");
+    printf("Test Plaintext: 00112233445566778899aabbccddeeff\n");
+    printf("Expected Cipher: 69c4e0d86a7b0430d8cdb78070b4c55a\n\n");
+
+    uint32_t encrypted_result[4];
+    uint32_t decrypted_result[4];
+    int test_passed = 1;
+
+    // Reset control register
+    Xil_Out32(AES_IP_BASE_ADDR + AES_CONTROL_REG, 0x00);
+    usleep(1000); // Wait 1ms
+
+    // Print initial state
+    debug_print_registers("Initial Reset State");
+
+    //=== Phase 1: Encryption Test ===
+    printf("=== Starting Encryption Test ===\n");
+
+    // Write test key and plaintext
+    aes_write_key(TEST_KEY);
+    aes_write_data(TEST_PLAINTEXT);
+
+    print_data("Input Key", TEST_KEY);
+    print_data("Input Plaintext", TEST_PLAINTEXT);
+
+    // Print state after data loading
+    debug_print_registers("After Loading Key & Data for Encryption");
+
+    // Start encryption (mode = 1)
+    if (aes_start_operation(1) != 0) {
+        printf("ERROR: Failed to start encryption operation\n");
+        return -1;
+    }
+
+    // Print state after starting operation
+    debug_print_registers("After Starting Encryption Operation");
+
+    // Wait for completion
+    if (aes_wait_done() != 0) {
+        printf("ERROR: Encryption operation timeout\n");
+        return -1;
+    }
+
+    // Read encrypted result
+    aes_read_data(encrypted_result);
+
+    // Print state after encryption completion
+    debug_print_registers("After Encryption Completion");
+
+    print_data("Encrypted Result", encrypted_result);
+    print_data("Expected Cipher", EXPECTED_CIPHER);
+
+    // Verify encryption result
+    if (compare_data(encrypted_result, EXPECTED_CIPHER)) {
+        printf("✓ PASS: Encryption test passed!\n\n");
+    } else {
+        printf("✗ FAIL: Encryption test failed!\n\n");
+        test_passed = 0;
+    }
+
+    // Wait between operations
+    usleep(10000); // Wait 10ms
+
+    //=== Phase 2: Decryption Test ===
+    printf("=== Starting Decryption Test ===\n");
+
+    // Write same key and encrypted result as input
+    aes_write_key(TEST_KEY);
+    aes_write_data(encrypted_result);
+
+    print_data("Input Key", TEST_KEY);
+    print_data("Input Ciphertext", encrypted_result);
+
+    // Print state after data loading for decryption
+    debug_print_registers("After Loading Key & Data for Decryption");
+
+    // Start decryption (mode = 0)
+    if (aes_start_operation(0) != 0) {
+        printf("ERROR: Failed to start decryption operation\n");
+        return -1;
+    }
+
+    // Print state after starting decryption operation
+    debug_print_registers("After Starting Decryption Operation");
+
+    // Wait for completion
+    if (aes_wait_done() != 0) {
+        printf("ERROR: Decryption operation timeout\n");
+        return -1;
+    }
+
+    // Read decrypted result
+    aes_read_data(decrypted_result);
+
+    // Print state after decryption completion
+    debug_print_registers("After Decryption Completion");
+
+    print_data("Decrypted Result", decrypted_result);
+    print_data("Original Plaintext", TEST_PLAINTEXT);
+
+    // Verify decryption result
+    if (compare_data(decrypted_result, TEST_PLAINTEXT)) {
+        printf("✓ PASS: Decryption test passed! Successfully recovered original text!\n\n");
+    } else {
+        printf("✗ FAIL: Decryption test failed! Cannot recover original text!\n\n");
+        test_passed = 0;
+    }
+
+    //=== Final Result ===
+    printf("=== Test Complete ===\n");
+    if (test_passed) {
+        printf("✓ ALL TESTS PASSED: AES IP is working correctly!\n");
+        return 0;
+    } else {
+        printf("✗ SOME TESTS FAILED: Please check AES IP implementation\n");
+        return -1;
+    }
+}
+
+void aes_write_key(const uint32_t key[4]) {
+    Xil_Out32(AES_IP_BASE_ADDR + AES_KEY_127_96, key[0]);
+    Xil_Out32(AES_IP_BASE_ADDR + AES_KEY_95_64,  key[1]);
+    Xil_Out32(AES_IP_BASE_ADDR + AES_KEY_63_32,  key[2]);
+    Xil_Out32(AES_IP_BASE_ADDR + AES_KEY_31_0,   key[3]);
+}
+
+void aes_write_data(const uint32_t data[4]) {
+    Xil_Out32(AES_IP_BASE_ADDR + AES_DATA_IN_127_96, data[0]);
+    Xil_Out32(AES_IP_BASE_ADDR + AES_DATA_IN_95_64,  data[1]);
+    Xil_Out32(AES_IP_BASE_ADDR + AES_DATA_IN_63_32,  data[2]);
+    Xil_Out32(AES_IP_BASE_ADDR + AES_DATA_IN_31_0,   data[3]);
+}
+
+void aes_read_data(uint32_t data[4]) {
+    data[0] = Xil_In32(AES_IP_BASE_ADDR + AES_DATA_OUT_127_96);
+    data[1] = Xil_In32(AES_IP_BASE_ADDR + AES_DATA_OUT_95_64);
+    data[2] = Xil_In32(AES_IP_BASE_ADDR + AES_DATA_OUT_63_32);
+    data[3] = Xil_In32(AES_IP_BASE_ADDR + AES_DATA_OUT_31_0);
+}
+
+int aes_start_operation(int mode) {
+    uint32_t control_value = AES_START_BIT;
+    if (mode == 1) {
+        control_value |= AES_MODE_BIT; // Set mode bit for encryption
+    }
+
+    printf("Starting AES operation (mode=%s)...\n", mode ? "encrypt" : "decrypt");
+
+    // Write control register to start operation
+    Xil_Out32(AES_IP_BASE_ADDR + AES_CONTROL_REG, control_value);
+
+    // Check if busy bit is set
+    usleep(1000); // Wait 1ms
+    uint32_t status = Xil_In32(AES_IP_BASE_ADDR + AES_STATUS_REG);
+    if (!(status & AES_BUSY_BIT)) {
+        printf("Warning: Busy bit not set after start\n");
+    }
+
+    return 0;
+}
+
+int aes_wait_done(void) {
+    int timeout_count = 0;
+    const int max_timeout = 10000; // 10 seconds timeout
+
+    printf("Waiting for operation to complete...\n");
+
+    while (timeout_count < max_timeout) {
+        uint32_t status = Xil_In32(AES_IP_BASE_ADDR + AES_STATUS_REG);
+
+        if (status & AES_DONE_BIT) {
+            printf("Operation completed successfully!\n");
+            return 0;
+        }
+
+        usleep(1000); // Wait 1ms
+        timeout_count++;
+
+        // Print progress every second
+        if (timeout_count % 1000 == 0) {
+            printf("Waiting... (%d seconds)\n", timeout_count / 1000);
+        }
+    }
+
+    printf("Operation timeout!\n");
+    return -1;
+}
+
+void print_data(const char* label, const uint32_t data[4]) {
+    printf("%s: %08lx%08lx%08lx%08lx\n", label,
+           (unsigned long)data[0], (unsigned long)data[1],
+           (unsigned long)data[2], (unsigned long)data[3]);
+}
+
+int compare_data(const uint32_t data1[4], const uint32_t data2[4]) {
+    for (int i = 0; i < 4; i++) {
+        if (data1[i] != data2[i]) {
+            printf("Mismatch at word %d: got %08lx, expected %08lx\n",
+                   i, (unsigned long)data1[i], (unsigned long)data2[i]);
+            return 0;
+        }
+    }
+    return 1;
+}
+
+// Enhanced debug function to check register status with detailed info
+void debug_print_registers(const char* stage) {
+    printf("\n==========================================\n");
+    printf("=== DEBUG: %s ===\n", stage);
+    printf("==========================================\n");
+
+    // Print control and status with bit details
+    print_control_status_detail();
+
+    // Print Key registers
+    printf("--- Key Registers ---\n");
+    printf("Key[127:96]: 0x%08lx\n", (unsigned long)Xil_In32(AES_IP_BASE_ADDR + AES_KEY_127_96));
+    printf("Key[95:64]:  0x%08lx\n", (unsigned long)Xil_In32(AES_IP_BASE_ADDR + AES_KEY_95_64));
+    printf("Key[63:32]:  0x%08lx\n", (unsigned long)Xil_In32(AES_IP_BASE_ADDR + AES_KEY_63_32));
+    printf("Key[31:0]:   0x%08lx\n", (unsigned long)Xil_In32(AES_IP_BASE_ADDR + AES_KEY_31_0));
+
+    // Print Input Data registers
+    printf("--- Input Data Registers ---\n");
+    printf("In[127:96]:  0x%08lx\n", (unsigned long)Xil_In32(AES_IP_BASE_ADDR + AES_DATA_IN_127_96));
+    printf("In[95:64]:   0x%08lx\n", (unsigned long)Xil_In32(AES_IP_BASE_ADDR + AES_DATA_IN_95_64));
+    printf("In[63:32]:   0x%08lx\n", (unsigned long)Xil_In32(AES_IP_BASE_ADDR + AES_DATA_IN_63_32));
+    printf("In[31:0]:    0x%08lx\n", (unsigned long)Xil_In32(AES_IP_BASE_ADDR + AES_DATA_IN_31_0));
+
+    // Print Output Data registers
+    printf("--- Output Data Registers ---\n");
+    printf("Out[127:96]: 0x%08lx\n", (unsigned long)Xil_In32(AES_IP_BASE_ADDR + AES_DATA_OUT_127_96));
+    printf("Out[95:64]:  0x%08lx\n", (unsigned long)Xil_In32(AES_IP_BASE_ADDR + AES_DATA_OUT_95_64));
+    printf("Out[63:32]:  0x%08lx\n", (unsigned long)Xil_In32(AES_IP_BASE_ADDR + AES_DATA_OUT_63_32));
+    printf("Out[31:0]:   0x%08lx\n", (unsigned long)Xil_In32(AES_IP_BASE_ADDR + AES_DATA_OUT_31_0));
+
+    printf("==========================================\n\n");
+}
+
+// Detailed control and status register decoder
+void print_control_status_detail(void) {
+    uint32_t control = Xil_In32(AES_IP_BASE_ADDR + AES_CONTROL_REG);
+    uint32_t status = Xil_In32(AES_IP_BASE_ADDR + AES_STATUS_REG);
+
+    printf("--- Control & Status Registers ---\n");
+    printf("Control Reg: 0x%08lx\n", (unsigned long)control);
+    printf("  - START bit [0]: %d (%s)\n",
+           (control & AES_START_BIT) ? 1 : 0,
+           (control & AES_START_BIT) ? "ACTIVE" : "INACTIVE");
+    printf("  - MODE bit [1]:  %d (%s)\n",
+           (control & AES_MODE_BIT) ? 1 : 0,
+           (control & AES_MODE_BIT) ? "ENCRYPT" : "DECRYPT");
+    printf("  - Reserved [31:2]: 0x%08lx\n", (unsigned long)((control >> 2) & 0x3FFFFFFF));
+
+    printf("Status Reg:  0x%08lx\n", (unsigned long)status);
+    printf("  - DONE bit [0]: %d (%s)\n",
+           (status & AES_DONE_BIT) ? 1 : 0,
+           (status & AES_DONE_BIT) ? "COMPLETED" : "NOT_DONE");
+    printf("  - BUSY bit [1]: %d (%s)\n",
+           (status & AES_BUSY_BIT) ? 1 : 0,
+           (status & AES_BUSY_BIT) ? "BUSY" : "IDLE");
+    printf("  - Reserved [31:2]: 0x%08lx\n", (unsigned long)((status >> 2) & 0x3FFFFFFF));
+}

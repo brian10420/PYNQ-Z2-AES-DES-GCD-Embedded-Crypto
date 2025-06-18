@@ -1,0 +1,110 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Sun Jun 15 03:45:39 2025
+# Process ID: 2076
+# Current directory: C:/embeding_system/project_2_final
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent9412 C:\embeding_system\project_2_final\project_1.xpr
+# Log file: C:/embeding_system/project_2_final/vivado.log
+# Journal file: C:/embeding_system/project_2_final\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/embeding_system/project_2_final/project_1.xpr
+update_compile_order -fileset sources_1
+open_bd_design {C:/embeding_system/project_2_final/project_1.srcs/sources_1/bd/system/system.bd}
+delete_bd_objs [get_bd_intf_nets ps7_0_axi_periph_M01_AXI] [get_bd_nets btn_0_1] [get_bd_nets switch_0_1] [get_bd_nets myhwip_0_led] [get_bd_nets myhwip_0_intr] [get_bd_cells myhwip_0]
+update_ip_catalog -rebuild
+set_property  ip_repo_paths  {} [current_project]
+update_ip_catalog
+set_property  ip_repo_paths  C:/embeding_system/project_2_final/ip_repo [current_project]
+update_ip_catalog
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:user:inter_ip:1.0 inter_ip_0
+endgroup
+set_property location {1 136 23} [get_bd_cells inter_ip_0]
+connect_bd_net [get_bd_ports btn] [get_bd_pins inter_ip_0/btn]
+connect_bd_net [get_bd_ports switch] [get_bd_pins inter_ip_0/switch]
+connect_bd_net [get_bd_ports LED] [get_bd_pins inter_ip_0/intr]
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/processing_system7_0/FCLK_CLK0 (100 MHz)} Clk_slave {Auto} Clk_xbar {/processing_system7_0/FCLK_CLK0 (100 MHz)} Master {/processing_system7_0/M_AXI_GP0} Slave {/inter_ip_0/S00_AXI} ddr_seg {Auto} intc_ip {/ps7_0_axi_periph} master_apm {0}}  [get_bd_intf_pins inter_ip_0/S00_AXI]
+delete_bd_objs [get_bd_nets inter_ip_0_intr]
+connect_bd_net [get_bd_ports LED] [get_bd_pins inter_ip_0/led]
+connect_bd_net [get_bd_pins inter_ip_0/intr] [get_bd_pins processing_system7_0/IRQ_F2P]
+regenerate_bd_layout
+export_ip_user_files -of_objects  [get_files C:/embeding_system/project_2_final/project_1.srcs/constrs_1/new/lab1_2.xdc] -no_script -reset -force -quiet
+remove_files  -fileset constrs_1 C:/embeding_system/project_2_final/project_1.srcs/constrs_1/new/lab1_2.xdc
+save_bd_design
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+wait_on_run impl_1
+delete_bd_objs [get_bd_nets inter_ip_0_led] [get_bd_ports LED]
+startgroup
+make_bd_pins_external  [get_bd_pins inter_ip_0/led]
+endgroup
+delete_bd_objs [get_bd_nets switch_1] [get_bd_ports switch]
+startgroup
+make_bd_pins_external  [get_bd_pins inter_ip_0/switch]
+endgroup
+delete_bd_objs [get_bd_nets btn_1] [get_bd_ports btn]
+startgroup
+make_bd_pins_external  [get_bd_pins inter_ip_0/btn]
+endgroup
+save_bd_design
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+wait_on_run impl_1
+set_property location {-30 473} [get_bd_ports switch_0]
+regenerate_bd_layout
+set_property needs_refresh false [get_runs synth_1]
+set_property needs_refresh false [get_runs impl_1]
+set_property needs_refresh false [get_runs system_processing_system7_0_0_synth_1]
+set_property needs_refresh false [get_runs system_rst_ps7_0_100M_0_synth_1]
+set_property needs_refresh false [get_runs system_xbar_0_synth_1]
+set_property needs_refresh false [get_runs system_inter_ip_0_0_synth_1]
+report_ports
+reset_run impl_1 -prev_step 
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+wait_on_run impl_1
+reset_run synth_1
+launch_runs synth_1 -jobs 8
+wait_on_run synth_1
+delete_bd_objs [get_bd_nets inter_ip_0_led] [get_bd_ports led_0]
+startgroup
+make_bd_pins_external  [get_bd_pins inter_ip_0/led]
+endgroup
+save_bd_design
+set_property name btn [get_bd_ports btn_0]
+save_bd_design
+set_property name switch [get_bd_ports switch_0]
+save_bd_design
+set_property name led [get_bd_ports led_0]
+save_bd_design
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+wait_on_run impl_1
+write_hw_platform -fixed -include_bit -force -file C:/embeding_system/project_2_final/system_wrapper.xsa
+update_ip_catalog -rebuild
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:user:AES_ip:10.0 AES_ip_0
+endgroup
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/processing_system7_0/FCLK_CLK0 (100 MHz)} Clk_slave {Auto} Clk_xbar {/processing_system7_0/FCLK_CLK0 (100 MHz)} Master {/processing_system7_0/M_AXI_GP0} Slave {/AES_ip_0/S00_AXI} ddr_seg {Auto} intc_ip {/ps7_0_axi_periph} master_apm {0}}  [get_bd_intf_pins AES_ip_0/S00_AXI]
+regenerate_bd_layout
+startgroup
+set_property -dict [list CONFIG.NUM_MI {4}] [get_bd_cells ps7_0_axi_periph]
+endgroup
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:user:gcdip:1.0 gcdip_0
+endgroup
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:user:desip:1.0 desip_0
+endgroup
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/processing_system7_0/FCLK_CLK0 (100 MHz)} Clk_slave {Auto} Clk_xbar {/processing_system7_0/FCLK_CLK0 (100 MHz)} Master {/processing_system7_0/M_AXI_GP0} Slave {/desip_0/S00_AXI} ddr_seg {Auto} intc_ip {/ps7_0_axi_periph} master_apm {0}}  [get_bd_intf_pins desip_0/S00_AXI]
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/processing_system7_0/FCLK_CLK0 (100 MHz)} Clk_slave {Auto} Clk_xbar {/processing_system7_0/FCLK_CLK0 (100 MHz)} Master {/processing_system7_0/M_AXI_GP0} Slave {/gcdip_0/S00_AXI} ddr_seg {Auto} intc_ip {/ps7_0_axi_periph} master_apm {0}}  [get_bd_intf_pins gcdip_0/S00_AXI]
+endgroup
+regenerate_bd_layout
+reset_run system_xbar_0_synth_1
+save_bd_design
+reset_run synth_1
+launch_runs synth_1 -jobs 8
+wait_on_run synth_1

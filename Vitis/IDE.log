@@ -1,0 +1,797 @@
+14:26:42 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\embeding_system\Vitis\temp_xsdb_launch_script.tcl
+14:26:42 INFO  : Registering command handlers for Vitis TCF services
+14:26:45 INFO  : XSCT server has started successfully.
+14:26:46 INFO  : Platform repository initialization has completed.
+14:26:53 INFO  : plnx-install-location is set to ''
+14:26:53 INFO  : Successfully done setting XSCT server connection channel  
+14:26:53 INFO  : Successfully done query RDI_DATADIR 
+14:26:53 INFO  : Successfully done setting workspace for the tool. 
+14:34:05 INFO  : Result from executing command 'getProjects': system_wrapper_AES
+14:34:05 INFO  : Result from executing command 'getPlatforms': 
+14:34:05 WARN  : An unexpected exception occurred in the module 'platform project logging'
+14:34:06 INFO  : Platform 'system_wrapper_AES' is added to custom repositories.
+14:34:18 INFO  : Platform 'system_wrapper_AES' is added to custom repositories.
+14:36:50 INFO  : Result from executing command 'getProjects': system_wrapper_AES
+14:36:50 INFO  : Result from executing command 'getPlatforms': system_wrapper_AES|C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/system_wrapper_AES.xpfm
+14:36:50 INFO  : Checking for BSP changes to sync application flags for project 'AES'...
+14:36:58 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:36:59 INFO  : Jtag cable 'Xilinx HW-FTDI-TEST FT2232H 1234-tulA' is selected.
+14:36:59 INFO  : 'jtag frequency' command is executed.
+14:36:59 INFO  : Context for 'APU' is selected.
+14:36:59 INFO  : System reset is completed.
+14:37:02 INFO  : 'after 3000' command is executed.
+14:37:02 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}' command is executed.
+14:37:04 INFO  : Device configured successfully with "C:/embeding_system/Vitis/AES/_ide/bitstream/system_wrapper_AES.bit"
+14:37:04 INFO  : Context for 'APU' is selected.
+14:37:04 INFO  : Hardware design and registers information is loaded from 'C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/hw/system_wrapper_AES.xsa'.
+14:37:04 INFO  : 'configparams force-mem-access 1' command is executed.
+14:37:04 INFO  : Context for 'APU' is selected.
+14:37:04 INFO  : Sourcing of 'C:/embeding_system/Vitis/AES/_ide/psinit/ps7_init.tcl' is done.
+14:37:05 INFO  : 'ps7_init' command is executed.
+14:37:05 INFO  : 'ps7_post_config' command is executed.
+14:37:05 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:37:05 INFO  : The application 'C:/embeding_system/Vitis/AES/Debug/AES.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:37:05 INFO  : 'configparams force-mem-access 0' command is executed.
+14:37:05 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}
+fpga -file C:/embeding_system/Vitis/AES/_ide/bitstream/system_wrapper_AES.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/hw/system_wrapper_AES.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/embeding_system/Vitis/AES/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/embeding_system/Vitis/AES/Debug/AES.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:37:05 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:37:05 INFO  : 'con' command is executed.
+14:37:05 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:37:05 INFO  : Launch script is exported to file 'C:\embeding_system\Vitis\AES_system\_ide\scripts\debugger_aes-default.tcl'
+14:37:57 INFO  : Checking for BSP changes to sync application flags for project 'AES'...
+14:38:03 INFO  : Disconnected from the channel tcfchan#2.
+14:38:04 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:38:04 INFO  : Jtag cable 'Xilinx HW-FTDI-TEST FT2232H 1234-tulA' is selected.
+14:38:04 INFO  : 'jtag frequency' command is executed.
+14:38:04 INFO  : Context for 'APU' is selected.
+14:38:04 INFO  : System reset is completed.
+14:38:07 INFO  : 'after 3000' command is executed.
+14:38:07 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}' command is executed.
+14:38:10 INFO  : Device configured successfully with "C:/embeding_system/Vitis/AES/_ide/bitstream/system_wrapper_AES.bit"
+14:38:10 INFO  : Context for 'APU' is selected.
+14:38:10 INFO  : Hardware design and registers information is loaded from 'C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/hw/system_wrapper_AES.xsa'.
+14:38:10 INFO  : 'configparams force-mem-access 1' command is executed.
+14:38:10 INFO  : Context for 'APU' is selected.
+14:38:10 INFO  : Sourcing of 'C:/embeding_system/Vitis/AES/_ide/psinit/ps7_init.tcl' is done.
+14:38:10 INFO  : 'ps7_init' command is executed.
+14:38:10 INFO  : 'ps7_post_config' command is executed.
+14:38:10 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:38:11 INFO  : The application 'C:/embeding_system/Vitis/AES/Debug/AES.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:38:11 INFO  : 'configparams force-mem-access 0' command is executed.
+14:38:11 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}
+fpga -file C:/embeding_system/Vitis/AES/_ide/bitstream/system_wrapper_AES.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/hw/system_wrapper_AES.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/embeding_system/Vitis/AES/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/embeding_system/Vitis/AES/Debug/AES.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:38:11 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:38:11 INFO  : 'con' command is executed.
+14:38:11 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:38:11 INFO  : Launch script is exported to file 'C:\embeding_system\Vitis\AES_system\_ide\scripts\debugger_aes-default.tcl'
+14:39:00 INFO  : Disconnected from the channel tcfchan#3.
+14:39:01 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:39:02 INFO  : Jtag cable 'Xilinx HW-FTDI-TEST FT2232H 1234-tulA' is selected.
+14:39:02 INFO  : 'jtag frequency' command is executed.
+14:39:02 INFO  : Context for 'APU' is selected.
+14:39:02 INFO  : System reset is completed.
+14:39:05 INFO  : 'after 3000' command is executed.
+14:39:05 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}' command is executed.
+14:39:07 INFO  : Device configured successfully with "C:/embeding_system/Vitis/AES/_ide/bitstream/system_wrapper_AES.bit"
+14:39:07 INFO  : Context for 'APU' is selected.
+14:39:07 INFO  : Hardware design and registers information is loaded from 'C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/hw/system_wrapper_AES.xsa'.
+14:39:07 INFO  : 'configparams force-mem-access 1' command is executed.
+14:39:07 INFO  : Context for 'APU' is selected.
+14:39:07 INFO  : Sourcing of 'C:/embeding_system/Vitis/AES/_ide/psinit/ps7_init.tcl' is done.
+14:39:08 INFO  : 'ps7_init' command is executed.
+14:39:08 INFO  : 'ps7_post_config' command is executed.
+14:39:08 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:39:08 INFO  : The application 'C:/embeding_system/Vitis/AES/Debug/AES.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:39:08 INFO  : 'configparams force-mem-access 0' command is executed.
+14:39:08 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}
+fpga -file C:/embeding_system/Vitis/AES/_ide/bitstream/system_wrapper_AES.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/hw/system_wrapper_AES.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/embeding_system/Vitis/AES/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/embeding_system/Vitis/AES/Debug/AES.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:39:08 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:39:08 INFO  : 'con' command is executed.
+14:39:08 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:39:08 INFO  : Launch script is exported to file 'C:\embeding_system\Vitis\AES_system\_ide\scripts\debugger_aes-default.tcl'
+14:54:00 INFO  : Hardware specification for platform project 'system_wrapper_AES' is updated.
+14:54:49 INFO  : Hardware specification for platform project 'system_wrapper_AES' is updated.
+14:55:06 INFO  : Result from executing command 'getProjects': system_wrapper_AES
+14:55:06 INFO  : Result from executing command 'getPlatforms': system_wrapper_AES|C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/system_wrapper_AES.xpfm
+14:55:07 INFO  : Checking for BSP changes to sync application flags for project 'AES'...
+14:55:14 INFO  : Disconnected from the channel tcfchan#4.
+14:55:15 INFO  : The hardware specfication used by project 'AES' is out of sync with the platform. Resource files extracted from the hardware specfiication will be updated.
+14:55:15 INFO  : The file 'C:\embeding_system\Vitis\AES\_ide\bitstream\system_wrapper_AES.bit' stored in project is removed.
+14:55:16 INFO  : The updated bitstream files are copied from platform to folder 'C:\embeding_system\Vitis\AES\_ide\bitstream' in project 'AES'.
+14:55:16 INFO  : The file 'C:\embeding_system\Vitis\AES\_ide\psinit\ps7_init.tcl' stored in project is removed.
+14:55:22 INFO  : The updated ps init files are copied from platform to folder 'C:\embeding_system\Vitis\AES\_ide\psinit' in project 'AES'.
+14:55:23 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:55:23 INFO  : Jtag cable 'Xilinx HW-FTDI-TEST FT2232H 1234-tulA' is selected.
+14:55:23 INFO  : 'jtag frequency' command is executed.
+14:55:23 INFO  : Context for 'APU' is selected.
+14:55:23 INFO  : System reset is completed.
+14:55:26 INFO  : 'after 3000' command is executed.
+14:55:26 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}' command is executed.
+14:55:29 INFO  : Device configured successfully with "C:/embeding_system/Vitis/AES/_ide/bitstream/system_wrapper_AES.bit"
+14:55:29 INFO  : Context for 'APU' is selected.
+14:55:29 INFO  : Hardware design and registers information is loaded from 'C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/hw/system_wrapper_AES.xsa'.
+14:55:29 INFO  : 'configparams force-mem-access 1' command is executed.
+14:55:29 INFO  : Context for 'APU' is selected.
+14:55:29 INFO  : Sourcing of 'C:/embeding_system/Vitis/AES/_ide/psinit/ps7_init.tcl' is done.
+14:55:29 INFO  : 'ps7_init' command is executed.
+14:55:29 INFO  : 'ps7_post_config' command is executed.
+14:55:29 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:55:30 INFO  : The application 'C:/embeding_system/Vitis/AES/Debug/AES.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:55:30 INFO  : 'configparams force-mem-access 0' command is executed.
+14:55:30 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}
+fpga -file C:/embeding_system/Vitis/AES/_ide/bitstream/system_wrapper_AES.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/hw/system_wrapper_AES.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/embeding_system/Vitis/AES/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/embeding_system/Vitis/AES/Debug/AES.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:55:30 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:55:30 INFO  : 'con' command is executed.
+14:55:30 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:55:30 INFO  : Launch script is exported to file 'C:\embeding_system\Vitis\AES_system\_ide\scripts\debugger_aes-default.tcl'
+15:23:50 INFO  : Hardware specification for platform project 'system_wrapper_AES' is updated.
+15:24:11 INFO  : Result from executing command 'getProjects': system_wrapper_AES
+15:24:11 INFO  : Result from executing command 'getPlatforms': system_wrapper_AES|C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/system_wrapper_AES.xpfm
+15:24:11 INFO  : Checking for BSP changes to sync application flags for project 'AES'...
+15:24:18 INFO  : Disconnected from the channel tcfchan#6.
+15:24:19 INFO  : The hardware specfication used by project 'AES' is out of sync with the platform. Resource files extracted from the hardware specfiication will be updated.
+15:24:19 INFO  : The file 'C:\embeding_system\Vitis\AES\_ide\bitstream\system_wrapper_AES.bit' stored in project is removed.
+15:24:19 INFO  : The updated bitstream files are copied from platform to folder 'C:\embeding_system\Vitis\AES\_ide\bitstream' in project 'AES'.
+15:24:19 INFO  : The file 'C:\embeding_system\Vitis\AES\_ide\psinit\ps7_init.tcl' stored in project is removed.
+15:24:27 INFO  : The updated ps init files are copied from platform to folder 'C:\embeding_system\Vitis\AES\_ide\psinit' in project 'AES'.
+15:24:27 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+15:24:27 INFO  : Jtag cable 'Xilinx HW-FTDI-TEST FT2232H 1234-tulA' is selected.
+15:24:27 INFO  : 'jtag frequency' command is executed.
+15:24:27 INFO  : Context for 'APU' is selected.
+15:24:27 INFO  : System reset is completed.
+15:24:30 INFO  : 'after 3000' command is executed.
+15:24:30 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}' command is executed.
+15:24:33 INFO  : Device configured successfully with "C:/embeding_system/Vitis/AES/_ide/bitstream/system_wrapper_AES.bit"
+15:24:33 INFO  : Context for 'APU' is selected.
+15:24:33 INFO  : Hardware design and registers information is loaded from 'C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/hw/system_wrapper_AES.xsa'.
+15:24:33 INFO  : 'configparams force-mem-access 1' command is executed.
+15:24:33 INFO  : Context for 'APU' is selected.
+15:24:33 INFO  : Sourcing of 'C:/embeding_system/Vitis/AES/_ide/psinit/ps7_init.tcl' is done.
+15:24:33 INFO  : 'ps7_init' command is executed.
+15:24:33 INFO  : 'ps7_post_config' command is executed.
+15:24:33 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+15:24:34 INFO  : The application 'C:/embeding_system/Vitis/AES/Debug/AES.elf' is downloaded to processor 'ps7_cortexa9_0'.
+15:24:34 INFO  : 'configparams force-mem-access 0' command is executed.
+15:24:34 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}
+fpga -file C:/embeding_system/Vitis/AES/_ide/bitstream/system_wrapper_AES.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/hw/system_wrapper_AES.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/embeding_system/Vitis/AES/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/embeding_system/Vitis/AES/Debug/AES.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+15:24:34 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+15:24:34 INFO  : 'con' command is executed.
+15:24:34 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+15:24:34 INFO  : Launch script is exported to file 'C:\embeding_system\Vitis\AES_system\_ide\scripts\debugger_aes-default.tcl'
+15:26:15 INFO  : Checking for BSP changes to sync application flags for project 'AES'...
+15:26:21 INFO  : Disconnected from the channel tcfchan#8.
+15:26:22 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+15:26:22 INFO  : Jtag cable 'Xilinx HW-FTDI-TEST FT2232H 1234-tulA' is selected.
+15:26:22 INFO  : 'jtag frequency' command is executed.
+15:26:22 INFO  : Context for 'APU' is selected.
+15:26:22 INFO  : System reset is completed.
+15:26:25 INFO  : 'after 3000' command is executed.
+15:26:26 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}' command is executed.
+15:26:28 INFO  : Device configured successfully with "C:/embeding_system/Vitis/AES/_ide/bitstream/system_wrapper_AES.bit"
+15:26:28 INFO  : Context for 'APU' is selected.
+15:26:28 INFO  : Hardware design and registers information is loaded from 'C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/hw/system_wrapper_AES.xsa'.
+15:26:28 INFO  : 'configparams force-mem-access 1' command is executed.
+15:26:28 INFO  : Context for 'APU' is selected.
+15:26:28 INFO  : Sourcing of 'C:/embeding_system/Vitis/AES/_ide/psinit/ps7_init.tcl' is done.
+15:26:28 INFO  : 'ps7_init' command is executed.
+15:26:28 INFO  : 'ps7_post_config' command is executed.
+15:26:29 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+15:26:29 INFO  : The application 'C:/embeding_system/Vitis/AES/Debug/AES.elf' is downloaded to processor 'ps7_cortexa9_0'.
+15:26:29 INFO  : 'configparams force-mem-access 0' command is executed.
+15:26:29 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}
+fpga -file C:/embeding_system/Vitis/AES/_ide/bitstream/system_wrapper_AES.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/hw/system_wrapper_AES.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/embeding_system/Vitis/AES/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/embeding_system/Vitis/AES/Debug/AES.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+15:26:29 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+15:26:29 INFO  : 'con' command is executed.
+15:26:29 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+15:26:29 INFO  : Launch script is exported to file 'C:\embeding_system\Vitis\AES_system\_ide\scripts\debugger_aes-default.tcl'
+15:51:16 INFO  : Result from executing command 'getProjects': system_wrapper_AES;system_wrapper_AES_final
+15:51:16 INFO  : Result from executing command 'getPlatforms': system_wrapper_AES|C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/system_wrapper_AES.xpfm
+15:51:16 INFO  : Platform 'system_wrapper_AES_final' is added to custom repositories.
+15:51:28 INFO  : Platform 'system_wrapper_AES_final' is added to custom repositories.
+15:51:51 ERROR : An unexpected exception occurred in the module 'reading platform'
+15:53:16 INFO  : Result from executing command 'getProjects': system_wrapper_AES;system_wrapper_AES_final
+15:53:16 INFO  : Result from executing command 'getPlatforms': system_wrapper_AES|C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/system_wrapper_AES.xpfm
+15:53:17 INFO  : Platform 'system_wrapper_AES_final' is added to custom repositories.
+15:53:26 INFO  : Platform 'system_wrapper_AES_final' is added to custom repositories.
+15:57:30 INFO  : Result from executing command 'getProjects': system_wrapper_AES;system_wrapper_AES_final
+15:57:30 INFO  : Result from executing command 'getPlatforms': C:\embeding_system\Vitis\system_wrapper_AES_final\export\system_wrapper_AES_final\system_wrapper_AES_final.xpfm|C:/embeding_system/Vitis/system_wrapper_AES_final/export/system_wrapper_AES_final/system_wrapper_AES_final.xpfm;system_wrapper_AES|C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/system_wrapper_AES.xpfm
+15:57:31 INFO  : Checking for BSP changes to sync application flags for project 'AES_final_2'...
+15:58:01 INFO  : Checking for BSP changes to sync application flags for project 'AES_final_2'...
+15:58:54 INFO  : Checking for BSP changes to sync application flags for project 'AES_final_2'...
+15:58:58 INFO  : Disconnected from the channel tcfchan#9.
+15:59:41 INFO  : Result from executing command 'getProjects': system_wrapper_AES;system_wrapper_AES_final
+15:59:41 INFO  : Result from executing command 'getPlatforms': 
+15:59:41 INFO  : Checking for BSP changes to sync application flags for project 'AES_final_2'...
+16:00:12 INFO  : Checking for BSP changes to sync application flags for project 'AES_final_2'...
+16:00:20 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+16:00:21 INFO  : Jtag cable 'Xilinx HW-FTDI-TEST FT2232H 1234-tulA' is selected.
+16:00:21 INFO  : 'jtag frequency' command is executed.
+16:00:21 INFO  : Context for 'APU' is selected.
+16:00:21 INFO  : System reset is completed.
+16:00:24 INFO  : 'after 3000' command is executed.
+16:00:24 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}' command is executed.
+16:00:26 INFO  : Device configured successfully with "C:/embeding_system/Vitis/AES_final_2/_ide/bitstream/system_wrapper_AES_final.bit"
+16:00:26 INFO  : Context for 'APU' is selected.
+16:00:26 INFO  : Hardware design and registers information is loaded from 'C:/embeding_system/Vitis/system_wrapper_AES_final/export/system_wrapper_AES_final/hw/system_wrapper_AES_final.xsa'.
+16:00:26 INFO  : 'configparams force-mem-access 1' command is executed.
+16:00:27 INFO  : Context for 'APU' is selected.
+16:00:27 INFO  : Sourcing of 'C:/embeding_system/Vitis/AES_final_2/_ide/psinit/ps7_init.tcl' is done.
+16:00:27 INFO  : 'ps7_init' command is executed.
+16:00:27 INFO  : 'ps7_post_config' command is executed.
+16:00:27 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+16:00:27 INFO  : The application 'C:/embeding_system/Vitis/AES_final_2/Debug/AES_final_2.elf' is downloaded to processor 'ps7_cortexa9_0'.
+16:00:27 INFO  : 'configparams force-mem-access 0' command is executed.
+16:00:27 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}
+fpga -file C:/embeding_system/Vitis/AES_final_2/_ide/bitstream/system_wrapper_AES_final.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/embeding_system/Vitis/system_wrapper_AES_final/export/system_wrapper_AES_final/hw/system_wrapper_AES_final.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/embeding_system/Vitis/AES_final_2/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/embeding_system/Vitis/AES_final_2/Debug/AES_final_2.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+16:00:28 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+16:00:28 INFO  : 'con' command is executed.
+16:00:28 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+16:00:28 INFO  : Launch script is exported to file 'C:\embeding_system\Vitis\AES_final_2_system\_ide\scripts\debugger_aes_final_2-default.tcl'
+16:02:12 INFO  : Disconnected from the channel tcfchan#13.
+16:02:13 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+16:02:13 INFO  : Jtag cable 'Xilinx HW-FTDI-TEST FT2232H 1234-tulA' is selected.
+16:02:13 INFO  : 'jtag frequency' command is executed.
+16:02:13 INFO  : Context for 'APU' is selected.
+16:02:13 INFO  : System reset is completed.
+16:02:16 INFO  : 'after 3000' command is executed.
+16:02:17 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}' command is executed.
+16:02:19 INFO  : Device configured successfully with "C:/embeding_system/Vitis/AES/_ide/bitstream/system_wrapper_AES.bit"
+16:02:19 INFO  : Context for 'APU' is selected.
+16:02:19 INFO  : Hardware design and registers information is loaded from 'C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/hw/system_wrapper_AES.xsa'.
+16:02:19 INFO  : 'configparams force-mem-access 1' command is executed.
+16:02:19 INFO  : Context for 'APU' is selected.
+16:02:19 INFO  : Sourcing of 'C:/embeding_system/Vitis/AES/_ide/psinit/ps7_init.tcl' is done.
+16:02:19 INFO  : 'ps7_init' command is executed.
+16:02:19 INFO  : 'ps7_post_config' command is executed.
+16:02:19 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+16:02:20 INFO  : The application 'C:/embeding_system/Vitis/AES/Debug/AES.elf' is downloaded to processor 'ps7_cortexa9_0'.
+16:02:20 INFO  : 'configparams force-mem-access 0' command is executed.
+16:02:20 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}
+fpga -file C:/embeding_system/Vitis/AES/_ide/bitstream/system_wrapper_AES.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/hw/system_wrapper_AES.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/embeding_system/Vitis/AES/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/embeding_system/Vitis/AES/Debug/AES.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+16:02:20 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+16:02:20 INFO  : 'con' command is executed.
+16:02:20 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+16:02:20 INFO  : Launch script is exported to file 'C:\embeding_system\Vitis\AES_system\_ide\scripts\debugger_aes-default.tcl'
+16:05:24 INFO  : Disconnected from the channel tcfchan#14.
+04:28:57 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\embeding_system\Vitis\temp_xsdb_launch_script.tcl
+04:29:01 INFO  : XSCT server has started successfully.
+04:29:01 INFO  : plnx-install-location is set to ''
+04:29:01 INFO  : Successfully done setting XSCT server connection channel  
+04:29:01 INFO  : Successfully done setting workspace for the tool. 
+04:29:05 INFO  : Platform repository initialization has completed.
+04:29:06 INFO  : Registering command handlers for Vitis TCF services
+04:29:11 INFO  : Successfully done query RDI_DATADIR 
+04:30:08 INFO  : Result from executing command 'getProjects': system_wrapper;system_wrapper_AES;system_wrapper_AES_final
+04:30:08 INFO  : Result from executing command 'getPlatforms': system_wrapper_AES_final|C:/embeding_system/Vitis/system_wrapper_AES_final/export/system_wrapper_AES_final/system_wrapper_AES_final.xpfm;system_wrapper_AES|C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/system_wrapper_AES.xpfm
+04:30:08 WARN  : An unexpected exception occurred in the module 'platform project logging'
+04:30:09 INFO  : Platform 'system_wrapper' is added to custom repositories.
+04:30:20 INFO  : Platform 'system_wrapper' is added to custom repositories.
+04:33:10 INFO  : Result from executing command 'getProjects': system_wrapper;system_wrapper_AES;system_wrapper_AES_final
+04:33:10 INFO  : Result from executing command 'getPlatforms': system_wrapper_AES_final|C:/embeding_system/Vitis/system_wrapper_AES_final/export/system_wrapper_AES_final/system_wrapper_AES_final.xpfm;system_wrapper_AES|C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/system_wrapper_AES.xpfm;system_wrapper|C:/embeding_system/Vitis/system_wrapper/export/system_wrapper/system_wrapper.xpfm
+04:33:11 INFO  : Checking for BSP changes to sync application flags for project 'intr_ip'...
+04:35:25 INFO  : Checking for BSP changes to sync application flags for project 'intr_ip'...
+04:36:11 INFO  : Checking for BSP changes to sync application flags for project 'intr_ip'...
+04:37:24 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+04:37:25 INFO  : Jtag cable 'Xilinx HW-FTDI-TEST FT2232H 1234-tulA' is selected.
+04:37:25 INFO  : 'jtag frequency' command is executed.
+04:37:25 INFO  : Context for 'APU' is selected.
+04:37:25 INFO  : System reset is completed.
+04:37:28 INFO  : 'after 3000' command is executed.
+04:37:28 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}' command is executed.
+04:37:30 INFO  : Device configured successfully with "C:/embeding_system/Vitis/intr_ip/_ide/bitstream/system_wrapper.bit"
+04:37:30 INFO  : Context for 'APU' is selected.
+04:37:30 INFO  : Hardware design and registers information is loaded from 'C:/embeding_system/Vitis/system_wrapper/export/system_wrapper/hw/system_wrapper.xsa'.
+04:37:30 INFO  : 'configparams force-mem-access 1' command is executed.
+04:37:30 INFO  : Context for 'APU' is selected.
+04:37:30 INFO  : Sourcing of 'C:/embeding_system/Vitis/intr_ip/_ide/psinit/ps7_init.tcl' is done.
+04:37:31 INFO  : 'ps7_init' command is executed.
+04:37:31 INFO  : 'ps7_post_config' command is executed.
+04:37:31 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+04:37:31 INFO  : The application 'C:/embeding_system/Vitis/intr_ip/Debug/intr_ip.elf' is downloaded to processor 'ps7_cortexa9_0'.
+04:37:31 INFO  : 'configparams force-mem-access 0' command is executed.
+04:37:31 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}
+fpga -file C:/embeding_system/Vitis/intr_ip/_ide/bitstream/system_wrapper.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/embeding_system/Vitis/system_wrapper/export/system_wrapper/hw/system_wrapper.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/embeding_system/Vitis/intr_ip/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/embeding_system/Vitis/intr_ip/Debug/intr_ip.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+04:37:31 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+04:37:31 INFO  : 'con' command is executed.
+04:37:31 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+04:37:31 INFO  : Launch script is exported to file 'C:\embeding_system\Vitis\intr_ip_system\_ide\scripts\debugger_intr_ip-default.tcl'
+04:44:12 INFO  : Disconnected from the channel tcfchan#2.
+13:47:40 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\embeding_system\Vitis\temp_xsdb_launch_script.tcl
+13:47:43 INFO  : XSCT server has started successfully.
+13:47:43 INFO  : Successfully done setting XSCT server connection channel  
+13:47:43 INFO  : plnx-install-location is set to ''
+13:47:43 INFO  : Successfully done setting workspace for the tool. 
+13:47:48 INFO  : Platform repository initialization has completed.
+13:47:48 INFO  : Successfully done query RDI_DATADIR 
+13:47:48 INFO  : Registering command handlers for Vitis TCF services
+13:49:35 INFO  : Result from executing command 'getProjects': system_wrapper;system_wrapper_AES;system_wrapper_AES_final;system_wrapper_final
+13:49:35 INFO  : Result from executing command 'getPlatforms': system_wrapper_AES_final|C:/embeding_system/Vitis/system_wrapper_AES_final/export/system_wrapper_AES_final/system_wrapper_AES_final.xpfm;system_wrapper_AES|C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/system_wrapper_AES.xpfm;system_wrapper|C:/embeding_system/Vitis/system_wrapper/export/system_wrapper/system_wrapper.xpfm
+13:49:35 WARN  : An unexpected exception occurred in the module 'platform project logging'
+13:49:36 INFO  : Platform 'system_wrapper_final' is added to custom repositories.
+13:49:46 INFO  : Platform 'system_wrapper_final' is added to custom repositories.
+14:03:51 INFO  : Result from executing command 'getProjects': system_wrapper;system_wrapper_AES;system_wrapper_AES_final;system_wrapper_final
+14:03:51 INFO  : Result from executing command 'getPlatforms': system_wrapper_AES_final|C:/embeding_system/Vitis/system_wrapper_AES_final/export/system_wrapper_AES_final/system_wrapper_AES_final.xpfm;system_wrapper_AES|C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/system_wrapper_AES.xpfm;system_wrapper_final|C:/embeding_system/Vitis/system_wrapper_final/export/system_wrapper_final/system_wrapper_final.xpfm;system_wrapper|C:/embeding_system/Vitis/system_wrapper/export/system_wrapper/system_wrapper.xpfm
+14:03:51 INFO  : Checking for BSP changes to sync application flags for project 'final'...
+14:04:49 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:04:50 INFO  : Jtag cable 'Xilinx HW-FTDI-TEST FT2232H 1234-tulA' is selected.
+14:04:50 INFO  : 'jtag frequency' command is executed.
+14:04:50 INFO  : Context for 'APU' is selected.
+14:04:50 INFO  : System reset is completed.
+14:04:53 INFO  : 'after 3000' command is executed.
+14:04:54 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}' command is executed.
+14:04:56 INFO  : Device configured successfully with "C:/embeding_system/Vitis/final/_ide/bitstream/system_wrapper_final.bit"
+14:04:56 INFO  : Context for 'APU' is selected.
+14:04:56 INFO  : Hardware design and registers information is loaded from 'C:/embeding_system/Vitis/system_wrapper_final/export/system_wrapper_final/hw/system_wrapper_final.xsa'.
+14:04:56 INFO  : 'configparams force-mem-access 1' command is executed.
+14:04:56 INFO  : Context for 'APU' is selected.
+14:04:56 INFO  : Sourcing of 'C:/embeding_system/Vitis/final/_ide/psinit/ps7_init.tcl' is done.
+14:04:57 INFO  : 'ps7_init' command is executed.
+14:04:57 INFO  : 'ps7_post_config' command is executed.
+14:04:57 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:04:57 INFO  : The application 'C:/embeding_system/Vitis/final/Debug/final.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:04:57 INFO  : 'configparams force-mem-access 0' command is executed.
+14:04:57 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}
+fpga -file C:/embeding_system/Vitis/final/_ide/bitstream/system_wrapper_final.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/embeding_system/Vitis/system_wrapper_final/export/system_wrapper_final/hw/system_wrapper_final.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/embeding_system/Vitis/final/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/embeding_system/Vitis/final/Debug/final.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:04:57 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:04:57 INFO  : 'con' command is executed.
+14:04:57 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:04:57 INFO  : Launch script is exported to file 'C:\embeding_system\Vitis\final_system\_ide\scripts\debugger_final-default.tcl'
+14:13:51 INFO  : Disconnected from the channel tcfchan#2.
+14:13:52 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:13:52 INFO  : Jtag cable 'Xilinx HW-FTDI-TEST FT2232H 1234-tulA' is selected.
+14:13:52 INFO  : 'jtag frequency' command is executed.
+14:13:52 INFO  : Context for 'APU' is selected.
+14:13:52 INFO  : System reset is completed.
+14:13:55 INFO  : 'after 3000' command is executed.
+14:13:55 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}' command is executed.
+14:13:58 INFO  : Device configured successfully with "C:/embeding_system/Vitis/final/_ide/bitstream/system_wrapper_final.bit"
+14:13:58 INFO  : Context for 'APU' is selected.
+14:13:58 INFO  : Hardware design and registers information is loaded from 'C:/embeding_system/Vitis/system_wrapper_final/export/system_wrapper_final/hw/system_wrapper_final.xsa'.
+14:13:58 INFO  : 'configparams force-mem-access 1' command is executed.
+14:13:58 INFO  : Context for 'APU' is selected.
+14:13:58 INFO  : Sourcing of 'C:/embeding_system/Vitis/final/_ide/psinit/ps7_init.tcl' is done.
+14:13:58 INFO  : 'ps7_init' command is executed.
+14:13:58 INFO  : 'ps7_post_config' command is executed.
+14:13:58 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:13:59 INFO  : The application 'C:/embeding_system/Vitis/final/Debug/final.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:13:59 INFO  : 'configparams force-mem-access 0' command is executed.
+14:13:59 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}
+fpga -file C:/embeding_system/Vitis/final/_ide/bitstream/system_wrapper_final.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/embeding_system/Vitis/system_wrapper_final/export/system_wrapper_final/hw/system_wrapper_final.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/embeding_system/Vitis/final/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/embeding_system/Vitis/final/Debug/final.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:13:59 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:13:59 INFO  : 'con' command is executed.
+14:13:59 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:13:59 INFO  : Launch script is exported to file 'C:\embeding_system\Vitis\final_system\_ide\scripts\debugger_final-default.tcl'
+14:14:13 INFO  : Checking for BSP changes to sync application flags for project 'final'...
+14:14:40 INFO  : Checking for BSP changes to sync application flags for project 'final'...
+14:14:45 INFO  : Disconnected from the channel tcfchan#3.
+14:14:46 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:14:46 INFO  : Jtag cable 'Xilinx HW-FTDI-TEST FT2232H 1234-tulA' is selected.
+14:14:46 INFO  : 'jtag frequency' command is executed.
+14:14:46 INFO  : Context for 'APU' is selected.
+14:14:46 INFO  : System reset is completed.
+14:14:49 INFO  : 'after 3000' command is executed.
+14:14:50 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}' command is executed.
+14:14:52 INFO  : Device configured successfully with "C:/embeding_system/Vitis/final/_ide/bitstream/system_wrapper_final.bit"
+14:14:52 INFO  : Context for 'APU' is selected.
+14:14:52 INFO  : Hardware design and registers information is loaded from 'C:/embeding_system/Vitis/system_wrapper_final/export/system_wrapper_final/hw/system_wrapper_final.xsa'.
+14:14:52 INFO  : 'configparams force-mem-access 1' command is executed.
+14:14:52 INFO  : Context for 'APU' is selected.
+14:14:52 INFO  : Sourcing of 'C:/embeding_system/Vitis/final/_ide/psinit/ps7_init.tcl' is done.
+14:14:52 INFO  : 'ps7_init' command is executed.
+14:14:52 INFO  : 'ps7_post_config' command is executed.
+14:14:52 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:14:53 INFO  : The application 'C:/embeding_system/Vitis/final/Debug/final.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:14:53 INFO  : 'configparams force-mem-access 0' command is executed.
+14:14:53 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}
+fpga -file C:/embeding_system/Vitis/final/_ide/bitstream/system_wrapper_final.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/embeding_system/Vitis/system_wrapper_final/export/system_wrapper_final/hw/system_wrapper_final.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/embeding_system/Vitis/final/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/embeding_system/Vitis/final/Debug/final.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:14:53 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:14:53 INFO  : 'con' command is executed.
+14:14:53 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:14:53 INFO  : Launch script is exported to file 'C:\embeding_system\Vitis\final_system\_ide\scripts\debugger_final-default.tcl'
+14:36:54 INFO  : Checking for BSP changes to sync application flags for project 'final'...
+14:38:55 INFO  : Checking for BSP changes to sync application flags for project 'final'...
+14:39:11 INFO  : Checking for BSP changes to sync application flags for project 'final'...
+14:39:25 INFO  : Disconnected from the channel tcfchan#4.
+14:39:26 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:39:26 INFO  : Jtag cable 'Xilinx HW-FTDI-TEST FT2232H 1234-tulA' is selected.
+14:39:26 INFO  : 'jtag frequency' command is executed.
+14:39:26 INFO  : Context for 'APU' is selected.
+14:39:26 INFO  : System reset is completed.
+14:39:29 INFO  : 'after 3000' command is executed.
+14:39:29 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}' command is executed.
+14:39:31 INFO  : Device configured successfully with "C:/embeding_system/Vitis/final/_ide/bitstream/system_wrapper_final.bit"
+14:39:31 INFO  : Context for 'APU' is selected.
+14:39:31 INFO  : Hardware design and registers information is loaded from 'C:/embeding_system/Vitis/system_wrapper_final/export/system_wrapper_final/hw/system_wrapper_final.xsa'.
+14:39:31 INFO  : 'configparams force-mem-access 1' command is executed.
+14:39:31 INFO  : Context for 'APU' is selected.
+14:39:31 INFO  : Sourcing of 'C:/embeding_system/Vitis/final/_ide/psinit/ps7_init.tcl' is done.
+14:39:32 INFO  : 'ps7_init' command is executed.
+14:39:32 INFO  : 'ps7_post_config' command is executed.
+14:39:32 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:39:32 INFO  : The application 'C:/embeding_system/Vitis/final/Debug/final.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:39:32 INFO  : 'configparams force-mem-access 0' command is executed.
+14:39:32 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}
+fpga -file C:/embeding_system/Vitis/final/_ide/bitstream/system_wrapper_final.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/embeding_system/Vitis/system_wrapper_final/export/system_wrapper_final/hw/system_wrapper_final.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/embeding_system/Vitis/final/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/embeding_system/Vitis/final/Debug/final.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:39:32 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:39:32 INFO  : 'con' command is executed.
+14:39:32 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:39:32 INFO  : Launch script is exported to file 'C:\embeding_system\Vitis\final_system\_ide\scripts\debugger_final-default.tcl'
+14:42:02 INFO  : Checking for BSP changes to sync application flags for project 'final'...
+14:42:07 INFO  : Disconnected from the channel tcfchan#5.
+14:42:08 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:42:08 INFO  : Jtag cable 'Xilinx HW-FTDI-TEST FT2232H 1234-tulA' is selected.
+14:42:08 INFO  : 'jtag frequency' command is executed.
+14:42:08 INFO  : Context for 'APU' is selected.
+14:42:08 INFO  : System reset is completed.
+14:42:11 INFO  : 'after 3000' command is executed.
+14:42:11 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}' command is executed.
+14:42:14 INFO  : Device configured successfully with "C:/embeding_system/Vitis/final/_ide/bitstream/system_wrapper_final.bit"
+14:42:14 INFO  : Context for 'APU' is selected.
+14:42:14 INFO  : Hardware design and registers information is loaded from 'C:/embeding_system/Vitis/system_wrapper_final/export/system_wrapper_final/hw/system_wrapper_final.xsa'.
+14:42:14 INFO  : 'configparams force-mem-access 1' command is executed.
+14:42:14 INFO  : Context for 'APU' is selected.
+14:42:14 INFO  : Sourcing of 'C:/embeding_system/Vitis/final/_ide/psinit/ps7_init.tcl' is done.
+14:42:14 INFO  : 'ps7_init' command is executed.
+14:42:14 INFO  : 'ps7_post_config' command is executed.
+14:42:14 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:42:14 INFO  : The application 'C:/embeding_system/Vitis/final/Debug/final.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:42:15 INFO  : 'configparams force-mem-access 0' command is executed.
+14:42:15 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}
+fpga -file C:/embeding_system/Vitis/final/_ide/bitstream/system_wrapper_final.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/embeding_system/Vitis/system_wrapper_final/export/system_wrapper_final/hw/system_wrapper_final.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/embeding_system/Vitis/final/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/embeding_system/Vitis/final/Debug/final.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:42:15 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:42:15 INFO  : 'con' command is executed.
+14:42:15 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:42:15 INFO  : Launch script is exported to file 'C:\embeding_system\Vitis\final_system\_ide\scripts\debugger_final-default.tcl'
+14:52:28 INFO  : Checking for BSP changes to sync application flags for project 'final'...
+14:52:33 INFO  : Disconnected from the channel tcfchan#6.
+14:52:34 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+14:52:34 INFO  : Jtag cable 'Xilinx HW-FTDI-TEST FT2232H 1234-tulA' is selected.
+14:52:34 INFO  : 'jtag frequency' command is executed.
+14:52:34 INFO  : Context for 'APU' is selected.
+14:52:34 INFO  : System reset is completed.
+14:52:37 INFO  : 'after 3000' command is executed.
+14:52:37 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}' command is executed.
+14:52:40 INFO  : Device configured successfully with "C:/embeding_system/Vitis/final/_ide/bitstream/system_wrapper_final.bit"
+14:52:40 INFO  : Context for 'APU' is selected.
+14:52:40 INFO  : Hardware design and registers information is loaded from 'C:/embeding_system/Vitis/system_wrapper_final/export/system_wrapper_final/hw/system_wrapper_final.xsa'.
+14:52:40 INFO  : 'configparams force-mem-access 1' command is executed.
+14:52:40 INFO  : Context for 'APU' is selected.
+14:52:40 INFO  : Sourcing of 'C:/embeding_system/Vitis/final/_ide/psinit/ps7_init.tcl' is done.
+14:52:40 INFO  : 'ps7_init' command is executed.
+14:52:40 INFO  : 'ps7_post_config' command is executed.
+14:52:40 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:52:40 INFO  : The application 'C:/embeding_system/Vitis/final/Debug/final.elf' is downloaded to processor 'ps7_cortexa9_0'.
+14:52:40 INFO  : 'configparams force-mem-access 0' command is executed.
+14:52:40 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}
+fpga -file C:/embeding_system/Vitis/final/_ide/bitstream/system_wrapper_final.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/embeding_system/Vitis/system_wrapper_final/export/system_wrapper_final/hw/system_wrapper_final.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/embeding_system/Vitis/final/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/embeding_system/Vitis/final/Debug/final.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+14:52:41 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+14:52:41 INFO  : 'con' command is executed.
+14:52:41 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+14:52:41 INFO  : Launch script is exported to file 'C:\embeding_system\Vitis\final_system\_ide\scripts\debugger_final-default.tcl'
+18:12:41 INFO  : Disconnected from the channel tcfchan#7.
+16:19:00 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\embeding_system\final_project\Vitis\temp_xsdb_launch_script.tcl
+16:19:04 INFO  : XSCT server has started successfully.
+16:19:04 INFO  : plnx-install-location is set to ''
+16:19:04 INFO  : Successfully done setting XSCT server connection channel  
+16:19:04 INFO  : Successfully done setting workspace for the tool. 
+16:19:06 INFO  : Successfully done query RDI_DATADIR 
+16:19:12 INFO  : Registering command handlers for Vitis TCF services
+16:19:12 INFO  : Platform repository initialization has completed.
+16:20:22 INFO  : Result from executing command 'getProjects': system_wrapper_final
+16:20:22 INFO  : Result from executing command 'getPlatforms': system_wrapper_AES_final|C:/embeding_system/Vitis/system_wrapper_AES_final/export/system_wrapper_AES_final/system_wrapper_AES_final.xpfm;system_wrapper_AES|C:/embeding_system/Vitis/system_wrapper_AES/export/system_wrapper_AES/system_wrapper_AES.xpfm;system_wrapper_final|C:/embeding_system/Vitis/system_wrapper_final/export/system_wrapper_final/system_wrapper_final.xpfm;system_wrapper|C:/embeding_system/Vitis/system_wrapper/export/system_wrapper/system_wrapper.xpfm
+16:20:22 INFO  : Checking for BSP changes to sync application flags for project 'final'...

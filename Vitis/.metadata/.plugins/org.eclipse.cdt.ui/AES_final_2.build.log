@@ -1,0 +1,25 @@
+16:00:12 **** Incremental Build of configuration Debug for project AES_final_2 ****
+make all 
+make --no-print-directory pre-build
+a9-linaro-pre-build-step
+' '
+make --no-print-directory main-build
+'Building file: ../src/AES_test_final.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/AES_test_final.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -IC:/embeding_system/Vitis/system_wrapper_AES_final/export/system_wrapper_AES_final/sw/system_wrapper_AES_final/standalone_ps7_cortexa9_0/bspinclude/include -MMD -MP -MF"src/AES_test_final.d" -MT"src/AES_test_final.o" -o "src/AES_test_final.o" "../src/AES_test_final.c"
+'Finished building: ../src/AES_test_final.c'
+' '
+'Building target: AES_final_2.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -LC:/embeding_system/Vitis/system_wrapper_AES_final/export/system_wrapper_AES_final/sw/system_wrapper_AES_final/standalone_ps7_cortexa9_0/bsplib/lib -o "AES_final_2.elf"  ./src/AES_test_final.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: AES_final_2.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size AES_final_2.elf  |tee "AES_final_2.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  53800	   2548	  22640	  78988	  1348c	AES_final_2.elf
+'Finished building: AES_final_2.elf.size'
+' '
+
+16:00:14 Build Finished (took 1s.395ms)
+

@@ -1,0 +1,61 @@
+/include/ "system-conf.dtsi"
+/ {
+
+	amba {
+		/* AES IP  */
+		aes_ip: aes_ip@43c10000 {
+			compatible = "xlnx,aes-ip-1.00";
+			reg = <0x43c10000 0x1000>;
+			xlnx,s00-axi-data-width = <32>;
+			xlnx,s00-axi-addr-width = <6>;
+		};
+		
+		/* DES IP  */
+		des_ip: des_ip@43c20000 {
+			compatible = "xlnx,des-ip-1.00";
+			reg = <0x43c20000 0x1000>;
+			xlnx,s00-axi-data-width = <32>;
+			xlnx,s00-axi-addr-width = <6>;
+		};
+		
+		/* GCD IP  */
+		gcd_ip: gcd_ip@43c30000 {
+			compatible = "xlnx,gcd-ip-1.00";
+			reg = <0x43c30000 0x1000>;
+			xlnx,s00-axi-data-width = <32>;
+			xlnx,s00-axi-addr-width = <6>;
+		};
+		
+		/* INTER IP */
+		inter_ip: inter_ip@43c00000 {
+			compatible = "xlnx,myhwip-1.00";  
+			interrupt-parent = <&intc>;
+			interrupts = <0 29 1>;  
+			reg = <0x43c00000 0x1000>;
+			xlnx,s00-axi-data-width = <32>;
+			xlnx,s00-axi-addr-width = <6>;
+		};
+	};
+
+        usb_phy0: phy0 {
+                compatible = "ulpi-phy";
+                #phy-cells = <0>;
+                reg = <0xe0002000 0x1000>;
+                view-port = <0x170>;
+                drv-vbus;
+        };
+};
+
+&i2c0 {
+	status = "okay";
+};
+
+&i2c1 {
+	status = "okay";
+};
+
+
+&usb0 {
+        usb-phy = <&usb_phy0>;
+};
+

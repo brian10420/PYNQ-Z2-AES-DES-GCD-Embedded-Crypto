@@ -1,0 +1,50 @@
+timestamp=[2025-06-14 14:26:40], mode=WORKBENCH_START, duration=0:00:08.738, duration_ms=8738, data={}
+timestamp=[2025-06-14 14:26:41], mode=WORKBENCH_UI_INIT, duration=0:00:01.139, duration_ms=1139, data={editors_count=0, platform_editors_count=0, projects_count=0, platform_projects_count=0, active_platform_editor=false, projects=}
+timestamp=[2025-06-14 14:26:46], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:04.577, duration_ms=4577, data={}
+timestamp=[2025-06-14 14:34:18], mode=APP_CREATION, duration=0:00:29.919, duration_ms=29919, data={name=AES, project_type=sdk, os=standalone, processor=ps7_cortexa9, runtime=cpp, platform=system_wrapper_AES, application_type=application}
+timestamp=[2025-06-14 14:36:50], mode=PLATFORM_GENERATION, duration=0:00:27.378, duration_ms=27378, data={name=system_wrapper_AES}
+timestamp=[2025-06-14 14:36:51], mode=BUILD, duration=0:00:01.114, duration_ms=1114, data={name=AES, configuration=Debug, clean_build=false}
+timestamp=[2025-06-14 14:37:58], mode=BUILD, duration=0:00:01.179, duration_ms=1179, data={name=AES, configuration=Debug, clean_build=false}
+timestamp=[2025-06-14 14:55:06], mode=PLATFORM_GENERATION, duration=0:00:02.889, duration_ms=2889, data={name=system_wrapper_AES}
+timestamp=[2025-06-14 14:55:09], mode=BUILD, duration=0:00:00.386, duration_ms=386, data={name=AES, configuration=Debug, clean_build=false}
+timestamp=[2025-06-14 15:24:11], mode=PLATFORM_GENERATION, duration=0:00:03.035, duration_ms=3035, data={name=system_wrapper_AES}
+timestamp=[2025-06-14 15:24:15], mode=BUILD, duration=0:00:00.393, duration_ms=393, data={name=AES, configuration=Debug, clean_build=false}
+timestamp=[2025-06-14 15:26:17], mode=BUILD, duration=0:00:01.416, duration_ms=1416, data={name=AES, configuration=Debug, clean_build=false}
+timestamp=[2025-06-14 15:51:28], mode=APP_CREATION, duration=0:00:27.175, duration_ms=27175, data={name=AES_final, project_type=sdk, os=standalone, processor=ps7_cortexa9, runtime=cpp, platform=system_wrapper_AES_final, application_type=application}
+timestamp=[2025-06-14 15:53:26], mode=APP_CREATION, duration=0:00:24.923, duration_ms=24923, data={name=AES_final_2, project_type=sdk, os=standalone, processor=ps7_cortexa9, runtime=cpp, platform=system_wrapper_AES_final, application_type=application}
+timestamp=[2025-06-14 15:57:31], mode=PLATFORM_GENERATION, duration=0:00:27.391, duration_ms=27391, data={name=system_wrapper_AES_final}
+timestamp=[2025-06-14 15:57:32], mode=BUILD, duration=0:00:00.710, duration_ms=710, data={name=AES_final_2, configuration=Debug, clean_build=false}
+timestamp=[2025-06-14 15:58:01], mode=BUILD, duration=0:00:00.566, duration_ms=566, data={name=AES_final_2, configuration=Debug, clean_build=false}
+timestamp=[2025-06-14 15:58:54], mode=BUILD, duration=0:00:00.578, duration_ms=578, data={name=AES_final_2, configuration=Debug, clean_build=false}
+timestamp=[2025-06-14 15:59:13], mode=PLATFORM_GENERATION, duration=0:00:06.937, duration_ms=6937, data={name=system_wrapper_AES_final}
+timestamp=[2025-06-14 15:59:13], mode=BUILD, duration=0:00:00.211, duration_ms=211, data={name=AES_final_2, configuration=Debug, clean_build=true}
+timestamp=[2025-06-14 15:59:41], mode=PLATFORM_GENERATION, duration=0:00:23.766, duration_ms=23766, data={name=system_wrapper_AES_final}
+timestamp=[2025-06-14 15:59:42], mode=BUILD, duration=0:00:00.636, duration_ms=636, data={name=AES_final_2, configuration=Debug, clean_build=false}
+timestamp=[2025-06-14 16:00:14], mode=BUILD, duration=0:00:01.411, duration_ms=1411, data={name=AES_final_2, configuration=Debug, clean_build=false}
+timestamp=[2025-06-15 04:29:04], mode=WORKBENCH_START, duration=0:00:13.241, duration_ms=13241, data={}
+timestamp=[2025-06-15 04:29:05], mode=WORKBENCH_UI_INIT, duration=0:00:01.265, duration_ms=1265, data={editors_count=12, platform_editors_count=6, projects_count=7, platform_projects_count=2, active_platform_editor=false, projects=AES,AES_final_2,AES_final_2_system,AES_system,RemoteSystemsTempFiles,system_wrapper_AES,system_wrapper_AES_final}
+timestamp=[2025-06-15 04:29:05], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.280, duration_ms=280, data={}
+timestamp=[2025-06-15 04:30:20], mode=APP_CREATION, duration=0:00:28.528, duration_ms=28528, data={name=intr_ip, project_type=sdk, os=standalone, processor=ps7_cortexa9, runtime=cpp, platform=system_wrapper, application_type=application}
+timestamp=[2025-06-15 04:33:11], mode=PLATFORM_GENERATION, duration=0:00:29.628, duration_ms=29628, data={name=system_wrapper}
+timestamp=[2025-06-15 04:33:12], mode=BUILD, duration=0:00:00.715, duration_ms=715, data={name=intr_ip, configuration=Debug, clean_build=false}
+timestamp=[2025-06-15 04:35:26], mode=BUILD, duration=0:00:00.547, duration_ms=547, data={name=intr_ip, configuration=Debug, clean_build=false}
+timestamp=[2025-06-15 04:36:13], mode=BUILD, duration=0:00:01.277, duration_ms=1277, data={name=intr_ip, configuration=Debug, clean_build=false}
+timestamp=[2025-06-15 13:47:46], mode=WORKBENCH_START, duration=0:00:12.135, duration_ms=12135, data={}
+timestamp=[2025-06-15 13:47:47], mode=WORKBENCH_UI_INIT, duration=0:00:01.077, duration_ms=1077, data={editors_count=18, platform_editors_count=9, projects_count=10, platform_projects_count=3, active_platform_editor=false, projects=AES,AES_final_2,AES_final_2_system,AES_system,RemoteSystemsTempFiles,intr_ip,intr_ip_system,system_wrapper,system_wrapper_AES,system_wrapper_AES_final}
+timestamp=[2025-06-15 13:47:48], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.119, duration_ms=119, data={}
+timestamp=[2025-06-15 13:49:46], mode=APP_CREATION, duration=0:00:26.326, duration_ms=26326, data={name=final, project_type=sdk, os=standalone, processor=ps7_cortexa9, runtime=cpp, platform=system_wrapper_final, application_type=application}
+timestamp=[2025-06-15 14:03:51], mode=PLATFORM_GENERATION, duration=0:00:35.631, duration_ms=35631, data={name=system_wrapper_final}
+timestamp=[2025-06-15 14:03:53], mode=BUILD, duration=0:00:01.340, duration_ms=1340, data={name=final, configuration=Debug, clean_build=false}
+timestamp=[2025-06-15 14:14:15], mode=BUILD, duration=0:00:01.306, duration_ms=1306, data={name=final, configuration=Debug, clean_build=false}
+timestamp=[2025-06-15 14:14:40], mode=BUILD, duration=0:00:00.208, duration_ms=208, data={name=final, configuration=Debug, clean_build=true}
+timestamp=[2025-06-15 14:14:41], mode=BUILD, duration=0:00:01.110, duration_ms=1110, data={name=final, configuration=Debug, clean_build=false}
+timestamp=[2025-06-15 14:36:55], mode=BUILD, duration=0:00:01.117, duration_ms=1117, data={name=final, configuration=Debug, clean_build=false}
+timestamp=[2025-06-15 14:38:56], mode=BUILD, duration=0:00:01.114, duration_ms=1114, data={name=final, configuration=Debug, clean_build=false}
+timestamp=[2025-06-15 14:39:12], mode=BUILD, duration=0:00:01.132, duration_ms=1132, data={name=final, configuration=Debug, clean_build=false}
+timestamp=[2025-06-15 14:42:03], mode=BUILD, duration=0:00:01.116, duration_ms=1116, data={name=final, configuration=Debug, clean_build=false}
+timestamp=[2025-06-15 14:52:30], mode=BUILD, duration=0:00:01.171, duration_ms=1171, data={name=final, configuration=Debug, clean_build=false}
+timestamp=[2025-06-16 16:19:07], mode=WORKBENCH_START, duration=0:00:14.137, duration_ms=14137, data={}
+timestamp=[2025-06-16 16:19:09], mode=WORKBENCH_UI_INIT, duration=0:00:01.777, duration_ms=1777, data={editors_count=36, platform_editors_count=15, projects_count=13, platform_projects_count=1, active_platform_editor=true, projects=AES,AES_final_2,AES_final_2_system,AES_system,RemoteSystemsTempFiles,final,final_system,intr_ip,intr_ip_system,system_wrapper,system_wrapper_AES,system_wrapper_AES_final,system_wrapper_final}
+timestamp=[2025-06-16 16:19:12], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.183, duration_ms=183, data={}
+timestamp=[2025-06-16 16:20:22], mode=PLATFORM_GENERATION, duration=0:00:09.650, duration_ms=9650, data={name=system_wrapper_final}
+timestamp=[2025-06-16 16:20:25], mode=BUILD, duration=0:00:00.354, duration_ms=354, data={name=final, configuration=Debug, clean_build=false}

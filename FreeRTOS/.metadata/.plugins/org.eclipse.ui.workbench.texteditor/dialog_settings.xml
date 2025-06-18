@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<item key="selection" value="xQueueCreate"/>
+		<list key="findhistory">
+			<item value="xQueueCreate"/>
+			<item value="xQueueCreate()"/>
+			<item value="queue"/>
+			<item value="DESIP_S00_AXI_SLV_REG0_OFFSET"/>
+			<item value="result_high "/>
+			<item value="    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0);"/>
+		</list>
+		<list key="replacehistory">
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="820"/>
+		<item key="DIALOG_Y_ORIGIN" value="268"/>
+		<item key="DIALOG_WIDTH" value="296"/>
+		<item key="DIALOG_HEIGHT" value="391"/>
+		<item key="DIALOG_FONT_NAME" value="1|Microsoft JhengHei UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Microsoft JhengHei UI"/>
+	</section>
+</section>

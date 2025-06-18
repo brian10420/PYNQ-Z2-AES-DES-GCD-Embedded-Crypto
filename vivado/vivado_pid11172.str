@@ -1,0 +1,144 @@
+/*
+
+Xilinx Vivado v2020.2 (64-bit) [Major: 2020, Minor: 2]
+SW Build: 3064766 on Wed Nov 18 09:12:45 MST 2020
+IP Build: 3064653 on Wed Nov 18 14:17:31 MST 2020
+
+Process ID (PID): 11172
+License: Customer
+Mode: GUI Mode
+
+Current time: 	Sun Jun 15 03:30:41 CST 2025
+Time zone: 	Taipei Standard Time (Asia/Taipei)
+
+OS: Windows 10
+OS Version: 10.0
+OS Architecture: amd64
+Available processors (cores): 8
+
+Screen size: 1920x1080
+Screen resolution (DPI): 125
+Available screens: 1
+Default font: family=Dialog,name=Dialog,style=plain,size=15
+Scale size: 19
+
+Java version: 	11.0.2 64-bit
+Java home: 	C:/xilinx/Vivado/2020.2/tps/win64/jre11.0.2
+Java executable location: 	C:/xilinx/Vivado/2020.2/tps/win64/jre11.0.2/bin/java.exe
+Java initial memory (-Xms): 	128 MB
+Java maximum memory (-Xmx):	 3 GB
+
+
+User name: 	brian
+User home directory: C:/Users/brian
+User working directory: C:/embeding_system/project_2_final
+User country: 	TW
+User language: 	zh
+User locale: 	zh_TW
+
+RDI_BASEROOT: C:/xilinx/Vivado
+HDI_APPROOT: C:/xilinx/Vivado/2020.2
+RDI_DATADIR: C:/xilinx/Vivado/2020.2/data
+RDI_BINDIR: C:/xilinx/Vivado/2020.2/bin
+
+Vivado preferences file location: C:/Users/brian/AppData/Roaming/Xilinx/Vivado/2020.2/vivado.xml
+Vivado preferences directory: C:/Users/brian/AppData/Roaming/Xilinx/Vivado/2020.2/
+Vivado layouts directory: C:/Users/brian/AppData/Roaming/Xilinx/Vivado/2020.2/data/layouts
+PlanAhead jar file location: 	C:/xilinx/Vivado/2020.2/lib/classes/planAhead.jar
+Vivado log file location: 	C:/embeding_system/project_2_final/vivado.log
+Vivado journal file location: 	C:/embeding_system/project_2_final/vivado.jou
+Engine tmp dir: 	C:/embeding_system/project_2_final/.Xil/Vivado-11172-DESKTOP-F2ANT3D
+
+Xilinx Environment Variables
+----------------------------
+XILINX: C:/xilinx/Vivado/2020.2/ids_lite/ISE
+XILINX_DSP: C:/xilinx/Vivado/2020.2/ids_lite/ISE
+XILINX_HLS: C:/xilinx/Vitis_HLS/2020.2
+XILINX_PLANAHEAD: C:/xilinx/Vivado/2020.2
+XILINX_SDK: C:/xilinx/Vitis/2020.2
+XILINX_VITIS: C:/xilinx/Vitis/2020.2
+XILINX_VIVADO: C:/xilinx/Vivado/2020.2
+XILINX_VIVADO_HLS: C:/xilinx/Vivado/2020.2
+
+
+GUI allocated memory:	154 MB
+GUI max memory:		3,072 MB
+Engine allocated memory: 1,137 MB
+
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+// TclEventType: PROJECT_OPEN_DIALOG
+// [GUI Memory]: 83 MB (+84206kb) [00:00:06]
+// [Engine Memory]: 1,137 MB (+1041107kb) [00:00:06]
+// bz (cr):  Open Project : addNotify
+// Opening Vivado Project: C:\embeding_system\project_2_final\project_1.xpr. Version: Vivado v2020.2 
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// Tcl Message: open_project C:/embeding_system/project_2_final/project_1.xpr 
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_DASHBOARD_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 1,137 MB. GUI used memory: 54 MB. Current time: 6/15/25, 3:30:42 AM CST
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: IP_LOCK_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 124 MB (+39079kb) [00:00:16]
+// [GUI Memory]: 131 MB (+281kb) [00:00:16]
+// WARNING: HEventQueue.dispatchEvent() is taking  4924 ms.
+// Tcl Message: open_project C:/embeding_system/project_2_final/project_1.xpr 
+// Tcl Message: INFO: [Project 1-313] Project file moved from 'D:/project/project_2' since last save. 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories 
+// Tcl Message: INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/xilinx/Vivado/2020.2/data/ip'. 
+// Tcl Message: open_project: Time (s): cpu = 00:00:23 ; elapsed = 00:00:13 . Memory (MB): peak = 1144.223 ; gain = 0.000 
+// Project name: project_1; location: C:/embeding_system/project_2_final; part: xc7z020clg400-1
+dismissDialog("Open Project"); // bz
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, IP Integrator, Open Block Design]", 7, false); // u
+// Run Command: PAResourceCommand.PACommandNames_OPEN_BLOCK_DESIGN
+// Tcl Command: 'rdi::info_commands {device::*}'
+// Tcl Command: 'rdi::info_commands {debug::*}'
+// Tcl Command: 'rdi::info_commands {*}'
+// bz (cr):  Open Block Design : addNotify
+// [GUI Memory]: 140 MB (+3148kb) [00:00:50]
+// Elapsed time: 65 seconds
+selectButton(RDIResource.ProgressDialog_CANCEL, "Cancel"); // a
+// Elapsed time: 33 seconds
+selectButton(RDIResource.ProgressDialog_BACKGROUND, "Background"); // a
+// 'bF' command handler elapsed time: 98 seconds
+// [GUI Memory]: 147 MB (+229kb) [00:02:01]
+closeMainWindow("project_1 - [C:/embeding_system/project_2_final/project_1.xpr] - Vivado 2020.2"); // cr
+// HOptionPane Warning: 'A background task is running. Please wait until it completes to exit Vivado. If you choose to abort background task and exit immediately, you will lose all unsaved changes to project. (Background Task)'

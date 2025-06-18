@@ -1,0 +1,533 @@
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+#include "semphr.h"
+#include "timers.h"
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xil_io.h"
+#include "gcdip.h"
+#include "desip.h"
+#include "sleep.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+// AES IP base address and register offsets
+#define AES_BASE_ADDR XPAR_AES_IP_0_S00_AXI_BASEADDR
+#define CONTROL_REG_OFFSET      0x00
+#define STATUS_REG_OFFSET       0x04
+#define KEY_HIGH_OFFSET         0x08
+#define KEY_LOW_OFFSET          0x0C
+#define KEY_HIGH2_OFFSET        0x10
+#define KEY_LOW2_OFFSET         0x14
+#define DATA_IN_HIGH_OFFSET     0x18
+#define DATA_IN_LOW_OFFSET      0x1C
+#define DATA_IN_HIGH2_OFFSET    0x20
+#define DATA_IN_LOW2_OFFSET     0x24
+#define DATA_OUT_HIGH_OFFSET    0x28
+#define DATA_OUT_MIDHIGH_OFFSET 0x2C
+#define DATA_OUT_MIDLOW_OFFSET  0x30
+#define DATA_OUT_LOW_OFFSET     0x34
+
+// Simple data structure for queue
+typedef struct {
+    uint32_t value1;
+    uint32_t value2;
+    uint8_t valid;  // Add validation flag
+} UserInput_t;
+
+// Global variables
+QueueHandle_t xInputQueue = NULL;
+SemaphoreHandle_t xIPCoreMutex = NULL;
+SemaphoreHandle_t xPrintMutex = NULL;
+
+// Test control
+volatile uint8_t input_finished = 0;
+volatile uint8_t current_test_index = 0;
+
+// Default DES key for encryption/decryption
+#define DEFAULT_DES_KEY 0x0123456789ABCDEFULL
+
+// AES key for final encryption (128-bit)
+#define AES_KEY_HIGH   0x2B7E1516
+#define AES_KEY_LOW    0x28AED2A6
+#define AES_KEY_HIGH2  0xABF71588
+#define AES_KEY_LOW2   0x09CF4F3C
+
+// Test data
+static const uint32_t test_inputs[][2] = {
+    {48, 60},
+    {24, 36},
+    {100, 150},
+    {17, 19},
+    {84, 126}
+};
+#define NUM_TEST_CASES (sizeof(test_inputs) / sizeof(test_inputs[0]))
+
+// Function prototypes
+void vUserInputTask(void *pvParameters);
+void vSystemProcessTask(void *pvParameters);
+void vStatusTask(void *pvParameters);
+uint64_t des_encrypt_value(uint32_t value, uint64_t key);
+uint64_t des_decrypt_value(uint64_t encrypted_value, uint64_t key);
+uint32_t calculate_gcd(uint32_t x, uint32_t y);
+void aes_encrypt_result(uint32_t value, uint32_t *result_high, uint32_t *result_low);
+void safe_printf(const char* msg);
+
+// Safe printf function using mutex
+void safe_printf(const char* msg) {
+    if (xPrintMutex != NULL) {
+        if (xSemaphoreTake(xPrintMutex, pdMS_TO_TICKS(500)) == pdTRUE) {
+            xil_printf("%s", msg);
+            xSemaphoreGive(xPrintMutex);
+        }
+    } else {
+        xil_printf("%s", msg);
+    }
+}
+
+// Enhanced printf with formatting
+void safe_printf_fmt(const char* format, uint32_t val1, uint32_t val2) {
+    char buffer[200];
+    sprintf(buffer, format, val1, val2);
+    safe_printf(buffer);
+}
+
+void safe_printf_hex(const char* format, uint32_t high, uint32_t low) {
+    char buffer[200];
+    sprintf(buffer, format, high, low);
+    safe_printf(buffer);
+}
+
+// DES encryption function (simplified and robust)
+uint64_t des_encrypt_value(uint32_t value, uint64_t key) {
+    // Convert 32-bit value to 64-bit for DES (pad with zeros)
+    uint64_t plaintext = ((uint64_t)value << 32) | 0x00000000UL;
+
+    uint32_t pt_high = (uint32_t)(plaintext >> 32);    // value
+    uint32_t pt_low = (uint32_t)(plaintext & 0xFFFFFFFF); // 0
+    uint32_t key_high = (uint32_t)(key >> 32);
+    uint32_t key_low = (uint32_t)(key & 0xFFFFFFFF);
+    uint32_t res_high, res_low;
+    uint32_t status;
+    int timeout = 0;
+
+    if (xSemaphoreTake(xIPCoreMutex, pdMS_TO_TICKS(2000)) != pdTRUE) {
+        safe_printf("ERROR: DES encrypt mutex timeout\r\n");
+        return 0;
+    }
+    
+    // Reset DES IP completely
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0);
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG7_OFFSET, 0);
+    vTaskDelay(pdMS_TO_TICKS(20)); // Use FreeRTOS delay instead of usleep
+
+    // Write plaintext (low first, then high)
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG0_OFFSET, pt_low);
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG1_OFFSET, pt_high);
+
+    // Write key (low first, then high)
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG2_OFFSET, key_low);
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG3_OFFSET, key_high);
+
+    vTaskDelay(pdMS_TO_TICKS(10));
+
+    // Start encryption (bit 0 = start, bit 1 = 0 for encrypt)
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0x01);
+
+    // Wait for completion with timeout
+    do {
+        vTaskDelay(pdMS_TO_TICKS(2));
+        status = DESIP_mReadReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG7_OFFSET);
+        timeout++;
+        if (timeout > 50) {
+            safe_printf("ERROR: DES encryption timeout\r\n");
+            break;
+        }
+    } while ((status & 0x01) == 0);
+
+    if (status & 0x01) {
+        // Read result
+        res_low = DESIP_mReadReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG5_OFFSET);
+        res_high = DESIP_mReadReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG6_OFFSET);
+    } else {
+        res_low = 0;
+        res_high = 0;
+    }
+
+    // Clear start signal
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0);
+    
+    xSemaphoreGive(xIPCoreMutex);
+
+    return ((uint64_t)res_high << 32) | res_low;
+}
+
+// DES decryption function
+uint64_t des_decrypt_value(uint64_t encrypted_value, uint64_t key) {
+    uint32_t cipher_high = (uint32_t)(encrypted_value >> 32);
+    uint32_t cipher_low = (uint32_t)(encrypted_value & 0xFFFFFFFF);
+    uint32_t key_high = (uint32_t)(key >> 32);
+    uint32_t key_low = (uint32_t)(key & 0xFFFFFFFF);
+    uint32_t res_high, res_low;
+    uint32_t status;
+    int timeout = 0;
+
+    if (xSemaphoreTake(xIPCoreMutex, pdMS_TO_TICKS(2000)) != pdTRUE) {
+        safe_printf("ERROR: DES decrypt mutex timeout\r\n");
+        return 0;
+    }
+
+    // Reset DES IP
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0);
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG7_OFFSET, 0);
+    vTaskDelay(pdMS_TO_TICKS(20));
+
+    // Write ciphertext
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG0_OFFSET, cipher_low);
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG1_OFFSET, cipher_high);
+
+    // Write key
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG2_OFFSET, key_low);
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG3_OFFSET, key_high);
+
+    vTaskDelay(pdMS_TO_TICKS(10));
+
+    // Start decryption (bit 0 = start, bit 1 = 1 for decrypt)
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0x03);
+
+    // Wait for completion
+    do {
+        vTaskDelay(pdMS_TO_TICKS(2));
+        status = DESIP_mReadReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG7_OFFSET);
+        timeout++;
+        if (timeout > 50) {
+            safe_printf("ERROR: DES decryption timeout\r\n");
+            break;
+        }
+    } while ((status & 0x01) == 0);
+
+    if (status & 0x01) {
+        // Read result
+        res_low = DESIP_mReadReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG5_OFFSET);
+        res_high = DESIP_mReadReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG6_OFFSET);
+    } else {
+        res_low = 0;
+        res_high = 0;
+    }
+
+    // Clear start signal
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0);
+    
+    xSemaphoreGive(xIPCoreMutex);
+
+    return ((uint64_t)res_high << 32) | res_low;
+}
+
+// GCD calculation function
+uint32_t calculate_gcd(uint32_t x, uint32_t y) {
+    uint32_t result;
+    int timeout_counter = 0;
+
+    if (xSemaphoreTake(xIPCoreMutex, pdMS_TO_TICKS(2000)) != pdTRUE) {
+        safe_printf("ERROR: GCD mutex timeout\r\n");
+        return 0;
+    }
+
+    // Ensure start signal is 0
+    GCDIP_mWriteReg(XPAR_GCDIP_0_S00_AXI_BASEADDR, GCDIP_S00_AXI_SLV_REG2_OFFSET, 0);
+
+    // Write X and Y values
+    GCDIP_mWriteReg(XPAR_GCDIP_0_S00_AXI_BASEADDR, GCDIP_S00_AXI_SLV_REG0_OFFSET, x);
+    GCDIP_mWriteReg(XPAR_GCDIP_0_S00_AXI_BASEADDR, GCDIP_S00_AXI_SLV_REG1_OFFSET, y);
+
+    vTaskDelay(pdMS_TO_TICKS(2));
+
+    // Start calculation
+    GCDIP_mWriteReg(XPAR_GCDIP_0_S00_AXI_BASEADDR, GCDIP_S00_AXI_SLV_REG2_OFFSET, 1);
+
+    // Poll for result
+    do {
+        vTaskDelay(pdMS_TO_TICKS(2));
+        result = GCDIP_mReadReg(XPAR_GCDIP_0_S00_AXI_BASEADDR, GCDIP_S00_AXI_SLV_REG3_OFFSET);
+        timeout_counter++;
+        if (timeout_counter > 200) {
+            safe_printf("ERROR: GCD calculation timeout\r\n");
+            break;
+        }
+    } while ((result & 0xFF) == 0);
+
+    // Clear start signal
+    GCDIP_mWriteReg(XPAR_GCDIP_0_S00_AXI_BASEADDR, GCDIP_S00_AXI_SLV_REG2_OFFSET, 0);
+
+    xSemaphoreGive(xIPCoreMutex);
+
+    return (result & 0xFF);
+}
+
+// AES encryption function for final result
+void aes_encrypt_result(uint32_t value, uint32_t *result_high, uint32_t *result_low) {
+    uint32_t data_high = value;
+    uint32_t data_low = 0;
+    uint32_t data_high2 = 0;
+    uint32_t data_low2 = 0;
+    uint32_t status;
+
+    if (xSemaphoreTake(xIPCoreMutex, pdMS_TO_TICKS(2000)) != pdTRUE) {
+        safe_printf("ERROR: AES mutex timeout\r\n");
+        *result_high = 0;
+        *result_low = 0;
+        return;
+    }
+
+    // Write key
+    Xil_Out32(AES_BASE_ADDR + KEY_HIGH_OFFSET, AES_KEY_HIGH);
+    Xil_Out32(AES_BASE_ADDR + KEY_LOW_OFFSET, AES_KEY_LOW);
+    Xil_Out32(AES_BASE_ADDR + KEY_HIGH2_OFFSET, AES_KEY_HIGH2);
+    Xil_Out32(AES_BASE_ADDR + KEY_LOW2_OFFSET, AES_KEY_LOW2);
+
+    // Write data
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_HIGH_OFFSET, data_high);
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_LOW_OFFSET, data_low);
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_HIGH2_OFFSET, data_high2);
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_LOW2_OFFSET, data_low2);
+
+    // Start encryption
+    Xil_Out32(AES_BASE_ADDR + CONTROL_REG_OFFSET, 0x00000003);
+
+    // Wait for completion
+    do {
+        status = Xil_In32(AES_BASE_ADDR + STATUS_REG_OFFSET);
+    } while (!(status & 0x00000001));
+
+    // Read result (only using first 64 bits)
+    *result_high = Xil_In32(AES_BASE_ADDR + DATA_OUT_HIGH_OFFSET);
+    *result_low = Xil_In32(AES_BASE_ADDR + DATA_OUT_MIDHIGH_OFFSET);
+
+    xSemaphoreGive(xIPCoreMutex);
+}
+
+// User input task - inputs every 4 seconds, stops after all test cases
+void vUserInputTask(void *pvParameters) {
+    UserInput_t user_input;
+    uint64_t encrypted_val1, encrypted_val2;
+    uint8_t test_index = 0;
+    
+    safe_printf(">>> USER INPUT TASK STARTED <<<\r\n");
+    
+    for (;;) {
+        // Check if all test cases are done
+        if (test_index >= NUM_TEST_CASES) {
+            if (!input_finished) {
+                input_finished = 1;
+                safe_printf(">>> ALL TEST INPUTS COMPLETED <<<\r\n");
+            }
+            vTaskDelay(pdMS_TO_TICKS(1000)); // Sleep indefinitely
+            continue;
+        }
+
+        // Get current test input
+        user_input.value1 = test_inputs[test_index][0];
+        user_input.value2 = test_inputs[test_index][1];
+        user_input.valid = 1;
+        
+        safe_printf("\r\n>>> USER INPUT <<<\r\n");
+        safe_printf_fmt("User entered values: %lu, %lu\r\n", user_input.value1, user_input.value2);
+        
+        // Encrypt both values using DES
+        encrypted_val1 = des_encrypt_value(user_input.value1, DEFAULT_DES_KEY);
+        encrypted_val2 = des_encrypt_value(user_input.value2, DEFAULT_DES_KEY);
+        
+        safe_printf_hex("Encrypted value1: 0x%08lX%08lX\r\n",
+                       (uint32_t)(encrypted_val1 >> 32),
+                       (uint32_t)(encrypted_val1 & 0xFFFFFFFF));
+        safe_printf_hex("Encrypted value2: 0x%08lX%08lX\r\n",
+                       (uint32_t)(encrypted_val2 >> 32),
+                       (uint32_t)(encrypted_val2 & 0xFFFFFFFF));
+        
+        // Try to queue the data for processing
+        if (xQueueSend(xInputQueue, &user_input, 0) == pdTRUE) {
+            safe_printf("Data queued for processing\r\n");
+            test_index++; // Only increment if successfully queued
+        } else {
+            safe_printf("Queue full! Data lost.\r\n");
+            // Don't increment test_index, retry this input next time
+        }
+        
+        // Wait exactly 4 seconds before next input
+        vTaskDelay(pdMS_TO_TICKS(4000));
+    }
+}
+
+// System processing task - runs every 10 seconds
+void vSystemProcessTask(void *pvParameters) {
+    UserInput_t user_input;
+    uint64_t encrypted_val1, encrypted_val2;
+    uint32_t decrypted_value1, decrypted_value2;
+    uint32_t gcd_result;
+    uint32_t aes_result_high, aes_result_low;
+    TickType_t xLastWakeTime;
+
+    safe_printf(">>> SYSTEM PROCESSING TASK STARTED <<<\r\n");
+    
+    xLastWakeTime = xTaskGetTickCount();
+    
+    for (;;) {
+        safe_printf("\r\n=== SYSTEM PROCESSING CYCLE ===\r\n");
+        
+        // Check if there's data in the queue
+        if (xQueueReceive(xInputQueue, &user_input, 0) == pdTRUE) {
+            if (user_input.valid == 1) {
+            	xil_printf("Processing values: %lu, %lu\r\n", user_input.value1, user_input.value2);
+
+                // Step 1: Encrypt with DES (simulate the user's encrypted storage)
+                encrypted_val1 = des_encrypt_value(user_input.value1, DEFAULT_DES_KEY);
+                encrypted_val2 = des_encrypt_value(user_input.value2, DEFAULT_DES_KEY);
+
+                // Step 2: Decrypt the values using DES
+                decrypted_value1 = (uint32_t)(des_decrypt_value(encrypted_val1, DEFAULT_DES_KEY) >> 32);
+                decrypted_value2 = (uint32_t)(des_decrypt_value(encrypted_val2, DEFAULT_DES_KEY) >> 32);
+
+                xil_printf("Decrypted values: %lu, %lu\r\n", decrypted_value1, decrypted_value2);
+
+                // Step 3: Calculate GCD
+                gcd_result = calculate_gcd(decrypted_value1, decrypted_value2);
+                xil_printf("GCD(%lu, %lu) = %lu\r\n", decrypted_value1, decrypted_value2, gcd_result);
+
+                // Step 4: Encrypt GCD result using AES
+                aes_encrypt_result(gcd_result, &aes_result_high, &aes_result_low);
+                safe_printf_hex("AES encrypted GCD result: 0x%08lX%08lX\r\n", aes_result_high, aes_result_low);
+
+                safe_printf("Processing completed successfully!\r\n");
+            } else {
+                safe_printf("Invalid data received in queue\r\n");
+            }
+        } else {
+            safe_printf("No data in queue to process\r\n");
+            if (input_finished) {
+                safe_printf("All inputs processed. System processing will continue monitoring.\r\n");
+            }
+        }
+        
+        // Wait exactly 10 seconds before next processing cycle
+        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(10000));
+    }
+}
+
+// Status monitoring task
+void vStatusTask(void *pvParameters) {
+    UBaseType_t queue_items;
+    
+    safe_printf(">>> STATUS TASK STARTED <<<\r\n");
+
+    for (;;) {
+        if (xInputQueue != NULL) {
+            queue_items = uxQueueMessagesWaiting(xInputQueue);
+            if (queue_items < 1000) { // Sanity check for valid queue
+                safe_printf_fmt("\r\n[STATUS] Queue items waiting: %lu\r\n", queue_items, 0);
+            } else {
+                safe_printf("[STATUS] Queue corruption detected!\r\n");
+            }
+        } else {
+            safe_printf("[STATUS] Queue is NULL!\r\n");
+        }
+        
+        vTaskDelay(pdMS_TO_TICKS(5000)); // Status every 5 seconds
+    }
+}
+
+int main(void) {
+    xil_printf("========================================\r\n");
+    xil_printf("  FreeRTOS Cryptographic Workflow Demo \r\n");
+    xil_printf("========================================\r\n");
+
+    // Initialize variables
+    input_finished = 0;
+    current_test_index = 0;
+
+    // Create mutexes first
+    xIPCoreMutex = xSemaphoreCreateMutex();
+    xPrintMutex = xSemaphoreCreateMutex();
+
+    // Create queue with small, simple structure
+    xInputQueue = xQueueCreate(2, sizeof(UserInput_t)); // Only 2 items max
+
+    // Check if all resources were created successfully
+    if (xInputQueue == NULL) {
+        xil_printf("ERROR: Failed to create input queue!\r\n");
+        for (;;);
+    }
+
+    if (xIPCoreMutex == NULL) {
+        xil_printf("ERROR: Failed to create IP core mutex!\r\n");
+        for (;;);
+    }
+
+    if (xPrintMutex == NULL) {
+        xil_printf("ERROR: Failed to create print mutex!\r\n");
+        for (;;);
+    }
+
+    xil_printf("All resources created successfully\r\n");
+    xil_printf("Test cases to process: %d\r\n", NUM_TEST_CASES);
+
+    // Create tasks with appropriate stack sizes
+    if (xTaskCreate(vUserInputTask,
+                   "UserInput",
+                   3072,  // Reduced stack size
+                   NULL,
+                   2,     // Higher priority
+                   NULL) != pdPASS) {
+        xil_printf("ERROR: Failed to create UserInput task!\r\n");
+        for (;;);
+    }
+
+    if (xTaskCreate(vSystemProcessTask,
+                   "SystemProcess",
+                   3072,  // Reduced stack size
+                   NULL,
+                   1,     // Lower priority
+                   NULL) != pdPASS) {
+        xil_printf("ERROR: Failed to create SystemProcess task!\r\n");
+        for (;;);
+    }
+
+    if (xTaskCreate(vStatusTask,
+                   "Status",
+                   1536,  // Smaller stack for status
+                   NULL,
+                   1,     // Lowest priority
+                   NULL) != pdPASS) {
+        xil_printf("ERROR: Failed to create Status task!\r\n");
+        for (;;);
+    }
+
+    xil_printf("All tasks created successfully\r\n");
+    xil_printf("Starting scheduler...\r\n");
+
+    // Start the scheduler
+    vTaskStartScheduler();
+
+    // Should never reach here
+    xil_printf("ERROR: Scheduler returned!\r\n");
+    for (;;);
+}
+
+// Required FreeRTOS hook functions
+void vApplicationMallocFailedHook(void) {
+    xil_printf("ERROR: Malloc failed!\r\n");
+    for (;;);
+}
+
+void vApplicationSetupHardware(void) {
+    // Hardware initialization if needed
+}
+
+void vApplicationStackOverflowHook(TaskHandle_t xTask, signed char *pcTaskName) {
+    xil_printf("ERROR: Stack overflow in task: %s\r\n", pcTaskName);
+    for (;;);
+}
+
+void vApplicationIdleHook(void) {
+    // Idle task hook
+}

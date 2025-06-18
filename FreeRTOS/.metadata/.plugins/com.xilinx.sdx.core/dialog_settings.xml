@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="sdx.custom.platform.repository.locations" value="D:\EOS\project\project_1\vitis_project\vitis_test_project\test_system_wrapper\export\test_system_wrapper;D:\EOS\project\project_1\vitis_test_project\testFreeRTOS06151533\export\testFreeRTOS06151533;D:\EOS\project\project_1\vitis_test_project\testfinalFreeRTOS06151536\export\testfinalFreeRTOS06151536"/>
+</section>

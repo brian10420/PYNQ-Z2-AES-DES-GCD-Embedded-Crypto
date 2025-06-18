@@ -1,0 +1,81 @@
+timestamp=[2025-03-11 14:24:44], mode=WORKBENCH_START, duration=0:00:08.075, duration_ms=8075, data={}
+timestamp=[2025-03-11 14:24:45], mode=WORKBENCH_UI_INIT, duration=0:00:00.618, duration_ms=618, data={editors_count=0, platform_editors_count=0, projects_count=0, platform_projects_count=0, active_platform_editor=false, projects=}
+timestamp=[2025-03-11 14:24:53], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:06.315, duration_ms=6315, data={}
+timestamp=[2025-03-11 14:30:00], mode=APP_CREATION, duration=0:00:26.474, duration_ms=26474, data={name=lab1_2, project_type=sdk, os=standalone, processor=ps7_cortexa9, runtime=cpp, platform=system_wrapper, application_type=application}
+timestamp=[2025-03-11 14:33:39], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.017, duration_ms=17, data={}
+timestamp=[2025-03-11 14:33:40], mode=WORKBENCH_START, duration=0:00:10.435, duration_ms=10435, data={}
+timestamp=[2025-03-11 14:33:41], mode=WORKBENCH_UI_INIT, duration=0:00:01.116, duration_ms=1116, data={editors_count=2, platform_editors_count=0, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,lab1_2,lab1_2_system,system_wrapper}
+timestamp=[2025-03-11 14:37:49], mode=WORKBENCH_START, duration=0:00:10.143, duration_ms=10143, data={}
+timestamp=[2025-03-11 14:37:49], mode=WORKBENCH_UI_INIT, duration=0:00:00.491, duration_ms=491, data={editors_count=0, platform_editors_count=0, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,lab1_2,lab1_2_system,system_wrapper}
+timestamp=[2025-03-11 14:37:50], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.022, duration_ms=22, data={}
+timestamp=[2025-03-11 14:43:02], mode=WORKBENCH_START, duration=0:00:06.971, duration_ms=6971, data={}
+timestamp=[2025-03-11 14:43:03], mode=WORKBENCH_UI_INIT, duration=0:00:00.352, duration_ms=352, data={editors_count=0, platform_editors_count=0, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,lab1_2,lab1_2_system,system_wrapper}
+timestamp=[2025-03-11 14:43:07], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:03.182, duration_ms=3182, data={}
+timestamp=[2025-03-11 14:46:32], mode=WORKBENCH_START, duration=0:00:05.114, duration_ms=5114, data={}
+timestamp=[2025-03-11 14:46:33], mode=WORKBENCH_UI_INIT, duration=0:00:00.752, duration_ms=752, data={editors_count=1, platform_editors_count=0, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,lab1_2,lab1_2_system,system_wrapper}
+timestamp=[2025-03-11 14:46:38], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:04.092, duration_ms=4092, data={}
+timestamp=[2025-03-11 14:48:29], mode=WORKBENCH_START, duration=0:00:04.281, duration_ms=4281, data={}
+timestamp=[2025-03-11 14:48:31], mode=WORKBENCH_UI_INIT, duration=0:00:01.013, duration_ms=1013, data={editors_count=0, platform_editors_count=0, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,lab1_2,lab1_2_system,system_wrapper}
+timestamp=[2025-03-11 14:48:35], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:03.751, duration_ms=3751, data={}
+timestamp=[2025-03-11 14:52:05], mode=WORKBENCH_START, duration=0:00:06.810, duration_ms=6810, data={}
+timestamp=[2025-03-11 14:52:05], mode=WORKBENCH_UI_INIT, duration=0:00:00.374, duration_ms=374, data={editors_count=0, platform_editors_count=0, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,lab1_2,lab1_2_system,system_wrapper}
+timestamp=[2025-03-11 14:52:10], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:03.312, duration_ms=3312, data={}
+timestamp=[2025-03-11 14:54:45], mode=WORKBENCH_START, duration=0:00:06.674, duration_ms=6674, data={}
+timestamp=[2025-03-11 14:54:46], mode=WORKBENCH_UI_INIT, duration=0:00:00.400, duration_ms=400, data={editors_count=0, platform_editors_count=0, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,lab1_2,lab1_2_system,system_wrapper}
+timestamp=[2025-03-11 14:54:50], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:03.226, duration_ms=3226, data={}
+timestamp=[2025-03-11 14:55:25], mode=PLATFORM_GENERATION, duration=0:00:29.581, duration_ms=29581, data={name=system_wrapper}
+timestamp=[2025-03-11 14:55:31], mode=BUILD, duration=0:00:01.380, duration_ms=1380, data={name=lab1_2, configuration=Debug, clean_build=false}
+timestamp=[2025-03-11 15:09:46], mode=WORKBENCH_START, duration=0:00:06.624, duration_ms=6624, data={}
+timestamp=[2025-03-11 15:09:46], mode=WORKBENCH_UI_INIT, duration=0:00:00.449, duration_ms=449, data={editors_count=0, platform_editors_count=0, projects_count=3, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,lab1_2,system_wrapper}
+timestamp=[2025-03-11 15:09:51], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:03.632, duration_ms=3632, data={}
+timestamp=[2025-03-11 15:13:14], mode=APP_CREATION, duration=0:00:23.129, duration_ms=23129, data={name=lab1_2, project_type=sdk, os=standalone, processor=ps7_cortexa9, runtime=cpp, platform=system_wrapper, application_type=application}
+timestamp=[2025-03-11 15:13:56], mode=WORKBENCH_START, duration=0:00:05.646, duration_ms=5646, data={}
+timestamp=[2025-03-11 15:13:56], mode=WORKBENCH_UI_INIT, duration=0:00:00.555, duration_ms=555, data={editors_count=0, platform_editors_count=0, projects_count=1, platform_projects_count=0, active_platform_editor=false, projects=RemoteSystemsTempFiles}
+timestamp=[2025-03-11 15:14:01], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:03.322, duration_ms=3322, data={}
+timestamp=[2025-03-11 15:28:24], mode=WORKBENCH_START, duration=0:00:05.546, duration_ms=5546, data={}
+timestamp=[2025-03-11 15:28:25], mode=WORKBENCH_UI_INIT, duration=0:00:00.706, duration_ms=706, data={editors_count=0, platform_editors_count=0, projects_count=1, platform_projects_count=0, active_platform_editor=false, projects=RemoteSystemsTempFiles}
+timestamp=[2025-03-11 15:28:29], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:03.200, duration_ms=3200, data={}
+timestamp=[2025-03-11 15:31:00], mode=WORKBENCH_START, duration=0:00:05.732, duration_ms=5732, data={}
+timestamp=[2025-03-11 15:31:00], mode=WORKBENCH_UI_INIT, duration=0:00:00.677, duration_ms=677, data={editors_count=1, platform_editors_count=0, projects_count=1, platform_projects_count=0, active_platform_editor=false, projects=RemoteSystemsTempFiles}
+timestamp=[2025-03-11 15:31:05], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:03.350, duration_ms=3350, data={}
+timestamp=[2025-03-11 15:33:48], mode=WORKBENCH_START, duration=0:00:05.556, duration_ms=5556, data={}
+timestamp=[2025-03-11 15:33:49], mode=WORKBENCH_UI_INIT, duration=0:00:00.685, duration_ms=685, data={editors_count=1, platform_editors_count=0, projects_count=1, platform_projects_count=0, active_platform_editor=false, projects=RemoteSystemsTempFiles}
+timestamp=[2025-03-11 15:33:53], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:03.106, duration_ms=3106, data={}
+timestamp=[2025-03-18 14:46:05], mode=WORKBENCH_START, duration=0:00:06.944, duration_ms=6944, data={}
+timestamp=[2025-03-18 14:46:06], mode=WORKBENCH_UI_INIT, duration=0:00:00.818, duration_ms=818, data={editors_count=1, platform_editors_count=0, projects_count=1, platform_projects_count=0, active_platform_editor=false, projects=RemoteSystemsTempFiles}
+timestamp=[2025-03-18 14:46:12], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:05.308, duration_ms=5308, data={}
+timestamp=[2025-03-18 14:48:17], mode=WORKBENCH_START, duration=0:00:05.581, duration_ms=5581, data={}
+timestamp=[2025-03-18 14:48:17], mode=WORKBENCH_UI_INIT, duration=0:00:00.692, duration_ms=692, data={editors_count=1, platform_editors_count=0, projects_count=1, platform_projects_count=0, active_platform_editor=false, projects=RemoteSystemsTempFiles}
+timestamp=[2025-03-18 14:48:22], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:03.171, duration_ms=3171, data={}
+timestamp=[2025-03-18 14:51:44], mode=WORKBENCH_START, duration=0:00:05.672, duration_ms=5672, data={}
+timestamp=[2025-03-18 14:51:44], mode=WORKBENCH_UI_INIT, duration=0:00:00.609, duration_ms=609, data={editors_count=1, platform_editors_count=0, projects_count=1, platform_projects_count=0, active_platform_editor=false, projects=RemoteSystemsTempFiles}
+timestamp=[2025-03-18 14:51:49], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:03.218, duration_ms=3218, data={}
+timestamp=[2025-03-18 14:52:49], mode=APP_CREATION, duration=0:00:25.294, duration_ms=25294, data={name=lab1_3, project_type=sdk, os=standalone, processor=ps7_cortexa9, runtime=cpp, platform=system_wrapper, application_type=application}
+timestamp=[2025-03-18 15:19:33], mode=PLATFORM_GENERATION, duration=0:00:10.932, duration_ms=10932, data={name=system_wrapper}
+timestamp=[2025-03-18 15:23:50], mode=PLATFORM_GENERATION, duration=0:00:04.770, duration_ms=4770, data={name=system_wrapper}
+timestamp=[2025-03-18 15:23:50], mode=BUILD, duration=0:00:00.596, duration_ms=596, data={name=lab1_3, configuration=Debug, clean_build=false}
+timestamp=[2025-03-18 15:25:03], mode=PLATFORM_GENERATION, duration=0:00:22.678, duration_ms=22678, data={name=system_wrapper}
+timestamp=[2025-03-18 15:25:07], mode=BUILD, duration=0:00:00.913, duration_ms=913, data={name=lab1_3, configuration=Debug, clean_build=false}
+timestamp=[2025-03-25 13:57:42], mode=WORKBENCH_START, duration=0:00:04.922, duration_ms=4922, data={}
+timestamp=[2025-03-25 13:57:42], mode=WORKBENCH_UI_INIT, duration=0:00:00.386, duration_ms=386, data={editors_count=7, platform_editors_count=3, projects_count=4, platform_projects_count=1, active_platform_editor=true, projects=RemoteSystemsTempFiles,lab1_3,lab1_3_system,system_wrapper}
+timestamp=[2025-03-25 13:57:42], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.046, duration_ms=46, data={}
+timestamp=[2025-03-25 13:59:40], mode=MISC, duration=0:00:03.565, duration_ms=3565, data={name=lab1_3_system, type=bif_creation}
+timestamp=[2025-03-25 15:28:27], mode=WORKBENCH_START, duration=0:00:05.738, duration_ms=5738, data={}
+timestamp=[2025-03-25 15:28:27], mode=WORKBENCH_UI_INIT, duration=0:00:00.423, duration_ms=423, data={editors_count=7, platform_editors_count=3, projects_count=4, platform_projects_count=1, active_platform_editor=true, projects=RemoteSystemsTempFiles,lab1_3,lab1_3_system,system_wrapper}
+timestamp=[2025-03-25 15:28:27], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.034, duration_ms=34, data={}
+timestamp=[2025-03-25 15:29:53], mode=APP_CREATION, duration=0:00:12.458, duration_ms=12458, data={name=lab1_5, project_type=sdk, os=standalone, processor=ps7_cortexa9, runtime=cpp, platform=system_wrapper_5, application_type=application}
+timestamp=[2025-03-25 15:33:34], mode=PLATFORM_GENERATION, duration=0:00:05.211, duration_ms=5211, data={name=system_wrapper_5}
+timestamp=[2025-03-25 15:33:35], mode=BUILD, duration=0:00:00.223, duration_ms=223, data={name=lab1_5, configuration=Debug, clean_build=false}
+timestamp=[2025-03-25 15:33:36], mode=BUILD, duration=0:00:00.890, duration_ms=890, data={name=lab1_5_system, configuration=Debug, clean_build=false}
+timestamp=[2025-03-25 15:41:41], mode=APP_CREATION, duration=0:00:09.215, duration_ms=9215, data={name=lab1_5_2, project_type=sdk, os=standalone, processor=ps7_cortexa9, runtime=cpp, platform=system_wrapper_1, application_type=application}
+timestamp=[2025-03-25 15:43:15], mode=PLATFORM_GENERATION, duration=0:00:03.898, duration_ms=3898, data={name=system_wrapper_1}
+timestamp=[2025-03-25 15:43:16], mode=BUILD, duration=0:00:00.211, duration_ms=211, data={name=lab1_5_2, configuration=Debug, clean_build=false}
+timestamp=[2025-03-25 15:43:17], mode=BUILD, duration=0:00:00.821, duration_ms=821, data={name=lab1_5_2_system, configuration=Debug, clean_build=false}
+timestamp=[2025-03-25 15:45:07], mode=PLATFORM_GENERATION, duration=0:00:05.765, duration_ms=5765, data={name=system_wrapper_1}
+timestamp=[2025-03-25 15:45:08], mode=BUILD, duration=0:00:00.218, duration_ms=218, data={name=lab1_5_2, configuration=Debug, clean_build=false}
+timestamp=[2025-03-25 15:48:35], mode=BUILD, duration=0:00:00.210, duration_ms=210, data={name=lab1_5_2, configuration=Debug, clean_build=false}
+timestamp=[2025-03-25 15:49:27], mode=BUILD, duration=0:00:00.224, duration_ms=224, data={name=lab1_5_2, configuration=Debug, clean_build=false}
+timestamp=[2025-03-25 16:08:47], mode=APP_CREATION, duration=0:00:06.913, duration_ms=6913, data={name=lab1_5, project_type=sdk, os=standalone, processor=ps7_cortexa9, runtime=cpp, platform=C:\EOS\project\project_1\system_wrapper_5\export\system_wrapper_5\system_wrapper_5.xpfm, application_type=application}
+timestamp=[2025-03-25 16:09:34], mode=APP_CREATION, duration=0:00:09.409, duration_ms=9409, data={name=lab1_5_3, project_type=sdk, os=standalone, processor=ps7_cortexa9, runtime=cpp, platform=system_wrapper_2, application_type=application}
+timestamp=[2025-03-25 16:11:13], mode=PLATFORM_GENERATION, duration=0:00:07.555, duration_ms=7555, data={name=system_wrapper_2}
+timestamp=[2025-03-25 16:11:13], mode=BUILD, duration=0:00:00.528, duration_ms=528, data={name=lab1_5_3, configuration=Debug, clean_build=false}

@@ -1,0 +1,42 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"0.654167",
+   "Default View_TopLeft":"-226,0",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.0r6  2020-01-29 bk=1.5227 VDI=41 GEI=36 GUI=JA:10.0 non-TLS
+#  -string -flagsOSRD
+preplace port DDR -pg 1 -lvl 4 -x 1030 -y 60 -defaultsOSRD
+preplace port FIXED_IO -pg 1 -lvl 4 -x 1030 -y 80 -defaultsOSRD
+preplace port btn -pg 1 -lvl 0 -x 0 -y 600 -defaultsOSRD
+preplace portBus switch -pg 1 -lvl 0 -x 0 -y 620 -defaultsOSRD
+preplace portBus led -pg 1 -lvl 4 -x 1030 -y 610 -defaultsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 1 -x 240 -y 110 -defaultsOSRD
+preplace inst ps7_0_axi_periph -pg 1 -lvl 2 -x 610 -y 270 -defaultsOSRD
+preplace inst rst_ps7_0_100M -pg 1 -lvl 1 -x 240 -y 330 -defaultsOSRD
+preplace inst inter_ip_0 -pg 1 -lvl 3 -x 900 -y 620 -defaultsOSRD
+preplace inst AES_ip_0 -pg 1 -lvl 3 -x 900 -y 160 -defaultsOSRD
+preplace inst gcdip_0 -pg 1 -lvl 3 -x 900 -y 440 -defaultsOSRD
+preplace inst desip_0 -pg 1 -lvl 3 -x 900 -y 300 -defaultsOSRD
+preplace netloc processing_system7_0_FCLK_CLK0 1 0 3 30 230 450 450 780
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 2 40 220 440
+preplace netloc rst_ps7_0_100M_peripheral_aresetn 1 1 2 460 460 790
+preplace netloc inter_ip_0_intr 1 0 4 20 520 NJ 520 NJ 520 1010
+preplace netloc switch_0_1 1 0 3 NJ 620 NJ 620 NJ
+preplace netloc btn_0_1 1 0 3 NJ 600 NJ 600 NJ
+preplace netloc inter_ip_0_led 1 3 1 NJ 610
+preplace netloc processing_system7_0_M_AXI_GP0 1 1 1 460 120n
+preplace netloc processing_system7_0_FIXED_IO 1 1 3 NJ 80 NJ 80 NJ
+preplace netloc processing_system7_0_DDR 1 1 3 NJ 60 NJ 60 NJ
+preplace netloc ps7_0_axi_periph_M00_AXI 1 2 1 770 240n
+preplace netloc ps7_0_axi_periph_M01_AXI 1 2 1 760 140n
+preplace netloc ps7_0_axi_periph_M02_AXI 1 2 1 N 280
+preplace netloc ps7_0_axi_periph_M03_AXI 1 2 1 760 300n
+levelinfo -pg 1 0 240 610 900 1030
+pagesize -pg 1 -db -bbox -sgen -120 0 1150 720
+"
+}
+{
+   "da_axi4_cnt":"15",
+   "da_board_cnt":"1",
+   "da_ps7_cnt":"1"
+}

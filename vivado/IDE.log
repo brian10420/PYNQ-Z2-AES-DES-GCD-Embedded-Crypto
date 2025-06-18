@@ -1,0 +1,495 @@
+14:24:47 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\EOS\project\project_1\temp_xsdb_launch_script.tcl
+14:24:47 INFO  : Registering command handlers for Vitis TCF services
+14:24:53 INFO  : Platform repository initialization has completed.
+14:24:53 INFO  : XSCT server has started successfully.
+14:25:00 INFO  : plnx-install-location is set to ''
+14:25:00 INFO  : Successfully done setting XSCT server connection channel  
+14:25:00 INFO  : Successfully done query RDI_DATADIR 
+14:25:00 INFO  : Successfully done setting workspace for the tool. 
+14:29:49 INFO  : Result from executing command 'getProjects': system_wrapper
+14:29:49 INFO  : Result from executing command 'getPlatforms': 
+14:29:49 WARN  : An unexpected exception occurred in the module 'platform project logging'
+14:29:50 INFO  : Platform 'system_wrapper' is added to custom repositories.
+14:30:01 INFO  : Platform 'system_wrapper' is added to custom repositories.
+14:33:35 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\EOS\project\project_1\temp_xsdb_launch_script.tcl
+14:33:38 INFO  : XSCT server has started successfully.
+14:33:38 INFO  : plnx-install-location is set to ''
+14:33:38 INFO  : Successfully done setting XSCT server connection channel  
+14:33:38 INFO  : Successfully done setting workspace for the tool. 
+14:33:39 INFO  : Platform repository initialization has completed.
+14:33:40 INFO  : Registering command handlers for Vitis TCF services
+14:33:41 INFO  : Successfully done query RDI_DATADIR 
+14:37:44 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\EOS\project\project_1\temp_xsdb_launch_script.tcl
+14:37:46 INFO  : XSCT server has started successfully.
+14:37:46 INFO  : Successfully done setting XSCT server connection channel  
+14:37:46 INFO  : plnx-install-location is set to ''
+14:37:46 INFO  : Successfully done setting workspace for the tool. 
+14:37:50 INFO  : Platform repository initialization has completed.
+14:37:50 INFO  : Registering command handlers for Vitis TCF services
+14:37:51 INFO  : Successfully done query RDI_DATADIR 
+14:43:00 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\EOS\project\project_1\temp_xsdb_launch_script.tcl
+14:43:04 INFO  : Registering command handlers for Vitis TCF services
+14:43:06 INFO  : XSCT server has started successfully.
+14:43:06 INFO  : Successfully done setting XSCT server connection channel  
+14:43:06 INFO  : plnx-install-location is set to ''
+14:43:06 INFO  : Successfully done setting workspace for the tool. 
+14:43:06 INFO  : Successfully done query RDI_DATADIR 
+14:43:07 INFO  : Platform repository initialization has completed.
+14:46:34 INFO  : Registering command handlers for Vitis TCF services
+14:46:36 INFO  : XSCT server has started successfully.
+14:46:36 INFO  : plnx-install-location is set to ''
+14:46:36 INFO  : Successfully done setting XSCT server connection channel  
+14:46:36 INFO  : Successfully done query RDI_DATADIR 
+14:46:36 INFO  : Successfully done setting workspace for the tool. 
+14:46:38 INFO  : Platform repository initialization has completed.
+14:48:31 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\EOS\project\project_1\temp_xsdb_launch_script.tcl
+14:48:32 INFO  : Registering command handlers for Vitis TCF services
+14:48:35 INFO  : XSCT server has started successfully.
+14:48:35 INFO  : plnx-install-location is set to ''
+14:48:35 INFO  : Successfully done setting XSCT server connection channel  
+14:48:35 INFO  : Successfully done query RDI_DATADIR 
+14:48:35 INFO  : Successfully done setting workspace for the tool. 
+14:48:35 INFO  : Platform repository initialization has completed.
+14:52:04 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\EOS\project\project_1\temp_xsdb_launch_script.tcl
+14:52:07 INFO  : Registering command handlers for Vitis TCF services
+14:52:09 INFO  : XSCT server has started successfully.
+14:52:09 INFO  : Successfully done setting XSCT server connection channel  
+14:52:09 INFO  : plnx-install-location is set to ''
+14:52:09 INFO  : Successfully done setting workspace for the tool. 
+14:52:09 INFO  : Successfully done query RDI_DATADIR 
+14:52:10 INFO  : Platform repository initialization has completed.
+14:54:44 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\EOS\project\project_1\temp_xsdb_launch_script.tcl
+14:54:47 INFO  : Registering command handlers for Vitis TCF services
+14:54:49 INFO  : XSCT server has started successfully.
+14:54:49 INFO  : plnx-install-location is set to ''
+14:54:49 INFO  : Successfully done setting XSCT server connection channel  
+14:54:49 INFO  : Successfully done query RDI_DATADIR 
+14:54:49 INFO  : Successfully done setting workspace for the tool. 
+14:54:50 INFO  : Platform repository initialization has completed.
+14:55:24 INFO  : Result from executing command 'getProjects': system_wrapper
+14:55:24 INFO  : Result from executing command 'getPlatforms': system_wrapper|C:/EOS/project/project_1/system_wrapper/export/system_wrapper/system_wrapper.xpfm
+14:55:25 INFO  : Checking for BSP changes to sync application flags for project 'lab1_2'...
+15:09:44 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\EOS\project\project_1\temp_xsdb_launch_script.tcl
+15:09:47 INFO  : Registering command handlers for Vitis TCF services
+15:09:49 INFO  : XSCT server has started successfully.
+15:09:49 INFO  : plnx-install-location is set to ''
+15:09:50 INFO  : Successfully done setting XSCT server connection channel  
+15:09:50 INFO  : Successfully done query RDI_DATADIR 
+15:09:50 INFO  : Successfully done setting workspace for the tool. 
+15:09:51 INFO  : Platform repository initialization has completed.
+15:11:24 WARN  : An unexpected exception occurred in the module 'platform project logging'
+15:13:04 INFO  : Result from executing command 'getProjects': system_wrapper
+15:13:04 INFO  : Result from executing command 'getPlatforms': 
+15:13:04 WARN  : An unexpected exception occurred in the module 'platform project logging'
+15:13:04 INFO  : Platform 'system_wrapper' is added to custom repositories.
+15:13:15 INFO  : Platform 'system_wrapper' is added to custom repositories.
+15:13:32 ERROR : An unexpected exception occurred in the module 'reading platform'
+15:13:56 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\EOS\project\project_1\temp_xsdb_launch_script.tcl
+15:13:58 INFO  : Registering command handlers for Vitis TCF services
+15:14:00 INFO  : XSCT server has started successfully.
+15:14:00 INFO  : Successfully done setting XSCT server connection channel  
+15:14:00 INFO  : plnx-install-location is set to ''
+15:14:00 INFO  : Successfully done query RDI_DATADIR 
+15:14:00 INFO  : Successfully done setting workspace for the tool. 
+15:14:01 INFO  : Platform repository initialization has completed.
+15:28:25 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\EOS\project\project_1\temp_xsdb_launch_script.tcl
+15:28:26 INFO  : Registering command handlers for Vitis TCF services
+15:28:28 INFO  : XSCT server has started successfully.
+15:28:28 INFO  : Successfully done setting XSCT server connection channel  
+15:28:28 INFO  : plnx-install-location is set to ''
+15:28:28 INFO  : Successfully done setting workspace for the tool. 
+15:28:28 INFO  : Successfully done query RDI_DATADIR 
+15:28:29 INFO  : Platform repository initialization has completed.
+15:31:00 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\EOS\project\project_1\temp_xsdb_launch_script.tcl
+15:31:02 INFO  : Registering command handlers for Vitis TCF services
+15:31:04 INFO  : XSCT server has started successfully.
+15:31:04 INFO  : plnx-install-location is set to ''
+15:31:04 INFO  : Successfully done setting XSCT server connection channel  
+15:31:04 INFO  : Successfully done query RDI_DATADIR 
+15:31:04 INFO  : Successfully done setting workspace for the tool. 
+15:31:05 INFO  : Platform repository initialization has completed.
+15:33:49 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\EOS\project\project_1\temp_xsdb_launch_script.tcl
+15:33:50 INFO  : Registering command handlers for Vitis TCF services
+15:33:52 INFO  : XSCT server has started successfully.
+15:33:52 INFO  : Successfully done setting XSCT server connection channel  
+15:33:52 INFO  : plnx-install-location is set to ''
+15:33:52 INFO  : Successfully done query RDI_DATADIR 
+15:33:52 INFO  : Successfully done setting workspace for the tool. 
+15:33:53 INFO  : Platform repository initialization has completed.
+14:46:06 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\EOS\project\project_1\temp_xsdb_launch_script.tcl
+14:46:07 INFO  : Registering command handlers for Vitis TCF services
+14:46:11 INFO  : XSCT server has started successfully.
+14:46:12 INFO  : Platform repository initialization has completed.
+14:46:15 INFO  : plnx-install-location is set to ''
+14:46:16 INFO  : Successfully done query RDI_DATADIR 
+14:46:16 INFO  : Successfully done setting XSCT server connection channel  
+14:46:16 INFO  : Successfully done setting workspace for the tool. 
+14:48:17 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\EOS\project\project_1\temp_xsdb_launch_script.tcl
+14:48:19 INFO  : Registering command handlers for Vitis TCF services
+14:48:21 INFO  : XSCT server has started successfully.
+14:48:21 INFO  : plnx-install-location is set to ''
+14:48:21 INFO  : Successfully done setting XSCT server connection channel  
+14:48:21 INFO  : Successfully done query RDI_DATADIR 
+14:48:21 INFO  : Successfully done setting workspace for the tool. 
+14:48:22 INFO  : Platform repository initialization has completed.
+14:50:16 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core ledhw of version 1.0 not found in repositories
+ERROR: [Hsi 55-1403] C:/EOS/project/project_1/system_wrapper/zynq_fsbl/zynq_fsbl_bsp/system.mss line 27 - No IP instance named ledhw_0 present in hardware design
+
+14:50:16 ERROR : (XSDB Server)ERROR: [Hsi 55-1592] Current Software Design is not set
+
+14:50:16 ERROR : Failed to create platform for application project
+Reason: Failed to create platform.
+14:50:16 WARN  : An unexpected exception occurred in the module 'platform project logging'
+14:50:16 INFO  : Platform creation cancelled by the user.
+14:51:44 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\EOS\project\project_1\temp_xsdb_launch_script.tcl
+14:51:46 INFO  : Registering command handlers for Vitis TCF services
+14:51:48 INFO  : XSCT server has started successfully.
+14:51:48 INFO  : plnx-install-location is set to ''
+14:51:48 INFO  : Successfully done setting XSCT server connection channel  
+14:51:48 INFO  : Successfully done query RDI_DATADIR 
+14:51:48 INFO  : Successfully done setting workspace for the tool. 
+14:51:49 INFO  : Platform repository initialization has completed.
+14:52:38 INFO  : Result from executing command 'getProjects': system_wrapper
+14:52:38 INFO  : Result from executing command 'getPlatforms': 
+14:52:38 WARN  : An unexpected exception occurred in the module 'platform project logging'
+14:52:39 INFO  : Platform 'system_wrapper' is added to custom repositories.
+14:52:49 INFO  : Platform 'system_wrapper' is added to custom repositories.
+15:19:33 INFO  : Checking for BSP changes to sync application flags for project 'lab1_3'...
+15:19:33 ERROR : Failed to openhw "C:/EOS/project/project_1/system_wrapper/export/system_wrapper/hw/system_wrapper.xsa"
+Reason: ERROR: [Common 17-39] 'hsi::open_hw_design' failed due to earlier errors.
+
+15:19:33 ERROR : Failed to update application flags from BSP for 'lab1_3'. Reason: null
+java.lang.NullPointerException
+	at com.xilinx.sdx.sw.internal.SDxSwPlatform.<init>(SDxSwPlatform.java:305)
+	at com.xilinx.sdx.sw.internal.SDxSwPlatform.create(SDxSwPlatform.java:214)
+	at com.xilinx.sdx.sdk.core.util.SdkPlatformHelper.getSwPlatform(SdkPlatformHelper.java:61)
+	at com.xilinx.sdx.sdk.core.build.SdkMakefileGenerationListener.getSwPlatform(SdkMakefileGenerationListener.java:160)
+	at com.xilinx.sdx.sdk.core.build.SdkMakefileGenerationListener.syncAppFlags(SdkMakefileGenerationListener.java:78)
+	at com.xilinx.sdx.sdk.core.build.SdkMakefileGenerationListener.preMakefileGeneration(SdkMakefileGenerationListener.java:48)
+	at com.xilinx.sdk.managedbuilder.XilinxGnuMakefileGenerator.notifyPreMakefileGenerationListeners(XilinxGnuMakefileGenerator.java:91)
+	at com.xilinx.sdk.managedbuilder.XilinxGnuMakefileGenerator.regenerateMakefiles(XilinxGnuMakefileGenerator.java:75)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.performMakefileGeneration(CommonBuilder.java:1006)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.performPrebuildGeneration(CommonBuilder.java:873)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:748)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:513)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:832)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:220)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:263)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:316)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:319)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:371)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:392)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:515)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:412)
+	at org.eclipse.ui.actions.BuildAction$1.runInWorkspace(BuildAction.java:291)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:42)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+15:23:50 INFO  : Checking for BSP changes to sync application flags for project 'lab1_3'...
+15:23:50 ERROR : Failed to openhw "C:/EOS/project/project_1/system_wrapper/export/system_wrapper/hw/system_wrapper.xsa"
+Reason: ERROR: [Common 17-39] 'hsi::open_hw_design' failed due to earlier errors.
+
+15:23:50 ERROR : Failed to update application flags from BSP for 'lab1_3'. Reason: null
+java.lang.NullPointerException
+	at com.xilinx.sdx.sw.internal.SDxSwPlatform.<init>(SDxSwPlatform.java:305)
+	at com.xilinx.sdx.sw.internal.SDxSwPlatform.create(SDxSwPlatform.java:214)
+	at com.xilinx.sdx.sdk.core.util.SdkPlatformHelper.getSwPlatform(SdkPlatformHelper.java:61)
+	at com.xilinx.sdx.sdk.core.build.SdkMakefileGenerationListener.getSwPlatform(SdkMakefileGenerationListener.java:160)
+	at com.xilinx.sdx.sdk.core.build.SdkMakefileGenerationListener.syncAppFlags(SdkMakefileGenerationListener.java:78)
+	at com.xilinx.sdx.sdk.core.build.SdkMakefileGenerationListener.preMakefileGeneration(SdkMakefileGenerationListener.java:48)
+	at com.xilinx.sdk.managedbuilder.XilinxGnuMakefileGenerator.notifyPreMakefileGenerationListeners(XilinxGnuMakefileGenerator.java:91)
+	at com.xilinx.sdk.managedbuilder.XilinxGnuMakefileGenerator.regenerateMakefiles(XilinxGnuMakefileGenerator.java:75)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.performMakefileGeneration(CommonBuilder.java:1006)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.performPrebuildGeneration(CommonBuilder.java:873)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:748)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:510)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:832)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:220)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:263)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:316)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:319)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:371)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:392)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:515)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:412)
+	at org.eclipse.ui.actions.BuildAction$1.runInWorkspace(BuildAction.java:291)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:42)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+15:25:02 INFO  : Result from executing command 'getProjects': system_wrapper
+15:25:02 INFO  : Result from executing command 'getPlatforms': system_wrapper|C:/EOS/project/project_1/system_wrapper/export/system_wrapper/system_wrapper.xpfm
+15:25:03 INFO  : Checking for BSP changes to sync application flags for project 'lab1_3'...
+15:28:30 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+15:28:31 INFO  : Jtag cable 'Xilinx HW-FTDI-TEST FT2232H 1234-tulA' is selected.
+15:28:31 INFO  : 'jtag frequency' command is executed.
+15:28:31 INFO  : Context for 'APU' is selected.
+15:28:31 INFO  : System reset is completed.
+15:28:34 INFO  : 'after 3000' command is executed.
+15:28:34 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}' command is executed.
+15:28:36 INFO  : Device configured successfully with "C:/EOS/project/project_1/lab1_3/_ide/bitstream/system_wrapper.bit"
+15:28:36 INFO  : Context for 'APU' is selected.
+15:28:37 INFO  : Hardware design and registers information is loaded from 'C:/EOS/project/project_1/system_wrapper/export/system_wrapper/hw/system_wrapper.xsa'.
+15:28:37 INFO  : 'configparams force-mem-access 1' command is executed.
+15:28:37 INFO  : Context for 'APU' is selected.
+15:28:37 INFO  : Sourcing of 'C:/EOS/project/project_1/lab1_3/_ide/psinit/ps7_init.tcl' is done.
+15:28:37 INFO  : 'ps7_init' command is executed.
+15:28:37 INFO  : 'ps7_post_config' command is executed.
+15:28:37 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+15:28:37 INFO  : The application 'C:/EOS/project/project_1/lab1_3/Debug/lab1_3.elf' is downloaded to processor 'ps7_cortexa9_0'.
+15:28:37 INFO  : 'configparams force-mem-access 0' command is executed.
+15:28:37 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}
+fpga -file C:/EOS/project/project_1/lab1_3/_ide/bitstream/system_wrapper.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/EOS/project/project_1/system_wrapper/export/system_wrapper/hw/system_wrapper.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/EOS/project/project_1/lab1_3/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/EOS/project/project_1/lab1_3/Debug/lab1_3.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+15:28:37 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+15:28:37 INFO  : 'con' command is executed.
+15:28:37 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+15:28:37 INFO  : Launch script is exported to file 'C:\EOS\project\project_1\lab1_3_system\_ide\scripts\debugger_lab1_3-default.tcl'
+13:57:39 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\EOS\project\project_1\temp_xsdb_launch_script.tcl
+13:57:40 INFO  : XSCT server has started successfully.
+13:57:40 INFO  : plnx-install-location is set to ''
+13:57:40 INFO  : Successfully done setting XSCT server connection channel  
+13:57:40 INFO  : Successfully done setting workspace for the tool. 
+13:57:42 INFO  : Platform repository initialization has completed.
+13:57:42 INFO  : Successfully done query RDI_DATADIR 
+13:57:42 INFO  : Registering command handlers for Vitis TCF services
+13:59:38 ERROR : (XSDB Server)ERROR: [Hsi 55-1571] The design file C:/EOS/project/project_1/system_wrapper/export/system_wrapper/hw/system_wrapper.xsa is already opened
+
+13:59:38 INFO  : Generated template bif file for lab1_3_system
+14:00:04 INFO  : Invoking Bootgen: bootgen -image lab1_3_system.bif -arch zynq -o C:/EOS/project/project_1/lab1_3_system/_ide/bootimage/BOOT.bin
+14:00:05 INFO  : Bootgen command execution is done.
+14:05:26 INFO  : Invoking Bootgen: bootgen -image lab1_3_system.bif -arch zynq -o C:/EOS/project/project_1/lab1_3_system/_ide/bootimage/BOOT.bin -w on
+14:05:27 INFO  : Bootgen command execution is done.
+15:20:46 INFO  : Invoking Bootgen: bootgen -image lab1_3_system.bif -arch zynq -o C:/EOS/project/project_1/lab1_3_system/_ide/bootimage/BOOT2.bin
+15:20:46 INFO  : Overwriting existing bif file C:/EOS/project/project_1/lab1_3_system/_ide/bootimage/lab1_3_system.bif
+15:20:47 INFO  : Bootgen command execution is done.
+15:28:24 INFO  : Launching XSCT server: xsct.bat -n  -interactive C:\EOS\project\project_1\temp_xsdb_launch_script.tcl
+15:28:26 INFO  : XSCT server has started successfully.
+15:28:26 INFO  : Successfully done setting XSCT server connection channel  
+15:28:26 INFO  : plnx-install-location is set to ''
+15:28:26 INFO  : Successfully done setting workspace for the tool. 
+15:28:27 INFO  : Platform repository initialization has completed.
+15:28:27 INFO  : Registering command handlers for Vitis TCF services
+15:28:29 INFO  : Successfully done query RDI_DATADIR 
+15:29:48 INFO  : Result from executing command 'getProjects': system_wrapper;system_wrapper_5
+15:29:48 INFO  : Result from executing command 'getPlatforms': system_wrapper|C:/EOS/project/project_1/system_wrapper/export/system_wrapper/system_wrapper.xpfm
+15:29:48 WARN  : An unexpected exception occurred in the module 'platform project logging'
+15:29:49 INFO  : Platform 'system_wrapper_5' is added to custom repositories.
+15:29:53 INFO  : Platform 'system_wrapper_5' is added to custom repositories.
+15:33:34 INFO  : Checking for BSP changes to sync application flags for project 'lab1_5'...
+15:33:34 ERROR : Failed to openhw "C:/EOS/project/project_1/system_wrapper_5/export/system_wrapper_5/hw/system_wrapper.xsa"
+Reason: ERROR: [Common 17-39] 'hsi::open_hw_design' failed due to earlier errors.
+
+15:33:34 ERROR : Failed to update application flags from BSP for 'lab1_5'. Reason: null
+java.lang.NullPointerException
+	at com.xilinx.sdx.sw.internal.SDxSwPlatform.<init>(SDxSwPlatform.java:305)
+	at com.xilinx.sdx.sw.internal.SDxSwPlatform.create(SDxSwPlatform.java:214)
+	at com.xilinx.sdx.sdk.core.util.SdkPlatformHelper.getSwPlatform(SdkPlatformHelper.java:61)
+	at com.xilinx.sdx.sdk.core.build.SdkMakefileGenerationListener.getSwPlatform(SdkMakefileGenerationListener.java:160)
+	at com.xilinx.sdx.sdk.core.build.SdkMakefileGenerationListener.syncAppFlags(SdkMakefileGenerationListener.java:78)
+	at com.xilinx.sdx.sdk.core.build.SdkMakefileGenerationListener.preMakefileGeneration(SdkMakefileGenerationListener.java:48)
+	at com.xilinx.sdk.managedbuilder.XilinxGnuMakefileGenerator.notifyPreMakefileGenerationListeners(XilinxGnuMakefileGenerator.java:91)
+	at com.xilinx.sdk.managedbuilder.XilinxGnuMakefileGenerator.regenerateMakefiles(XilinxGnuMakefileGenerator.java:75)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.performMakefileGeneration(CommonBuilder.java:1006)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.performPrebuildGeneration(CommonBuilder.java:873)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:748)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:513)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:832)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:220)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:263)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:316)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:319)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:371)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:392)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:515)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:412)
+	at org.eclipse.ui.actions.BuildAction$1.runInWorkspace(BuildAction.java:291)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:42)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+15:33:35 ERROR : Failed to compute checksum of hardware specification file used by project 'lab1_5'
+15:33:35 ERROR : Failed to openhw "C:/EOS/project/project_1/system_wrapper_5/export/system_wrapper_5/hw/system_wrapper.xsa"
+Reason: ERROR: [Common 17-39] 'hsi::open_hw_design' failed due to earlier errors.
+
+15:33:35 ERROR : Failed to openhw "C:/EOS/project/project_1/system_wrapper_5/export/system_wrapper_5/hw/system_wrapper.xsa"
+Reason: ERROR: [Common 17-39] 'hsi::open_hw_design' failed due to earlier errors.
+
+15:33:35 ERROR : Failed to openhw "C:/EOS/project/project_1/system_wrapper_5/export/system_wrapper_5/hw/system_wrapper.xsa"
+Reason: ERROR: [Common 17-39] 'hsi::open_hw_design' failed due to earlier errors.
+
+15:41:37 INFO  : Result from executing command 'getProjects': system_wrapper;system_wrapper_1;system_wrapper_5
+15:41:37 INFO  : Result from executing command 'getPlatforms': system_wrapper_5|C:/EOS/project/project_1/system_wrapper_5/export/system_wrapper_5/system_wrapper_5.xpfm;system_wrapper|C:/EOS/project/project_1/system_wrapper/export/system_wrapper/system_wrapper.xpfm
+15:41:37 INFO  : Platform 'system_wrapper_1' is added to custom repositories.
+15:41:41 INFO  : Platform 'system_wrapper_1' is added to custom repositories.
+15:43:15 INFO  : Checking for BSP changes to sync application flags for project 'lab1_5_2'...
+15:43:15 ERROR : Failed to openhw "C:/EOS/project/project_1/system_wrapper_1/export/system_wrapper_1/hw/system_wrapper.xsa"
+Reason: ERROR: [Common 17-39] 'hsi::open_hw_design' failed due to earlier errors.
+
+15:43:15 ERROR : Failed to update application flags from BSP for 'lab1_5_2'. Reason: null
+java.lang.NullPointerException
+	at com.xilinx.sdx.sw.internal.SDxSwPlatform.<init>(SDxSwPlatform.java:305)
+	at com.xilinx.sdx.sw.internal.SDxSwPlatform.create(SDxSwPlatform.java:214)
+	at com.xilinx.sdx.sdk.core.util.SdkPlatformHelper.getSwPlatform(SdkPlatformHelper.java:61)
+	at com.xilinx.sdx.sdk.core.build.SdkMakefileGenerationListener.getSwPlatform(SdkMakefileGenerationListener.java:160)
+	at com.xilinx.sdx.sdk.core.build.SdkMakefileGenerationListener.syncAppFlags(SdkMakefileGenerationListener.java:78)
+	at com.xilinx.sdx.sdk.core.build.SdkMakefileGenerationListener.preMakefileGeneration(SdkMakefileGenerationListener.java:48)
+	at com.xilinx.sdk.managedbuilder.XilinxGnuMakefileGenerator.notifyPreMakefileGenerationListeners(XilinxGnuMakefileGenerator.java:91)
+	at com.xilinx.sdk.managedbuilder.XilinxGnuMakefileGenerator.regenerateMakefiles(XilinxGnuMakefileGenerator.java:75)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.performMakefileGeneration(CommonBuilder.java:1006)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.performPrebuildGeneration(CommonBuilder.java:873)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:748)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:513)
+	at org.eclipse.cdt.managedbuilder.internal.core.CommonBuilder.build(CommonBuilder.java:459)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:832)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:220)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:263)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:316)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:319)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:371)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:392)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:515)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:412)
+	at org.eclipse.ui.actions.BuildAction$1.runInWorkspace(BuildAction.java:291)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:42)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+15:43:16 ERROR : Failed to compute checksum of hardware specification file used by project 'lab1_5_2'
+15:43:16 ERROR : Failed to openhw "C:/EOS/project/project_1/system_wrapper_1/export/system_wrapper_1/hw/system_wrapper.xsa"
+Reason: ERROR: [Common 17-39] 'hsi::open_hw_design' failed due to earlier errors.
+
+15:43:16 ERROR : Failed to openhw "C:/EOS/project/project_1/system_wrapper_1/export/system_wrapper_1/hw/system_wrapper.xsa"
+Reason: ERROR: [Common 17-39] 'hsi::open_hw_design' failed due to earlier errors.
+
+15:43:16 ERROR : Failed to openhw "C:/EOS/project/project_1/system_wrapper_1/export/system_wrapper_1/hw/system_wrapper.xsa"
+Reason: ERROR: [Common 17-39] 'hsi::open_hw_design' failed due to earlier errors.
+
+15:45:07 INFO  : Result from executing command 'getProjects': system_wrapper;system_wrapper_1
+15:45:07 INFO  : Result from executing command 'getPlatforms': system_wrapper_1|C:/EOS/project/project_1/system_wrapper_1/export/system_wrapper_1/system_wrapper_1.xpfm;system_wrapper|C:/EOS/project/project_1/system_wrapper/export/system_wrapper/system_wrapper.xpfm
+15:45:07 INFO  : Checking for BSP changes to sync application flags for project 'lab1_5_2'...
+15:48:35 INFO  : Checking for BSP changes to sync application flags for project 'lab1_5_2'...
+15:49:27 INFO  : Checking for BSP changes to sync application flags for project 'lab1_5_2'...
+16:08:46 INFO  : Result from executing command 'getProjects': system_wrapper;system_wrapper_1;system_wrapper_5
+16:08:46 INFO  : Result from executing command 'getPlatforms': system_wrapper_1|C:/EOS/project/project_1/system_wrapper_1/export/system_wrapper_1/system_wrapper_1.xpfm;system_wrapper|C:/EOS/project/project_1/system_wrapper/export/system_wrapper/system_wrapper.xpfm
+16:08:46 INFO  : Platform 'system_wrapper_5' is added to custom repositories.
+16:08:47 ERROR : 
+java.lang.NullPointerException
+	at com.xilinx.sdk.sw.internal.SwDb.getComponentAppCompilerFlags(SwDb.java:762)
+	at com.xilinx.sdx.sw.internal.SDxSwPlatform.getSwPlatformCompilerFlags(SDxSwPlatform.java:1177)
+	at com.xilinx.sdx.sdk.core.build.AppSwBuildOptionsHelper.inferSwPlatformFlags(AppSwBuildOptionsHelper.java:54)
+	at com.xilinx.sdx.sdk.core.build.AppSwBuildOptionsHelper.updateBuildOptions(AppSwBuildOptionsHelper.java:46)
+	at com.xilinx.sdx.sdk.core.gen.ManagedAppCreator.updateSwBuildOptions(ManagedAppCreator.java:82)
+	at com.xilinx.sdx.sdk.core.gen.ManagedAppCreator.create(ManagedAppCreator.java:54)
+	at com.xilinx.sdx.sdk.core.gen.StandaloneProjectHandler.createCoreApp(StandaloneProjectHandler.java:79)
+	at com.xilinx.sdx.sdk.core.gen.AppCreationHandler.createApplication(AppCreationHandler.java:79)
+	at com.xilinx.sdx.sdk.core.gen.AppCreationHandler.execute(AppCreationHandler.java:69)
+	at com.xilinx.sdx.sdk.core.SdkAppCreationHandler.executeInternal(SdkAppCreationHandler.java:75)
+	at com.xilinx.sdx.sdk.core.SdkAppCreationHandler.lambda$1(SdkAppCreationHandler.java:67)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2292)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2312)
+	at com.xilinx.sdx.sdk.core.SdkAppCreationHandler.execute(SdkAppCreationHandler.java:66)
+	at com.xilinx.sdx.npw.NewProjectCreationHandler.createApplicationProject(NewProjectCreationHandler.java:235)
+	at com.xilinx.sdx.npw.NewProjectCreationHandler.internalExecute(NewProjectCreationHandler.java:374)
+	at com.xilinx.sdx.npw.NewProjectCreationHandler$1.execute(NewProjectCreationHandler.java:98)
+	at org.eclipse.ui.actions.WorkspaceModifyOperation.lambda$0(WorkspaceModifyOperation.java:110)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2292)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2317)
+	at org.eclipse.ui.actions.WorkspaceModifyOperation.run(WorkspaceModifyOperation.java:131)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+16:08:47 ERROR : Failed to create application project
+org.eclipse.core.runtime.CoreException: Unexpected error occurred. Please check log for further details.
+	at com.xilinx.sdx.sdk.core.gen.StandaloneProjectHandler.createCoreApp(StandaloneProjectHandler.java:150)
+	at com.xilinx.sdx.sdk.core.gen.AppCreationHandler.createApplication(AppCreationHandler.java:79)
+	at com.xilinx.sdx.sdk.core.gen.AppCreationHandler.execute(AppCreationHandler.java:69)
+	at com.xilinx.sdx.sdk.core.SdkAppCreationHandler.executeInternal(SdkAppCreationHandler.java:75)
+	at com.xilinx.sdx.sdk.core.SdkAppCreationHandler.lambda$1(SdkAppCreationHandler.java:67)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2292)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2312)
+	at com.xilinx.sdx.sdk.core.SdkAppCreationHandler.execute(SdkAppCreationHandler.java:66)
+	at com.xilinx.sdx.npw.NewProjectCreationHandler.createApplicationProject(NewProjectCreationHandler.java:235)
+	at com.xilinx.sdx.npw.NewProjectCreationHandler.internalExecute(NewProjectCreationHandler.java:374)
+	at com.xilinx.sdx.npw.NewProjectCreationHandler$1.execute(NewProjectCreationHandler.java:98)
+	at org.eclipse.ui.actions.WorkspaceModifyOperation.lambda$0(WorkspaceModifyOperation.java:110)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2292)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2317)
+	at org.eclipse.ui.actions.WorkspaceModifyOperation.run(WorkspaceModifyOperation.java:131)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+16:09:30 INFO  : Result from executing command 'getProjects': system_wrapper;system_wrapper_1;system_wrapper_2
+16:09:30 INFO  : Result from executing command 'getPlatforms': system_wrapper_1|C:/EOS/project/project_1/system_wrapper_1/export/system_wrapper_1/system_wrapper_1.xpfm;system_wrapper|C:/EOS/project/project_1/system_wrapper/export/system_wrapper/system_wrapper.xpfm
+16:09:30 ERROR : Unexpected exception occurred while writing platform project 'system_wrapper_5' log.
+16:09:30 INFO  : Platform 'system_wrapper_2' is added to custom repositories.
+16:09:34 INFO  : Platform 'system_wrapper_2' is added to custom repositories.
+16:11:13 INFO  : Result from executing command 'getProjects': system_wrapper;system_wrapper_1;system_wrapper_2
+16:11:13 INFO  : Result from executing command 'getPlatforms': system_wrapper_1|C:/EOS/project/project_1/system_wrapper_1/export/system_wrapper_1/system_wrapper_1.xpfm;system_wrapper_2|C:/EOS/project/project_1/system_wrapper_2/export/system_wrapper_2/system_wrapper_2.xpfm;system_wrapper|C:/EOS/project/project_1/system_wrapper/export/system_wrapper/system_wrapper.xpfm
+16:11:13 INFO  : Checking for BSP changes to sync application flags for project 'lab1_5_3'...
+16:12:09 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+16:12:10 INFO  : Jtag cable 'Xilinx HW-FTDI-TEST FT2232H 1234-tulA' is selected.
+16:12:10 INFO  : 'jtag frequency' command is executed.
+16:12:10 INFO  : Context for 'APU' is selected.
+16:12:10 INFO  : System reset is completed.
+16:12:13 INFO  : 'after 3000' command is executed.
+16:12:13 INFO  : 'targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}' command is executed.
+16:12:15 INFO  : Device configured successfully with "C:/EOS/project/project_1/lab1_5_3/_ide/bitstream/system_wrapper.bit"
+16:12:15 INFO  : Context for 'APU' is selected.
+16:12:15 INFO  : Hardware design and registers information is loaded from 'C:/EOS/project/project_1/system_wrapper_2/export/system_wrapper_2/hw/system_wrapper.xsa'.
+16:12:15 INFO  : 'configparams force-mem-access 1' command is executed.
+16:12:15 INFO  : Context for 'APU' is selected.
+16:12:16 INFO  : Sourcing of 'C:/EOS/project/project_1/lab1_5_3/_ide/psinit/ps7_init.tcl' is done.
+16:12:16 INFO  : 'ps7_init' command is executed.
+16:12:16 INFO  : 'ps7_post_config' command is executed.
+16:12:16 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+16:12:16 INFO  : The application 'C:/EOS/project/project_1/lab1_5_3/Debug/lab1_5_3.elf' is downloaded to processor 'ps7_cortexa9_0'.
+16:12:16 INFO  : 'configparams force-mem-access 0' command is executed.
+16:12:16 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -nocase -filter {name =~"APU*"}
+rst -system
+after 3000
+targets -set -filter {jtag_cable_name =~ "Xilinx HW-FTDI-TEST FT2232H 1234-tulA" && level==0 && jtag_device_ctx=="jsn-HW-FTDI-TEST FT2232H-1234-tulA-23727093-0"}
+fpga -file C:/EOS/project/project_1/lab1_5_3/_ide/bitstream/system_wrapper.bit
+targets -set -nocase -filter {name =~"APU*"}
+loadhw -hw C:/EOS/project/project_1/system_wrapper_2/export/system_wrapper_2/hw/system_wrapper.xsa -mem-ranges [list {0x40000000 0xbfffffff}] -regs
+configparams force-mem-access 1
+targets -set -nocase -filter {name =~"APU*"}
+source C:/EOS/project/project_1/lab1_5_3/_ide/psinit/ps7_init.tcl
+ps7_init
+ps7_post_config
+targets -set -nocase -filter {name =~ "*A9*#0"}
+dow C:/EOS/project/project_1/lab1_5_3/Debug/lab1_5_3.elf
+configparams force-mem-access 0
+----------------End of Script----------------
+
+16:12:16 INFO  : Context for processor 'ps7_cortexa9_0' is selected.
+16:12:16 INFO  : 'con' command is executed.
+16:12:16 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "*A9*#0"}
+con
+----------------End of Script----------------
+
+16:12:16 INFO  : Launch script is exported to file 'C:\EOS\project\project_1\lab1_5_3_system\_ide\scripts\debugger_lab1_5_3-default.tcl'
+16:15:38 INFO  : Disconnected from the channel tcfchan#7.

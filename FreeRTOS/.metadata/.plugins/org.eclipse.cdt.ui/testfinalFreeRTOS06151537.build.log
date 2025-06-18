@@ -1,0 +1,25 @@
+13:59:40 **** Incremental Build of configuration Debug for project testfinalFreeRTOS06151537 ****
+make all 
+make --no-print-directory pre-build
+a9-linaro-pre-build-step
+' '
+make --no-print-directory main-build
+'Building file: ../src/FreeRTOS.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/FreeRTOS.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -ID:/EOS/project/project_1/vitis_test_project/testfinalFreeRTOS06151536/export/testfinalFreeRTOS06151536/sw/testfinalFreeRTOS06151536/freertos10_xilinx_domain/bspinclude/include -MMD -MP -MF"src/FreeRTOS.d" -MT"src/FreeRTOS.o" -o "src/FreeRTOS.o" "../src/FreeRTOS.c"
+'Finished building: ../src/FreeRTOS.c'
+' '
+'Building target: testfinalFreeRTOS06151537.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -LD:/EOS/project/project_1/vitis_test_project/testfinalFreeRTOS06151536/export/testfinalFreeRTOS06151536/sw/testfinalFreeRTOS06151536/freertos10_xilinx_domain/bsplib/lib -o "testfinalFreeRTOS06151537.elf"  ./src/FreeRTOS.o   -Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group
+'Finished building target: testfinalFreeRTOS06151537.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size testfinalFreeRTOS06151537.elf  |tee "testfinalFreeRTOS06151537.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  74784	   3332	  88736	 166852	  28bc4	testfinalFreeRTOS06151537.elf
+'Finished building: testfinalFreeRTOS06151537.elf.size'
+' '
+
+13:59:40 Build Finished (took 445ms)
+

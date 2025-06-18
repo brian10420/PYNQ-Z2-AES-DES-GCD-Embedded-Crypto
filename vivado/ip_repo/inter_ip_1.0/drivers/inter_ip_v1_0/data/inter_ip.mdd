@@ -1,0 +1,10 @@
+
+
+OPTION psf_version = 2.1;
+
+BEGIN DRIVER inter_ip
+	OPTION supported_peripherals = (inter_ip);
+	OPTION copyfiles = all;
+	OPTION VERSION = 1.0;
+	OPTION NAME = inter_ip;
+END DRIVER

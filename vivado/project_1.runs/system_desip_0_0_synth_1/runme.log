@@ -1,0 +1,360 @@
+
+*** Running vivado
+    with args -log system_desip_0_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source system_desip_0_0.tcl
+
+
+
+****** Vivado v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source system_desip_0_0.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/embeding_system/project_2_final/ip_repo'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/xilinx/Vivado/2020.2/data/ip'.
+Command: synth_design -top system_desip_0_0 -part xc7z020clg400-1 -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 12476
+CRITICAL WARNING: [Synth 8-976] start_prev has already been declared [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/hdl/desip_v1_0_S00_AXI.v:762]
+CRITICAL WARNING: [Synth 8-2654] second declaration of start_prev ignored [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/hdl/desip_v1_0_S00_AXI.v:762]
+INFO: [Synth 8-994] start_prev is declared here [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/hdl/desip_v1_0_S00_AXI.v:143]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1175.734 ; gain = 49.059
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'system_desip_0_0' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ip/system_desip_0_0/synth/system_desip_0_0.v:57]
+INFO: [Synth 8-6157] synthesizing module 'desip_v1_0' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/hdl/desip_v1_0.v:4]
+	Parameter C_S00_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S00_AXI_ADDR_WIDTH bound to: 6 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'desip_v1_0_S00_AXI' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/hdl/desip_v1_0_S00_AXI.v:3]
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 6 - type: integer 
+	Parameter ADDR_LSB bound to: 2 - type: integer 
+	Parameter OPT_MEM_ADDR_BITS bound to: 3 - type: integer 
+INFO: [Synth 8-226] default block is never used [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/hdl/desip_v1_0_S00_AXI.v:509]
+INFO: [Synth 8-6157] synthesizing module 'des' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des.v:40]
+INFO: [Synth 8-6157] synthesizing module 'des_key' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+	Parameter cs bound to: 5'b00001 
+INFO: [Synth 8-6157] synthesizing module 'SRL16' [C:/xilinx/Vivado/2020.2/scripts/rt/data/unisim_comp.v:78018]
+	Parameter INIT bound to: 16'b0000000000000000 
+INFO: [Synth 8-6155] done synthesizing module 'SRL16' (1#1) [C:/xilinx/Vivado/2020.2/scripts/rt/data/unisim_comp.v:78018]
+INFO: [Synth 8-6155] done synthesizing module 'des_key' (2#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized0' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+	Parameter cs bound to: 5'b00010 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized0' (2#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized1' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+	Parameter cs bound to: 5'b00011 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized1' (2#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized2' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+	Parameter cs bound to: 5'b00100 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized2' (2#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized3' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+	Parameter cs bound to: 5'b00101 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized3' (2#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized4' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+	Parameter cs bound to: 5'b00110 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized4' (2#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized5' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+	Parameter cs bound to: 5'b00111 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized5' (2#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized6' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+	Parameter cs bound to: 5'b01000 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized6' (2#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized7' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+	Parameter cs bound to: 5'b01001 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized7' (2#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized8' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+	Parameter cs bound to: 5'b01010 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized8' (2#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized9' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+	Parameter cs bound to: 5'b01011 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized9' (2#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized10' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+	Parameter cs bound to: 5'b01100 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized10' (2#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized11' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+	Parameter cs bound to: 5'b01101 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized11' (2#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized12' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+	Parameter cs bound to: 5'b01110 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized12' (2#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized13' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+	Parameter cs bound to: 5'b01111 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized13' (2#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized14' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+	Parameter cs bound to: 5'b10000 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized14' (2#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_f' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_f.v:36]
+INFO: [Synth 8-6157] synthesizing module 'SB1' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_sbox.v:35]
+INFO: [Synth 8-226] default block is never used [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_sbox.v:67]
+INFO: [Synth 8-6157] synthesizing module 'MUXF5' [C:/xilinx/Vivado/2020.2/scripts/rt/data/unisim_comp.v:42973]
+INFO: [Synth 8-6155] done synthesizing module 'MUXF5' (3#1) [C:/xilinx/Vivado/2020.2/scripts/rt/data/unisim_comp.v:42973]
+INFO: [Synth 8-6155] done synthesizing module 'SB1' (4#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_sbox.v:35]
+INFO: [Synth 8-6157] synthesizing module 'SB2' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_sbox.v:147]
+INFO: [Synth 8-6155] done synthesizing module 'SB2' (5#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_sbox.v:147]
+INFO: [Synth 8-6157] synthesizing module 'SB3' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_sbox.v:257]
+INFO: [Synth 8-6155] done synthesizing module 'SB3' (6#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_sbox.v:257]
+INFO: [Synth 8-6157] synthesizing module 'SB4' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_sbox.v:367]
+INFO: [Synth 8-6155] done synthesizing module 'SB4' (7#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_sbox.v:367]
+INFO: [Synth 8-6157] synthesizing module 'SB5' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_sbox.v:478]
+INFO: [Synth 8-6155] done synthesizing module 'SB5' (8#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_sbox.v:478]
+INFO: [Synth 8-6157] synthesizing module 'SB6' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_sbox.v:590]
+INFO: [Synth 8-6155] done synthesizing module 'SB6' (9#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_sbox.v:590]
+INFO: [Synth 8-6157] synthesizing module 'SB7' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_sbox.v:702]
+INFO: [Synth 8-6155] done synthesizing module 'SB7' (10#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_sbox.v:702]
+INFO: [Synth 8-6157] synthesizing module 'SB8' [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_sbox.v:813]
+INFO: [Synth 8-6155] done synthesizing module 'SB8' (11#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_sbox.v:813]
+INFO: [Synth 8-6155] done synthesizing module 'des_f' (12#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des_f.v:36]
+INFO: [Synth 8-6155] done synthesizing module 'des' (13#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/src/des.v:40]
+INFO: [Synth 8-6155] done synthesizing module 'desip_v1_0_S00_AXI' (14#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/hdl/desip_v1_0_S00_AXI.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'desip_v1_0' (15#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ipshared/cd5e/hdl/desip_v1_0.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'system_desip_0_0' (16#1) [c:/embeding_system/project_2_final/project_1.gen/sources_1/bd/system/ip/system_desip_0_0/synth/system_desip_0_0.v:57]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1259.434 ; gain = 132.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 1259.434 ; gain = 132.758
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 1259.434 ; gain = 132.758
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.257 . Memory (MB): peak = 1259.434 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1920 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 1 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1371.129 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 1920 instances were transformed.
+  MUXF5 => LUT3: 1024 instances
+  SRL16 => SRL16E: 896 instances
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.224 . Memory (MB): peak = 1373.164 ; gain = 2.035
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 1373.164 ; gain = 246.488
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 1373.164 ; gain = 246.488
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 1373.164 ; gain = 246.488
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 1373.164 ; gain = 246.488
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   32 Bit       Adders := 1     
+	   2 Input    3 Bit       Adders := 1     
++---XORs : 
+	   2 Input     48 Bit         XORs := 16    
+	   2 Input     32 Bit         XORs := 16    
++---Registers : 
+	               64 Bit    Registers := 2     
+	               48 Bit    Registers := 16    
+	               32 Bit    Registers := 114   
+	               28 Bit    Registers := 32    
+	                6 Bit    Registers := 2     
+	                4 Bit    Registers := 256   
+	                3 Bit    Registers := 16    
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 8     
++---Muxes : 
+	   2 Input   32 Bit        Muxes := 16    
+	  14 Input   32 Bit        Muxes := 13    
+	   2 Input   28 Bit        Muxes := 32    
+	   2 Input    4 Bit        Muxes := 128   
+	   3 Input    3 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 8     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:54 ; elapsed = 00:00:56 . Memory (MB): peak = 1373.164 ; gain = 246.488
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:02 ; elapsed = 00:01:04 . Memory (MB): peak = 1373.164 ; gain = 246.488
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:01:03 ; elapsed = 00:01:05 . Memory (MB): peak = 1373.164 ; gain = 246.488
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:01:06 ; elapsed = 00:01:08 . Memory (MB): peak = 1461.199 ; gain = 334.523
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:01:10 ; elapsed = 00:01:13 . Memory (MB): peak = 1475.250 ; gain = 348.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:10 ; elapsed = 00:01:13 . Memory (MB): peak = 1475.250 ; gain = 348.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:11 ; elapsed = 00:01:13 . Memory (MB): peak = 1475.250 ; gain = 348.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:11 ; elapsed = 00:01:13 . Memory (MB): peak = 1475.250 ; gain = 348.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:11 ; elapsed = 00:01:14 . Memory (MB): peak = 1475.250 ; gain = 348.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:11 ; elapsed = 00:01:14 . Memory (MB): peak = 1475.250 ; gain = 348.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++-----------------+------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name      | RTL Name                                                               | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++-----------------+------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|system_desip_0_0 | inst/desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f02/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|system_desip_0_0 | inst/desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f03/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|system_desip_0_0 | inst/desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f04/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|system_desip_0_0 | inst/desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f05/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|system_desip_0_0 | inst/desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f06/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|system_desip_0_0 | inst/desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f07/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|system_desip_0_0 | inst/desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f08/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|system_desip_0_0 | inst/desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f09/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|system_desip_0_0 | inst/desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f10/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|system_desip_0_0 | inst/desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f11/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|system_desip_0_0 | inst/desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f12/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|system_desip_0_0 | inst/desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f13/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|system_desip_0_0 | inst/desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f14/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|system_desip_0_0 | inst/desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f15/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|system_desip_0_0 | inst/desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f16/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
++-----------------+------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |CARRY4 |    16|
+|2     |LUT1   |     1|
+|3     |LUT2   |   529|
+|4     |LUT3   |   841|
+|5     |LUT4   |  3237|
+|6     |LUT5   |    74|
+|7     |LUT6   |   207|
+|8     |MUXF5  |  1024|
+|9     |MUXF7  |    64|
+|10    |MUXF8  |    32|
+|11    |SRL16  |   840|
+|12    |SRL16E |   480|
+|13    |FDCE   |  2491|
+|14    |FDRE   |  1850|
+|15    |FDSE   |     1|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:11 ; elapsed = 00:01:14 . Memory (MB): peak = 1475.250 ; gain = 348.574
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:56 ; elapsed = 00:01:09 . Memory (MB): peak = 1475.250 ; gain = 234.844
+Synthesis Optimization Complete : Time (s): cpu = 00:01:12 ; elapsed = 00:01:14 . Memory (MB): peak = 1475.250 ; gain = 348.574
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.255 . Memory (MB): peak = 1475.250 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1976 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1475.250 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 1864 instances were transformed.
+  MUXF5 => LUT3: 1024 instances
+  SRL16 => SRL16E: 840 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+84 Infos, 0 Warnings, 2 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:22 ; elapsed = 00:01:26 . Memory (MB): peak = 1475.250 ; gain = 348.574
+INFO: [Common 17-1381] The checkpoint 'C:/embeding_system/project_2_final/project_1.runs/system_desip_0_0_synth_1/system_desip_0_0.dcp' has been generated.
+INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
+INFO: [Coretcl 2-1174] Renamed 162 cell refs.
+INFO: [Common 17-1381] The checkpoint 'C:/embeding_system/project_2_final/project_1.runs/system_desip_0_0_synth_1/system_desip_0_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file system_desip_0_0_utilization_synth.rpt -pb system_desip_0_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sun Jun 15 04:43:42 2025...

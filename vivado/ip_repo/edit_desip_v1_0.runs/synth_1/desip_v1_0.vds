@@ -1,0 +1,494 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Sat Jun 14 13:19:30 2025
+# Process ID: 5468
+# Current directory: D:/EOS/project/ip_repo/edit_desip_v1_0.runs/synth_1
+# Command line: vivado.exe -log desip_v1_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source desip_v1_0.tcl
+# Log file: D:/EOS/project/ip_repo/edit_desip_v1_0.runs/synth_1/desip_v1_0.vds
+# Journal file: D:/EOS/project/ip_repo/edit_desip_v1_0.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source desip_v1_0.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'd:/EOS/project/ip_repo/desip_1.0'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'd:/EOS/project/ip_repo/gcdip_1.0'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.2/data/ip'.
+Command: synth_design -top desip_v1_0 -part xc7z020clg400-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 2900
+CRITICAL WARNING: [Synth 8-976] start_prev has already been declared [D:/EOS/project/ip_repo/desip_1.0/hdl/desip_v1_0_S00_AXI.v:762]
+CRITICAL WARNING: [Synth 8-2654] second declaration of start_prev ignored [D:/EOS/project/ip_repo/desip_1.0/hdl/desip_v1_0_S00_AXI.v:762]
+INFO: [Synth 8-994] start_prev is declared here [D:/EOS/project/ip_repo/desip_1.0/hdl/desip_v1_0_S00_AXI.v:143]
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1088.582 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'desip_v1_0' [D:/EOS/project/ip_repo/desip_1.0/hdl/desip_v1_0.v:4]
+	Parameter C_S00_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S00_AXI_ADDR_WIDTH bound to: 6 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'desip_v1_0_S00_AXI' [D:/EOS/project/ip_repo/desip_1.0/hdl/desip_v1_0_S00_AXI.v:3]
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 6 - type: integer 
+	Parameter ADDR_LSB bound to: 2 - type: integer 
+	Parameter OPT_MEM_ADDR_BITS bound to: 3 - type: integer 
+INFO: [Synth 8-226] default block is never used [D:/EOS/project/ip_repo/desip_1.0/hdl/desip_v1_0_S00_AXI.v:509]
+INFO: [Synth 8-6157] synthesizing module 'des' [D:/EOS/project/ip_repo/desip_1.0/src/des.v:40]
+INFO: [Synth 8-6157] synthesizing module 'des_key' [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+	Parameter cs bound to: 5'b00001 
+INFO: [Synth 8-6157] synthesizing module 'SRL16' [C:/Xilinx/Vivado/2020.2/scripts/rt/data/unisim_comp.v:78018]
+	Parameter INIT bound to: 16'b0000000000000000 
+INFO: [Synth 8-6155] done synthesizing module 'SRL16' (1#1) [C:/Xilinx/Vivado/2020.2/scripts/rt/data/unisim_comp.v:78018]
+INFO: [Synth 8-6155] done synthesizing module 'des_key' (2#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized0' [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+	Parameter cs bound to: 5'b00010 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized0' (2#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized1' [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+	Parameter cs bound to: 5'b00011 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized1' (2#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized2' [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+	Parameter cs bound to: 5'b00100 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized2' (2#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized3' [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+	Parameter cs bound to: 5'b00101 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized3' (2#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized4' [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+	Parameter cs bound to: 5'b00110 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized4' (2#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized5' [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+	Parameter cs bound to: 5'b00111 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized5' (2#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized6' [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+	Parameter cs bound to: 5'b01000 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized6' (2#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized7' [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+	Parameter cs bound to: 5'b01001 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized7' (2#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized8' [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+	Parameter cs bound to: 5'b01010 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized8' (2#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized9' [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+	Parameter cs bound to: 5'b01011 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized9' (2#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized10' [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+	Parameter cs bound to: 5'b01100 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized10' (2#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized11' [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+	Parameter cs bound to: 5'b01101 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized11' (2#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized12' [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+	Parameter cs bound to: 5'b01110 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized12' (2#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized13' [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+	Parameter cs bound to: 5'b01111 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized13' (2#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_key__parameterized14' [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+	Parameter cs bound to: 5'b10000 
+INFO: [Synth 8-6155] done synthesizing module 'des_key__parameterized14' (2#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_key.v:38]
+INFO: [Synth 8-6157] synthesizing module 'des_f' [D:/EOS/project/ip_repo/desip_1.0/src/des_f.v:36]
+INFO: [Synth 8-6157] synthesizing module 'SB1' [D:/EOS/project/ip_repo/desip_1.0/src/des_sbox.v:35]
+INFO: [Synth 8-226] default block is never used [D:/EOS/project/ip_repo/desip_1.0/src/des_sbox.v:67]
+INFO: [Synth 8-6157] synthesizing module 'MUXF5' [C:/Xilinx/Vivado/2020.2/scripts/rt/data/unisim_comp.v:42973]
+INFO: [Synth 8-6155] done synthesizing module 'MUXF5' (3#1) [C:/Xilinx/Vivado/2020.2/scripts/rt/data/unisim_comp.v:42973]
+INFO: [Synth 8-6155] done synthesizing module 'SB1' (4#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_sbox.v:35]
+INFO: [Synth 8-6157] synthesizing module 'SB2' [D:/EOS/project/ip_repo/desip_1.0/src/des_sbox.v:147]
+INFO: [Synth 8-6155] done synthesizing module 'SB2' (5#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_sbox.v:147]
+INFO: [Synth 8-6157] synthesizing module 'SB3' [D:/EOS/project/ip_repo/desip_1.0/src/des_sbox.v:257]
+INFO: [Synth 8-6155] done synthesizing module 'SB3' (6#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_sbox.v:257]
+INFO: [Synth 8-6157] synthesizing module 'SB4' [D:/EOS/project/ip_repo/desip_1.0/src/des_sbox.v:367]
+INFO: [Synth 8-6155] done synthesizing module 'SB4' (7#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_sbox.v:367]
+INFO: [Synth 8-6157] synthesizing module 'SB5' [D:/EOS/project/ip_repo/desip_1.0/src/des_sbox.v:478]
+INFO: [Synth 8-6155] done synthesizing module 'SB5' (8#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_sbox.v:478]
+INFO: [Synth 8-6157] synthesizing module 'SB6' [D:/EOS/project/ip_repo/desip_1.0/src/des_sbox.v:590]
+INFO: [Synth 8-6155] done synthesizing module 'SB6' (9#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_sbox.v:590]
+INFO: [Synth 8-6157] synthesizing module 'SB7' [D:/EOS/project/ip_repo/desip_1.0/src/des_sbox.v:702]
+INFO: [Synth 8-6155] done synthesizing module 'SB7' (10#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_sbox.v:702]
+INFO: [Synth 8-6157] synthesizing module 'SB8' [D:/EOS/project/ip_repo/desip_1.0/src/des_sbox.v:813]
+INFO: [Synth 8-6155] done synthesizing module 'SB8' (11#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_sbox.v:813]
+INFO: [Synth 8-6155] done synthesizing module 'des_f' (12#1) [D:/EOS/project/ip_repo/desip_1.0/src/des_f.v:36]
+INFO: [Synth 8-6155] done synthesizing module 'des' (13#1) [D:/EOS/project/ip_repo/desip_1.0/src/des.v:40]
+INFO: [Synth 8-6155] done synthesizing module 'desip_v1_0_S00_AXI' (14#1) [D:/EOS/project/ip_repo/desip_1.0/hdl/desip_v1_0_S00_AXI.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'desip_v1_0' (15#1) [D:/EOS/project/ip_repo/desip_1.0/hdl/desip_v1_0.v:4]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1088.582 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1088.582 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1088.582 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1088.582 ; gain = 0.000
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   32 Bit       Adders := 1     
+	   2 Input    3 Bit       Adders := 1     
++---XORs : 
+	   2 Input     48 Bit         XORs := 16    
+	   2 Input     32 Bit         XORs := 16    
++---Registers : 
+	               64 Bit    Registers := 2     
+	               48 Bit    Registers := 16    
+	               32 Bit    Registers := 114   
+	               28 Bit    Registers := 32    
+	                6 Bit    Registers := 2     
+	                4 Bit    Registers := 256   
+	                3 Bit    Registers := 16    
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 8     
++---Muxes : 
+	   2 Input   32 Bit        Muxes := 16    
+	  14 Input   32 Bit        Muxes := 13    
+	   2 Input   28 Bit        Muxes := 32    
+	   2 Input    4 Bit        Muxes := 128   
+	   3 Input    3 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 8     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:29 ; elapsed = 00:00:35 . Memory (MB): peak = 1121.246 ; gain = 32.664
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:30 ; elapsed = 00:00:36 . Memory (MB): peak = 1124.711 ; gain = 36.129
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:32 ; elapsed = 00:00:38 . Memory (MB): peak = 1124.930 ; gain = 36.348
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:35 ; elapsed = 00:00:42 . Memory (MB): peak = 1138.602 ; gain = 50.020
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:35 ; elapsed = 00:00:42 . Memory (MB): peak = 1138.602 ; gain = 50.020
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:36 ; elapsed = 00:00:42 . Memory (MB): peak = 1138.602 ; gain = 50.020
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:36 ; elapsed = 00:00:42 . Memory (MB): peak = 1138.602 ; gain = 50.020
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:36 ; elapsed = 00:00:42 . Memory (MB): peak = 1138.602 ; gain = 50.020
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:36 ; elapsed = 00:00:42 . Memory (MB): peak = 1138.602 ; gain = 50.020
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++------------+-------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name | RTL Name                                                          | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++------------+-------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|desip_v1_0  | desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f02/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|desip_v1_0  | desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f03/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|desip_v1_0  | desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f04/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|desip_v1_0  | desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f05/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|desip_v1_0  | desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f06/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|desip_v1_0  | desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f07/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|desip_v1_0  | desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f08/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|desip_v1_0  | desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f09/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|desip_v1_0  | desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f10/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|desip_v1_0  | desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f11/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|desip_v1_0  | desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f12/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|desip_v1_0  | desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f13/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|desip_v1_0  | desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f14/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|desip_v1_0  | desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f15/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
+|desip_v1_0  | desip_v1_0_S00_AXI_inst/des_core_inst/Ides_f16/f_in_l_reg1_reg[1] | 5      | 32    | YES          | NO                 | YES               | 32     | 0       | 
++------------+-------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |    16|
+|3     |LUT1   |     1|
+|4     |LUT2   |   529|
+|5     |LUT3   |   841|
+|6     |LUT4   |  3237|
+|7     |LUT5   |    74|
+|8     |LUT6   |   207|
+|9     |MUXF5  |  1024|
+|10    |MUXF7  |    64|
+|11    |MUXF8  |    32|
+|12    |SRL16  |   840|
+|13    |SRL16E |   480|
+|14    |FDCE   |  2491|
+|15    |FDRE   |  1850|
+|16    |FDSE   |     1|
+|17    |IBUF   |    51|
+|18    |OBUF   |    41|
++------+-------+------+
+
+Report Instance Areas: 
++------+--------------------------+-------------------------+------+
+|      |Instance                  |Module                   |Cells |
++------+--------------------------+-------------------------+------+
+|1     |top                       |                         | 11780|
+|2     |  desip_v1_0_S00_AXI_inst |desip_v1_0_S00_AXI       | 11687|
+|3     |    des_core_inst         |des                      | 10868|
+|4     |      Ides_f01            |des_f                    |   472|
+|5     |        Isb1              |SB1_127                  |    30|
+|6     |        Isb2              |SB2_128                  |    29|
+|7     |        Isb3              |SB3_129                  |    30|
+|8     |        Isb4              |SB4_130                  |    25|
+|9     |        Isb5              |SB5_131                  |    29|
+|10    |        Isb6              |SB6_132                  |    29|
+|11    |        Isb7              |SB7_133                  |    28|
+|12    |        Isb8              |SB8_134                  |    29|
+|13    |      Ides_f02            |des_f_0                  |   329|
+|14    |        Isb1              |SB1_119                  |     8|
+|15    |        Isb2              |SB2_120                  |     8|
+|16    |        Isb3              |SB3_121                  |     8|
+|17    |        Isb4              |SB4_122                  |     8|
+|18    |        Isb5              |SB5_123                  |     8|
+|19    |        Isb6              |SB6_124                  |     8|
+|20    |        Isb7              |SB7_125                  |     8|
+|21    |        Isb8              |SB8_126                  |     8|
+|22    |      Ides_f03            |des_f_1                  |   328|
+|23    |        Isb1              |SB1_111                  |     8|
+|24    |        Isb2              |SB2_112                  |     8|
+|25    |        Isb3              |SB3_113                  |     8|
+|26    |        Isb4              |SB4_114                  |     8|
+|27    |        Isb5              |SB5_115                  |     8|
+|28    |        Isb6              |SB6_116                  |     8|
+|29    |        Isb7              |SB7_117                  |     8|
+|30    |        Isb8              |SB8_118                  |     8|
+|31    |      Ides_f04            |des_f_2                  |   328|
+|32    |        Isb1              |SB1_103                  |     8|
+|33    |        Isb2              |SB2_104                  |     8|
+|34    |        Isb3              |SB3_105                  |     8|
+|35    |        Isb4              |SB4_106                  |     8|
+|36    |        Isb5              |SB5_107                  |     8|
+|37    |        Isb6              |SB6_108                  |     8|
+|38    |        Isb7              |SB7_109                  |     8|
+|39    |        Isb8              |SB8_110                  |     8|
+|40    |      Ides_f05            |des_f_3                  |   328|
+|41    |        Isb1              |SB1_95                   |     8|
+|42    |        Isb2              |SB2_96                   |     8|
+|43    |        Isb3              |SB3_97                   |     8|
+|44    |        Isb4              |SB4_98                   |     8|
+|45    |        Isb5              |SB5_99                   |     8|
+|46    |        Isb6              |SB6_100                  |     8|
+|47    |        Isb7              |SB7_101                  |     8|
+|48    |        Isb8              |SB8_102                  |     8|
+|49    |      Ides_f06            |des_f_4                  |   328|
+|50    |        Isb1              |SB1_87                   |     8|
+|51    |        Isb2              |SB2_88                   |     8|
+|52    |        Isb3              |SB3_89                   |     8|
+|53    |        Isb4              |SB4_90                   |     8|
+|54    |        Isb5              |SB5_91                   |     8|
+|55    |        Isb6              |SB6_92                   |     8|
+|56    |        Isb7              |SB7_93                   |     8|
+|57    |        Isb8              |SB8_94                   |     8|
+|58    |      Ides_f07            |des_f_5                  |   328|
+|59    |        Isb1              |SB1_79                   |     8|
+|60    |        Isb2              |SB2_80                   |     8|
+|61    |        Isb3              |SB3_81                   |     8|
+|62    |        Isb4              |SB4_82                   |     8|
+|63    |        Isb5              |SB5_83                   |     8|
+|64    |        Isb6              |SB6_84                   |     8|
+|65    |        Isb7              |SB7_85                   |     8|
+|66    |        Isb8              |SB8_86                   |     8|
+|67    |      Ides_f08            |des_f_6                  |   328|
+|68    |        Isb1              |SB1_71                   |     8|
+|69    |        Isb2              |SB2_72                   |     8|
+|70    |        Isb3              |SB3_73                   |     8|
+|71    |        Isb4              |SB4_74                   |     8|
+|72    |        Isb5              |SB5_75                   |     8|
+|73    |        Isb6              |SB6_76                   |     8|
+|74    |        Isb7              |SB7_77                   |     8|
+|75    |        Isb8              |SB8_78                   |     8|
+|76    |      Ides_f09            |des_f_7                  |   328|
+|77    |        Isb1              |SB1_63                   |     8|
+|78    |        Isb2              |SB2_64                   |     8|
+|79    |        Isb3              |SB3_65                   |     8|
+|80    |        Isb4              |SB4_66                   |     8|
+|81    |        Isb5              |SB5_67                   |     8|
+|82    |        Isb6              |SB6_68                   |     8|
+|83    |        Isb7              |SB7_69                   |     8|
+|84    |        Isb8              |SB8_70                   |     8|
+|85    |      Ides_f10            |des_f_8                  |   328|
+|86    |        Isb1              |SB1_55                   |     8|
+|87    |        Isb2              |SB2_56                   |     8|
+|88    |        Isb3              |SB3_57                   |     8|
+|89    |        Isb4              |SB4_58                   |     8|
+|90    |        Isb5              |SB5_59                   |     8|
+|91    |        Isb6              |SB6_60                   |     8|
+|92    |        Isb7              |SB7_61                   |     8|
+|93    |        Isb8              |SB8_62                   |     8|
+|94    |      Ides_f11            |des_f_9                  |   328|
+|95    |        Isb1              |SB1_47                   |     8|
+|96    |        Isb2              |SB2_48                   |     8|
+|97    |        Isb3              |SB3_49                   |     8|
+|98    |        Isb4              |SB4_50                   |     8|
+|99    |        Isb5              |SB5_51                   |     8|
+|100   |        Isb6              |SB6_52                   |     8|
+|101   |        Isb7              |SB7_53                   |     8|
+|102   |        Isb8              |SB8_54                   |     8|
+|103   |      Ides_f12            |des_f_10                 |   328|
+|104   |        Isb1              |SB1_39                   |     8|
+|105   |        Isb2              |SB2_40                   |     8|
+|106   |        Isb3              |SB3_41                   |     8|
+|107   |        Isb4              |SB4_42                   |     8|
+|108   |        Isb5              |SB5_43                   |     8|
+|109   |        Isb6              |SB6_44                   |     8|
+|110   |        Isb7              |SB7_45                   |     8|
+|111   |        Isb8              |SB8_46                   |     8|
+|112   |      Ides_f13            |des_f_11                 |   328|
+|113   |        Isb1              |SB1_31                   |     8|
+|114   |        Isb2              |SB2_32                   |     8|
+|115   |        Isb3              |SB3_33                   |     8|
+|116   |        Isb4              |SB4_34                   |     8|
+|117   |        Isb5              |SB5_35                   |     8|
+|118   |        Isb6              |SB6_36                   |     8|
+|119   |        Isb7              |SB7_37                   |     8|
+|120   |        Isb8              |SB8_38                   |     8|
+|121   |      Ides_f14            |des_f_12                 |   328|
+|122   |        Isb1              |SB1_23                   |     8|
+|123   |        Isb2              |SB2_24                   |     8|
+|124   |        Isb3              |SB3_25                   |     8|
+|125   |        Isb4              |SB4_26                   |     8|
+|126   |        Isb5              |SB5_27                   |     8|
+|127   |        Isb6              |SB6_28                   |     8|
+|128   |        Isb7              |SB7_29                   |     8|
+|129   |        Isb8              |SB8_30                   |     8|
+|130   |      Ides_f15            |des_f_13                 |   328|
+|131   |        Isb1              |SB1_15                   |     8|
+|132   |        Isb2              |SB2_16                   |     8|
+|133   |        Isb3              |SB3_17                   |     8|
+|134   |        Isb4              |SB4_18                   |     8|
+|135   |        Isb5              |SB5_19                   |     8|
+|136   |        Isb6              |SB6_20                   |     8|
+|137   |        Isb7              |SB7_21                   |     8|
+|138   |        Isb8              |SB8_22                   |     8|
+|139   |      Ides_f16            |des_f_14                 |   393|
+|140   |        Isb1              |SB1                      |     8|
+|141   |        Isb2              |SB2                      |     8|
+|142   |        Isb3              |SB3                      |     8|
+|143   |        Isb4              |SB4                      |     8|
+|144   |        Isb5              |SB5                      |     8|
+|145   |        Isb6              |SB6                      |     8|
+|146   |        Isb7              |SB7                      |     8|
+|147   |        Isb8              |SB8                      |     8|
+|148   |      Ides_key01          |des_key                  |   398|
+|149   |      Ides_key02          |des_key__parameterized0  |   341|
+|150   |      Ides_key03          |des_key__parameterized1  |   342|
+|151   |      Ides_key04          |des_key__parameterized2  |   341|
+|152   |      Ides_key05          |des_key__parameterized3  |   342|
+|153   |      Ides_key06          |des_key__parameterized4  |   341|
+|154   |      Ides_key07          |des_key__parameterized5  |   342|
+|155   |      Ides_key08          |des_key__parameterized6  |   341|
+|156   |      Ides_key09          |des_key__parameterized7  |   342|
+|157   |      Ides_key10          |des_key__parameterized8  |   341|
+|158   |      Ides_key11          |des_key__parameterized9  |   342|
+|159   |      Ides_key12          |des_key__parameterized10 |   342|
+|160   |      Ides_key13          |des_key__parameterized11 |   342|
+|161   |      Ides_key14          |des_key__parameterized12 |   340|
+|162   |      Ides_key15          |des_key__parameterized13 |   286|
++------+--------------------------+-------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:36 ; elapsed = 00:00:42 . Memory (MB): peak = 1138.602 ; gain = 50.020
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 2 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:36 ; elapsed = 00:00:42 . Memory (MB): peak = 1138.602 ; gain = 50.020
+Synthesis Optimization Complete : Time (s): cpu = 00:00:36 ; elapsed = 00:00:42 . Memory (MB): peak = 1138.602 ; gain = 50.020
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.215 . Memory (MB): peak = 1150.727 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1976 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1188.672 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 1864 instances were transformed.
+  MUXF5 => LUT3: 1024 instances
+  SRL16 => SRL16E: 840 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+79 Infos, 0 Warnings, 2 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:44 ; elapsed = 00:00:59 . Memory (MB): peak = 1188.672 ; gain = 100.090
+INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
+INFO: [Common 17-1381] The checkpoint 'D:/EOS/project/ip_repo/edit_desip_v1_0.runs/synth_1/desip_v1_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file desip_v1_0_utilization_synth.rpt -pb desip_v1_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sat Jun 14 13:20:36 2025...

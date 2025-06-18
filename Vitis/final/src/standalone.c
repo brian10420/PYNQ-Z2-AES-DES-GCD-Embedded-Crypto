@@ -1,0 +1,568 @@
+#include <stdio.h>
+#include "xparameters.h"
+#include "xil_io.h"
+#include "xil_printf.h"
+#include "xil_exception.h"
+#include "xscugic.h"
+#include "desip.h"
+#include "gcdip.h"
+#include "inter_ip.h"
+#include "sleep.h"
+#include <stdint.h>
+
+// AES IP base address and register offsets
+#define AES_BASE_ADDR XPAR_AES_IP_0_S00_AXI_BASEADDR
+#define CONTROL_REG_OFFSET      0x00
+#define STATUS_REG_OFFSET       0x04
+#define KEY_HIGH_OFFSET         0x08
+#define KEY_LOW_OFFSET          0x0C
+#define KEY_HIGH2_OFFSET        0x10
+#define KEY_LOW2_OFFSET         0x14
+#define DATA_IN_HIGH_OFFSET     0x18
+#define DATA_IN_LOW_OFFSET      0x1C
+#define DATA_IN_HIGH2_OFFSET    0x20
+#define DATA_IN_LOW2_OFFSET     0x24
+#define DATA_OUT_HIGH_OFFSET    0x28
+#define DATA_OUT_MIDHIGH_OFFSET 0x2C
+#define DATA_OUT_MIDLOW_OFFSET  0x30
+#define DATA_OUT_LOW_OFFSET     0x34
+
+// LED Status Patterns
+#define LED_IDLE        0x1  // 0001 - Idle
+#define LED_INPUT       0x3  // 0011 - Input stage
+#define LED_DES_WORK    0x6  // 0110 - DES processing
+#define LED_GCD_WORK    0x9  // 1001 - GCD calculation
+#define LED_AES_WORK    0xC  // 1100 - AES encryption
+#define LED_COMPLETE    0xF  // 1111 - Complete
+#define LED_ERROR       0xA  // 1010 - Error
+
+// Mode definitions
+#define MODE_AUTO       0    // Auto execute all steps
+#define MODE_MANUAL     1    // Manual confirmation for each step
+#define MODE_DEBUG      2    // Show detailed debug information
+#define MODE_SIMPLE     3    // Simplified output mode
+
+// Global variables
+XScuGic InterruptController;
+static XScuGic_Config *GicConfig;
+volatile int button_pressed_flag = 0;
+int selected_mode = 0;
+
+// Function prototypes
+uint64_t des_encrypt(uint64_t plaintext, uint64_t key);
+uint64_t des_decrypt(uint64_t ciphertext, uint64_t key);
+int calculate_gcd(int x, int y);
+void aes_encrypt_result(uint32_t gcd_result);
+void wait_for_aes_done();
+void read_aes_output(uint32_t *high, uint32_t *midhigh, uint32_t *midlow, uint32_t *low);
+int ScuGicInterrupt_Init(void);
+void INTERRUPT_Handler0(void *baseaddr_p);
+void set_led_status(int pattern);
+void wait_for_user_continue();
+void print_mode_instructions();
+void print_input_instructions();
+int get_switch_value();
+void stage1_mode_selection();
+int stage2_value_input();
+void execute_crypto_workflow(int value1, int value2);
+
+// Interrupt handler
+void INTERRUPT_Handler0(void *baseaddr_p) {
+    button_pressed_flag = 1;
+    if(selected_mode == MODE_DEBUG) {
+        print("Button interrupt triggered!\r\n");
+    }
+}
+
+// Initialize interrupt system
+int ScuGicInterrupt_Init(void) {
+    int Status;
+
+    Xil_ExceptionInit();
+
+    GicConfig = XScuGic_LookupConfig(XPAR_PS7_SCUGIC_0_DEVICE_ID);
+    if (NULL == GicConfig) {
+        return XST_FAILURE;
+    }
+
+    Status = XScuGic_CfgInitialize(&InterruptController, GicConfig, GicConfig->CpuBaseAddress);
+    if (Status != XST_SUCCESS) {
+        return XST_FAILURE;
+    }
+
+    Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_IRQ_INT,
+            (Xil_ExceptionHandler) XScuGic_InterruptHandler,
+            (void *) &InterruptController);
+
+    Status = XScuGic_Connect(&InterruptController, 61,
+            (Xil_ExceptionHandler)INTERRUPT_Handler0,
+            (void *)&InterruptController);
+
+    XScuGic_Enable(&InterruptController, 61);
+    Xil_ExceptionEnable();
+    XScuGic_SetPriorityTriggerType(&InterruptController, 61, 0xa0, 3);
+
+    if (Status != XST_SUCCESS)
+        return XST_FAILURE;
+
+    return XST_SUCCESS;
+}
+
+// LED control function
+void set_led_status(int pattern) {
+    INTER_IP_mWriteReg(XPAR_INTER_IP_0_S00_AXI_BASEADDR, 0, pattern);
+}
+
+// Wait for user input based on mode
+void wait_for_user_continue() {
+    if(selected_mode == MODE_AUTO) {
+        usleep(1500000); // Auto mode waits 1.5 seconds
+        return;
+    }
+
+    if(selected_mode != MODE_SIMPLE) {
+        xil_printf("Press pushbutton to continue...\r\n");
+    }
+
+    while(!button_pressed_flag) {
+        usleep(100000);
+    }
+    button_pressed_flag = 0;
+}
+
+// Print mode selection instructions
+void print_mode_instructions() {
+    xil_printf("Use 2 Switch combination to select operation mode:\r\n");
+    xil_printf("SW1 SW0 = Mode\r\n");
+    xil_printf("0   0   = Auto Mode (fully automatic execution)\r\n");
+    xil_printf("0   1   = Manual Mode (pushbutton confirmation for each step)\r\n");
+    xil_printf("1   0   = Debug Mode (show detailed intermediate results)\r\n");
+    xil_printf("1   1   = Simple Mode (minimal output for quick testing)\r\n");
+    xil_printf("Press pushbutton to confirm selection\r\n\r\n");
+}
+
+// Print input instructions
+void print_input_instructions() {
+    xil_printf("=== Value Input Instructions ===\r\n");
+    xil_printf("Use 2 Switch combination to select test case:\r\n");
+    xil_printf("SW1 SW0 = Test Case\r\n");
+    xil_printf("0   0   = Case 0: Values 12, 8   (simple case)\r\n");
+    xil_printf("0   1   = Case 1: Values 48, 18  (medium case)\r\n");
+    xil_printf("1   0   = Case 2: Values 144, 96 (complex case)\r\n");
+    xil_printf("1   1   = Case 3: Values 255, 85 (max complexity)\r\n");
+    xil_printf("\r\nPress pushbutton when ready\r\n");
+}
+
+// Get switch input value
+int get_switch_value() {
+    int current_switch = 0;
+    int last_switch = -1;
+
+    while(1) {
+        current_switch = INTER_IP_mReadReg(XPAR_INTER_IP_0_S00_AXI_BASEADDR, 4) & 0x3; // Only 2 switches
+
+        if(current_switch != last_switch) {
+            if(selected_mode != MODE_SIMPLE) {
+                xil_printf("Current Switch: SW1=%d SW0=%d = Case %d ",
+                          (current_switch>>1)&1, current_switch&1, current_switch);
+                switch(current_switch) {
+                    case 0: xil_printf("(Values: 12, 8)\r\n"); break;
+                    case 1: xil_printf("(Values: 48, 18)\r\n"); break;
+                    case 2: xil_printf("(Values: 144, 96)\r\n"); break;
+                    case 3: xil_printf("(Values: 255, 85)\r\n"); break;
+                }
+            }
+            last_switch = current_switch;
+        }
+        usleep(200000); // 200ms debounce
+
+        if(button_pressed_flag) {
+            button_pressed_flag = 0;
+            xil_printf("Test case confirmed: %d\r\n\r\n", current_switch);
+            return current_switch;
+        }
+    }
+}
+
+// Stage 1: Mode selection
+void stage1_mode_selection() {
+    int current_switch = 0;
+    int last_switch = -1;
+
+    set_led_status(LED_INPUT);
+    xil_printf("\r\n=== Stage 1: Mode Selection ===\r\n");
+    print_mode_instructions();
+
+    while(1) {
+        current_switch = INTER_IP_mReadReg(XPAR_INTER_IP_0_S00_AXI_BASEADDR, 4) & 0x3; // Only 2 switches
+
+        if(current_switch != last_switch) {
+            xil_printf("Current selection: SW1=%d SW0=%d = Mode %d - ",
+                      (current_switch>>1)&1, current_switch&1, current_switch);
+            switch(current_switch) {
+                case MODE_AUTO:   xil_printf("Auto Mode\r\n"); break;
+                case MODE_MANUAL: xil_printf("Manual Mode\r\n"); break;
+                case MODE_DEBUG:  xil_printf("Debug Mode\r\n"); break;
+                case MODE_SIMPLE: xil_printf("Simple Mode\r\n"); break;
+            }
+            last_switch = current_switch;
+        }
+        usleep(200000);
+
+        if(button_pressed_flag) {
+            selected_mode = current_switch;
+            button_pressed_flag = 0;
+            xil_printf("Mode confirmed: %d\r\n\r\n", selected_mode);
+            break;
+        }
+    }
+}
+
+// Stage 2: Value input
+int stage2_value_input() {
+    int value1 = 0, value2 = 0;
+    int test_case;
+
+    // Predefined test cases with different complexity levels
+    int test_values[4][2] = {
+        {12, 8},     // Case 0: Simple case (1-2 digit numbers)
+        {48, 18},    // Case 1: Medium case (2 digit numbers)
+        {144, 96},   // Case 2: Complex case (3 digit numbers)
+        {255, 85}    // Case 3: Max complexity (3 digit numbers)
+    };
+
+    set_led_status(LED_INPUT);
+    xil_printf("=== Stage 2: Test Case Selection ===\r\n");
+
+    // Select test case using switches
+    if(selected_mode != MODE_SIMPLE) {
+        print_input_instructions();
+    }
+    test_case = get_switch_value();
+
+    // Get values from predefined test case
+    value1 = test_values[test_case][0];
+    value2 = test_values[test_case][1];
+
+    xil_printf("Test case %d selected: Value1=%d, Value2=%d\r\n\r\n", test_case, value1, value2);
+
+    return (value1 << 16) | value2; // Pack both values
+}
+
+// Execute crypto workflow
+void execute_crypto_workflow(int value1, int value2) {
+    uint64_t des_key = 0x133457799BBCDFF1ULL;
+    uint64_t encrypted1, encrypted2, decrypted1, decrypted2;
+    int gcd_result;
+
+    xil_printf("=== Starting Cryptographic Workflow ===\r\n");
+    xil_printf("Processing values: %d and %d\r\n\r\n", value1, value2);
+
+    // Stage 3: DES Encryption
+    set_led_status(LED_DES_WORK);
+    if(selected_mode != MODE_SIMPLE) xil_printf("=== Stage 3: DES Encryption ===\r\n");
+
+    if(selected_mode == MODE_DEBUG) {
+        xil_printf("DES Key: 0x%08X%08X\r\n", (uint32_t)(des_key >> 32), (uint32_t)(des_key & 0xFFFFFFFF));
+    }
+
+    encrypted1 = des_encrypt((uint64_t)value1, des_key);
+    encrypted2 = des_encrypt((uint64_t)value2, des_key);
+
+    if(selected_mode == MODE_DEBUG) {
+        xil_printf("Value1 encrypted: 0x%08X%08X\r\n", (uint32_t)(encrypted1>>32), (uint32_t)encrypted1);
+        xil_printf("Value2 encrypted: 0x%08X%08X\r\n", (uint32_t)(encrypted2>>32), (uint32_t)encrypted2);
+    } else if(selected_mode != MODE_SIMPLE) {
+        xil_printf("DES encryption completed\r\n");
+    }
+
+    wait_for_user_continue();
+
+    // Stage 4: DES Decryption
+    if(selected_mode != MODE_SIMPLE) xil_printf("\r\n=== Stage 4: DES Decryption Verification ===\r\n");
+
+    decrypted1 = des_decrypt(encrypted1, des_key);
+    decrypted2 = des_decrypt(encrypted2, des_key);
+
+    if((int)(decrypted1 & 0xFFFFFFFF) == value1 && (int)(decrypted2 & 0xFFFFFFFF) == value2) {
+        xil_printf("DES verification SUCCESS: decrypted values %d, %d\r\n", (int)(decrypted1 & 0xFFFFFFFF), (int)(decrypted2 & 0xFFFFFFFF));
+    } else {
+        xil_printf("DES verification FAILED! Original: %d,%d, Decrypted: %d,%d\r\n",
+                   value1, value2, (int)(decrypted1 & 0xFFFFFFFF), (int)(decrypted2 & 0xFFFFFFFF));
+        set_led_status(LED_ERROR);
+        return;
+    }
+
+    wait_for_user_continue();
+
+    // Stage 5: GCD Calculation
+    set_led_status(LED_GCD_WORK);
+    if(selected_mode != MODE_SIMPLE) xil_printf("\r\n=== Stage 5: GCD Calculation ===\r\n");
+
+    gcd_result = calculate_gcd(value1, value2);
+    xil_printf("GCD(%d, %d) = %d\r\n", value1, value2, gcd_result);
+
+    wait_for_user_continue();
+
+    // Stage 6: AES Encryption
+    set_led_status(LED_AES_WORK);
+    if(selected_mode != MODE_SIMPLE) xil_printf("\r\n=== Stage 6: AES Encryption of GCD Result ===\r\n");
+
+    aes_encrypt_result((uint32_t)gcd_result);
+
+    // Stage 7: Complete
+    set_led_status(LED_COMPLETE);
+    xil_printf("\r\n=== Stage 7: Workflow Complete ===\r\n");
+    xil_printf("All cryptographic operations completed!\r\n");
+}
+
+// DES encryption function
+uint64_t des_encrypt(uint64_t plaintext, uint64_t key) {
+    uint32_t pt_high = (uint32_t)(plaintext >> 32);
+    uint32_t pt_low  = (uint32_t)(plaintext & 0xFFFFFFFF);
+    uint32_t key_high = (uint32_t)(key >> 32);
+    uint32_t key_low  = (uint32_t)(key & 0xFFFFFFFF);
+    uint32_t res_high, res_low;
+    uint32_t status;
+    int timeout = 0;
+
+    // Reset DES IP
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0);
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG7_OFFSET, 0);
+    usleep(10000);
+
+    // Write plaintext
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG0_OFFSET, pt_low);
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG1_OFFSET, pt_high);
+
+    // Write key
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG2_OFFSET, key_low);
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG3_OFFSET, key_high);
+
+    // Start encryption
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0x01);
+
+    // Wait for completion
+    do {
+        usleep(1000);
+        status = DESIP_mReadReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG7_OFFSET);
+        timeout++;
+        if (timeout > 100) {
+            xil_printf("DES encryption timeout!\r\n");
+            break;
+        }
+    } while ((status & 0x01) == 0);
+
+    // Read result
+    res_low  = DESIP_mReadReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG5_OFFSET);
+    res_high = DESIP_mReadReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG6_OFFSET);
+
+    // Clear start signal
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0);
+
+    return ((uint64_t)res_high << 32) | res_low;
+}
+
+// DES decryption function
+uint64_t des_decrypt(uint64_t ciphertext, uint64_t key) {
+    uint32_t ct_high = (uint32_t)(ciphertext >> 32);
+    uint32_t ct_low  = (uint32_t)(ciphertext & 0xFFFFFFFF);
+    uint32_t key_high = (uint32_t)(key >> 32);
+    uint32_t key_low  = (uint32_t)(key & 0xFFFFFFFF);
+    uint32_t res_high, res_low;
+    uint32_t status;
+    int timeout = 0;
+
+    // Reset DES IP
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0);
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG7_OFFSET, 0);
+    usleep(10000);
+
+    // Write ciphertext
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG0_OFFSET, ct_low);
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG1_OFFSET, ct_high);
+
+    // Write key
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG2_OFFSET, key_low);
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG3_OFFSET, key_high);
+
+    // Start decryption (bit0=start, bit1=1 for decrypt)
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0x03);
+
+    // Wait for completion
+    do {
+        usleep(1000);
+        status = DESIP_mReadReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG7_OFFSET);
+        timeout++;
+        if (timeout > 100) {
+            xil_printf("DES decryption timeout!\r\n");
+            break;
+        }
+    } while ((status & 0x01) == 0);
+
+    // Read result
+    res_low  = DESIP_mReadReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG5_OFFSET);
+    res_high = DESIP_mReadReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG6_OFFSET);
+
+    // Clear start signal
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0);
+
+    return ((uint64_t)res_high << 32) | res_low;
+}
+
+// GCD calculation function
+int calculate_gcd(int x, int y) {
+    int result;
+    int timeout_counter = 0;
+
+    if(selected_mode == MODE_DEBUG) {
+        xil_printf("Calculating GCD(%d, %d) using GCD IP...\r\n", x, y);
+    }
+
+    // Ensure start signal is 0
+    GCDIP_mWriteReg(XPAR_GCDIP_0_S00_AXI_BASEADDR, GCDIP_S00_AXI_SLV_REG2_OFFSET, 0);
+
+    // Write X and Y values
+    GCDIP_mWriteReg(XPAR_GCDIP_0_S00_AXI_BASEADDR, GCDIP_S00_AXI_SLV_REG0_OFFSET, x);
+    GCDIP_mWriteReg(XPAR_GCDIP_0_S00_AXI_BASEADDR, GCDIP_S00_AXI_SLV_REG1_OFFSET, y);
+
+    usleep(10);
+
+    // Start calculation
+    GCDIP_mWriteReg(XPAR_GCDIP_0_S00_AXI_BASEADDR, GCDIP_S00_AXI_SLV_REG2_OFFSET, 1);
+
+    // Poll for result
+    do {
+        usleep(1000);
+        result = GCDIP_mReadReg(XPAR_GCDIP_0_S00_AXI_BASEADDR, GCDIP_S00_AXI_SLV_REG3_OFFSET);
+        timeout_counter++;
+        if (timeout_counter > 1000) {
+            xil_printf("GCD calculation timeout!\r\n");
+            return -1;
+        }
+    } while ((result & 0xFF) == 0);
+
+    // Clear start signal
+    GCDIP_mWriteReg(XPAR_GCDIP_0_S00_AXI_BASEADDR, GCDIP_S00_AXI_SLV_REG2_OFFSET, 0);
+
+    if(selected_mode == MODE_DEBUG) {
+        xil_printf("GCD calculation completed in %d ms\r\n", timeout_counter);
+    }
+
+    return (result & 0xFF);
+}
+
+// AES encryption function
+void aes_encrypt_result(uint32_t gcd_result) {
+    // AES test key (128-bit)
+    uint32_t key_high   = 0x2B7E1516;
+    uint32_t key_low    = 0x28AED2A6;
+    uint32_t key_high2  = 0xABF71588;
+    uint32_t key_low2   = 0x09CF4F3C;
+
+    // Prepare data (GCD result in lower 32 bits, rest zeros)
+    uint32_t data_high  = 0x00000000;
+    uint32_t data_low   = gcd_result;
+    uint32_t data_high2 = 0x00000000;
+    uint32_t data_low2  = 0x00000000;
+
+    if(selected_mode == MODE_DEBUG) {
+        xil_printf("AES Key: 0x%08X%08X%08X%08X\r\n", key_high2, key_low2, key_high, key_low);
+        xil_printf("Input Data: 0x%08X%08X%08X%08X\r\n", data_high2, data_low2, data_high, data_low);
+    }
+
+    // Write key to AES IP
+    Xil_Out32(AES_BASE_ADDR + KEY_HIGH_OFFSET, key_high);
+    Xil_Out32(AES_BASE_ADDR + KEY_LOW_OFFSET, key_low);
+    Xil_Out32(AES_BASE_ADDR + KEY_HIGH2_OFFSET, key_high2);
+    Xil_Out32(AES_BASE_ADDR + KEY_LOW2_OFFSET, key_low2);
+
+    // Write data to AES IP
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_HIGH_OFFSET, data_high);
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_LOW_OFFSET, data_low);
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_HIGH2_OFFSET, data_high2);
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_LOW2_OFFSET, data_low2);
+
+    // Start encryption (mode=1 for encrypt, start=1)
+    Xil_Out32(AES_BASE_ADDR + CONTROL_REG_OFFSET, 0x00000003);
+
+    // Wait for completion
+    wait_for_aes_done();
+
+    // Read and display result
+    uint32_t cipher_high, cipher_midhigh, cipher_midlow, cipher_low;
+    read_aes_output(&cipher_high, &cipher_midhigh, &cipher_midlow, &cipher_low);
+
+    xil_printf("AES Encrypted Result: 0x%08X%08X%08X%08X\r\n",
+               cipher_high, cipher_midhigh, cipher_midlow, cipher_low);
+}
+
+// Wait for AES completion
+void wait_for_aes_done() {
+    uint32_t status;
+    int timeout = 0;
+
+    do {
+        usleep(1000);
+        status = Xil_In32(AES_BASE_ADDR + STATUS_REG_OFFSET);
+        timeout++;
+        if (timeout > 1000) {
+            xil_printf("AES encryption timeout!\r\n");
+            break;
+        }
+    } while (!(status & 0x00000001));
+
+    if(selected_mode == MODE_DEBUG) {
+        xil_printf("AES encryption completed in %d ms\r\n", timeout);
+    }
+}
+
+// Read AES output
+void read_aes_output(uint32_t *high, uint32_t *midhigh, uint32_t *midlow, uint32_t *low) {
+    *high = Xil_In32(AES_BASE_ADDR + DATA_OUT_HIGH_OFFSET);
+    *midhigh = Xil_In32(AES_BASE_ADDR + DATA_OUT_MIDHIGH_OFFSET);
+    *midlow = Xil_In32(AES_BASE_ADDR + DATA_OUT_MIDLOW_OFFSET);
+    *low = Xil_In32(AES_BASE_ADDR + DATA_OUT_LOW_OFFSET);
+}
+
+// Main function
+int main(void) {
+    int values;
+    int value1, value2;
+
+    xil_printf("\r\n================================================\r\n");
+    xil_printf("    Interactive Cryptographic Workstation v1.0\r\n");
+    xil_printf("    Supporting DES, GCD, AES with Interrupt Control\r\n");
+    xil_printf("================================================\r\n");
+
+    // Initialize interrupt system
+    if(ScuGicInterrupt_Init() != XST_SUCCESS) {
+        xil_printf("Interrupt system initialization FAILED!\r\n");
+        return XST_FAILURE;
+    }
+    xil_printf("Interrupt system initialized successfully\r\n");
+
+    while(1) {
+        set_led_status(LED_IDLE);
+
+        // Stage 1: Mode selection
+        stage1_mode_selection();
+
+        // Stage 2: Value input
+        values = stage2_value_input();
+        value1 = (values >> 16) & 0xFFFF;
+        value2 = values & 0xFFFF;
+
+        // Stage 3-7: Execute crypto workflow
+        execute_crypto_workflow(value1, value2);
+
+        xil_printf("\r\nPress pushbutton to restart...\r\n");
+        wait_for_user_continue();
+
+        xil_printf("\r\n" "================================================\r\n");
+        xil_printf("Restarting system...\r\n");
+        xil_printf("================================================\r\n");
+    }
+
+    return 0;
+}

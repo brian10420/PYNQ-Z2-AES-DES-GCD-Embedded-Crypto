@@ -1,0 +1,7 @@
+/*testfinalFreeRTOS06151536*/
+the_ROM_image:
+{
+  [bootloader]<testfinalFreeRTOS06151536/boot/fsbl.elf>
+   <bitstream> 
+  <elf,ps7_cortexa9_0>
+}

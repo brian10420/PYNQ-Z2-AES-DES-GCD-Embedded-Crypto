@@ -1,0 +1,311 @@
+#include <stdio.h>
+#include "xparameters.h"
+#include "xil_io.h"
+#include "desip.h"
+#include "gcdip.h"
+#include "sleep.h"
+#include <stdint.h>
+
+// AES IP base address and register offsets
+#define AES_BASE_ADDR XPAR_AES_IP_0_S00_AXI_BASEADDR
+#define CONTROL_REG_OFFSET      0x00
+#define STATUS_REG_OFFSET       0x04
+#define KEY_HIGH_OFFSET         0x08
+#define KEY_LOW_OFFSET          0x0C
+#define KEY_HIGH2_OFFSET        0x10
+#define KEY_LOW2_OFFSET         0x14
+#define DATA_IN_HIGH_OFFSET     0x18
+#define DATA_IN_LOW_OFFSET      0x1C
+#define DATA_IN_HIGH2_OFFSET    0x20
+#define DATA_IN_LOW2_OFFSET     0x24
+#define DATA_OUT_HIGH_OFFSET    0x28
+#define DATA_OUT_MIDHIGH_OFFSET 0x2C
+#define DATA_OUT_MIDLOW_OFFSET  0x30
+#define DATA_OUT_LOW_OFFSET     0x34
+
+// Function prototypes
+uint64_t des_encrypt(uint64_t plaintext, uint64_t key);
+uint64_t des_decrypt(uint64_t ciphertext, uint64_t key);
+int calculate_gcd(int x, int y);
+void aes_encrypt_result(uint32_t gcd_result);
+void wait_for_aes_done();
+void read_aes_output(uint32_t *high, uint32_t *midhigh, uint32_t *midlow, uint32_t *low);
+
+int main(void) {
+    int value1, value2;
+    uint64_t des_key = 0x133457799BBCDFF1ULL; // Sample DES key
+    uint64_t encrypted1, encrypted2, decrypted1, decrypted2;
+    int gcd_result;
+    
+    xil_printf("\r\n================================================\r\n");
+    xil_printf("    Integrated Cryptographic Workflow Demo\r\n");
+    xil_printf("================================================\r\n\r\n");
+    
+    // Step 1: Get user input
+    xil_printf("Step 1: User Input\r\n");
+    xil_printf("------------------\r\n");
+    // For demonstration, using fixed values. In real implementation, you'd get user input
+    value1 = 48;
+    value2 = 60;
+    xil_printf("Value 1: %d\r\n", value1);
+    xil_printf("Value 2: %d\r\n", value2);
+    xil_printf("\r\n");
+    
+    // Step 2: Encrypt both values using DES
+    xil_printf("Step 2: DES Encryption\r\n");
+    xil_printf("----------------------\r\n");
+    xil_printf("DES Key: 0x%08X%08X\r\n", 
+               (uint32_t)(des_key >> 32), (uint32_t)(des_key & 0xFFFFFFFF));
+    
+    // Convert integers to 64-bit for DES (pad with zeros)
+    uint64_t plaintext1 = (uint64_t)value1;
+    uint64_t plaintext2 = (uint64_t)value2;
+    
+    encrypted1 = des_encrypt(plaintext1, des_key);
+    encrypted2 = des_encrypt(plaintext2, des_key);
+    
+    xil_printf("Encrypted Value 1: 0x%08X%08X\r\n", 
+               (uint32_t)(encrypted1 >> 32), (uint32_t)(encrypted1 & 0xFFFFFFFF));
+    xil_printf("Encrypted Value 2: 0x%08X%08X\r\n", 
+               (uint32_t)(encrypted2 >> 32), (uint32_t)(encrypted2 & 0xFFFFFFFF));
+    xil_printf("\r\n");
+    
+    // Step 3: Decrypt both values using DES
+    xil_printf("Step 3: DES Decryption\r\n");
+    xil_printf("----------------------\r\n");
+    
+    decrypted1 = des_decrypt(encrypted1, des_key);
+    decrypted2 = des_decrypt(encrypted2, des_key);
+    
+    xil_printf("Decrypted Value 1: %d\r\n", (int)(decrypted1 & 0xFFFFFFFF));
+    xil_printf("Decrypted Value 2: %d\r\n", (int)(decrypted2 & 0xFFFFFFFF));
+    
+    // Verify decryption
+    if ((int)(decrypted1 & 0xFFFFFFFF) == value1 && (int)(decrypted2 & 0xFFFFFFFF) == value2) {
+        xil_printf("SUCCESS: DES encryption/decryption verified!\r\n");
+    } else {
+        xil_printf("ERROR: DES encryption/decryption failed!\r\n");
+    }
+    xil_printf("\r\n");
+    
+    // Step 4: Calculate GCD using GCD IP
+    xil_printf("Step 4: GCD Calculation\r\n");
+    xil_printf("-----------------------\r\n");
+    
+    gcd_result = calculate_gcd(value1, value2);
+    
+    // Step 5: Output GCD result
+    xil_printf("Step 5: GCD Result\r\n");
+    xil_printf("------------------\r\n");
+    xil_printf("GCD(%d, %d) = %d\r\n", value1, value2, gcd_result);
+    xil_printf("\r\n");
+    
+    // Step 6 & 7: Encrypt GCD result using AES and print result
+    xil_printf("Step 6: AES Encryption of GCD Result\r\n");
+    xil_printf("-------------------------------------\r\n");
+    
+    aes_encrypt_result((uint32_t)gcd_result);
+    
+    xil_printf("\r\n================================================\r\n");
+    xil_printf("    Workflow Completed Successfully!\r\n");
+    xil_printf("================================================\r\n");
+    
+    return 0;
+}
+
+uint64_t des_encrypt(uint64_t plaintext, uint64_t key) {
+    uint32_t pt_high = (uint32_t)(plaintext >> 32);
+    uint32_t pt_low  = (uint32_t)(plaintext & 0xFFFFFFFF);
+    uint32_t key_high = (uint32_t)(key >> 32);
+    uint32_t key_low  = (uint32_t)(key & 0xFFFFFFFF);
+    uint32_t res_high, res_low;
+    uint32_t status;
+    int timeout = 0;
+    
+    // Reset DES IP
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0);
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG7_OFFSET, 0);
+    usleep(10000);
+    
+    // Write plaintext
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG0_OFFSET, pt_low);
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG1_OFFSET, pt_high);
+    
+    // Write key
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG2_OFFSET, key_low);
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG3_OFFSET, key_high);
+    
+    // Start encryption
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0x01);
+    
+    // Wait for completion
+    do {
+        usleep(1000);
+        status = DESIP_mReadReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG7_OFFSET);
+        timeout++;
+        if (timeout > 100) {
+            xil_printf("DES encryption timeout!\r\n");
+            break;
+        }
+    } while ((status & 0x01) == 0);
+    
+    // Read result
+    res_low  = DESIP_mReadReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG5_OFFSET);
+    res_high = DESIP_mReadReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG6_OFFSET);
+    
+    // Clear start signal
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0);
+    
+    return ((uint64_t)res_high << 32) | res_low;
+}
+
+uint64_t des_decrypt(uint64_t ciphertext, uint64_t key) {
+    uint32_t ct_high = (uint32_t)(ciphertext >> 32);
+    uint32_t ct_low  = (uint32_t)(ciphertext & 0xFFFFFFFF);
+    uint32_t key_high = (uint32_t)(key >> 32);
+    uint32_t key_low  = (uint32_t)(key & 0xFFFFFFFF);
+    uint32_t res_high, res_low;
+    uint32_t status;
+    int timeout = 0;
+    
+    // Reset DES IP
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0);
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG7_OFFSET, 0);
+    usleep(10000);
+    
+    // Write ciphertext
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG0_OFFSET, ct_low);
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG1_OFFSET, ct_high);
+    
+    // Write key
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG2_OFFSET, key_low);
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG3_OFFSET, key_high);
+    
+    // Start decryption (bit0=start, bit1=1 for decrypt)
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0x03);
+    
+    // Wait for completion
+    do {
+        usleep(1000);
+        status = DESIP_mReadReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG7_OFFSET);
+        timeout++;
+        if (timeout > 100) {
+            xil_printf("DES decryption timeout!\r\n");
+            break;
+        }
+    } while ((status & 0x01) == 0);
+    
+    // Read result
+    res_low  = DESIP_mReadReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG5_OFFSET);
+    res_high = DESIP_mReadReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG6_OFFSET);
+    
+    // Clear start signal
+    DESIP_mWriteReg(XPAR_DESIP_0_S00_AXI_BASEADDR, DESIP_S00_AXI_SLV_REG4_OFFSET, 0);
+    
+    return ((uint64_t)res_high << 32) | res_low;
+}
+
+int calculate_gcd(int x, int y) {
+    int result;
+    int timeout_counter = 0;
+    
+    xil_printf("Calculating GCD(%d, %d) using GCD IP...\r\n", x, y);
+    
+    // Ensure start signal is 0
+    GCDIP_mWriteReg(XPAR_GCDIP_0_S00_AXI_BASEADDR, GCDIP_S00_AXI_SLV_REG2_OFFSET, 0);
+    
+    // Write X and Y values
+    GCDIP_mWriteReg(XPAR_GCDIP_0_S00_AXI_BASEADDR, GCDIP_S00_AXI_SLV_REG0_OFFSET, x);
+    GCDIP_mWriteReg(XPAR_GCDIP_0_S00_AXI_BASEADDR, GCDIP_S00_AXI_SLV_REG1_OFFSET, y);
+    
+    usleep(10);
+    
+    // Start calculation
+    GCDIP_mWriteReg(XPAR_GCDIP_0_S00_AXI_BASEADDR, GCDIP_S00_AXI_SLV_REG2_OFFSET, 1);
+    
+    // Poll for result
+    do {
+        usleep(1000);
+        result = GCDIP_mReadReg(XPAR_GCDIP_0_S00_AXI_BASEADDR, GCDIP_S00_AXI_SLV_REG3_OFFSET);
+        timeout_counter++;
+        if (timeout_counter > 1000) {
+            xil_printf("GCD calculation timeout!\r\n");
+            return -1;
+        }
+    } while ((result & 0xFF) == 0);
+    
+    // Clear start signal
+    GCDIP_mWriteReg(XPAR_GCDIP_0_S00_AXI_BASEADDR, GCDIP_S00_AXI_SLV_REG2_OFFSET, 0);
+    
+    xil_printf("GCD calculation completed in %d ms\r\n", timeout_counter);
+    
+    return (result & 0xFF);
+}
+
+void aes_encrypt_result(uint32_t gcd_result) {
+    // AES test key (128-bit)
+    uint32_t key_high   = 0x2B7E1516;
+    uint32_t key_low    = 0x28AED2A6;
+    uint32_t key_high2  = 0xABF71588;
+    uint32_t key_low2   = 0x09CF4F3C;
+    
+    // Prepare data (GCD result in lower 32 bits, rest zeros)
+    uint32_t data_high  = 0x00000000;
+    uint32_t data_low   = gcd_result;
+    uint32_t data_high2 = 0x00000000;
+    uint32_t data_low2  = 0x00000000;
+    
+    xil_printf("AES Key: 0x%08X%08X%08X%08X\r\n", key_high2, key_low2, key_high, key_low);
+    xil_printf("Input Data: 0x%08X%08X%08X%08X\r\n", data_high2, data_low2, data_high, data_low);
+    
+    // Write key to AES IP
+    Xil_Out32(AES_BASE_ADDR + KEY_HIGH_OFFSET, key_high);
+    Xil_Out32(AES_BASE_ADDR + KEY_LOW_OFFSET, key_low);
+    Xil_Out32(AES_BASE_ADDR + KEY_HIGH2_OFFSET, key_high2);
+    Xil_Out32(AES_BASE_ADDR + KEY_LOW2_OFFSET, key_low2);
+    
+    // Write data to AES IP
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_HIGH_OFFSET, data_high);
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_LOW_OFFSET, data_low);
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_HIGH2_OFFSET, data_high2);
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_LOW2_OFFSET, data_low2);
+    
+    // Start encryption (mode=1 for encrypt, start=1)
+    Xil_Out32(AES_BASE_ADDR + CONTROL_REG_OFFSET, 0x00000003);
+    
+    // Wait for completion
+    wait_for_aes_done();
+    
+    // Read and display result
+    uint32_t cipher_high, cipher_midhigh, cipher_midlow, cipher_low;
+    read_aes_output(&cipher_high, &cipher_midhigh, &cipher_midlow, &cipher_low);
+    
+    xil_printf("\r\nStep 7: AES Encrypted Result\r\n");
+    xil_printf("----------------------------\r\n");
+    xil_printf("AES Encrypted GCD: 0x%08X%08X%08X%08X\r\n",
+               cipher_high, cipher_midhigh, cipher_midlow, cipher_low);
+}
+
+void wait_for_aes_done() {
+    uint32_t status;
+    int timeout = 0;
+    
+    do {
+        usleep(1000);
+        status = Xil_In32(AES_BASE_ADDR + STATUS_REG_OFFSET);
+        timeout++;
+        if (timeout > 1000) {
+            xil_printf("AES encryption timeout!\r\n");
+            break;
+        }
+    } while (!(status & 0x00000001));
+    
+    xil_printf("AES encryption completed in %d ms\r\n", timeout);
+}
+
+void read_aes_output(uint32_t *high, uint32_t *midhigh, uint32_t *midlow, uint32_t *low) {
+    *high = Xil_In32(AES_BASE_ADDR + DATA_OUT_HIGH_OFFSET);
+    *midhigh = Xil_In32(AES_BASE_ADDR + DATA_OUT_MIDHIGH_OFFSET);
+    *midlow = Xil_In32(AES_BASE_ADDR + DATA_OUT_MIDLOW_OFFSET);
+    *low = Xil_In32(AES_BASE_ADDR + DATA_OUT_LOW_OFFSET);
+}

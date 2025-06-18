@@ -1,0 +1,116 @@
+#include <stdio.h>
+#include "xparameters.h"
+#include "xil_io.h"
+
+// AES IP base address (update based on your hardware design)
+#define AES_BASE_ADDR XPAR_AES_IP_0_S00_AXI_BASEADDR
+
+// Register offsets
+#define CONTROL_REG_OFFSET  0x00
+#define STATUS_REG_OFFSET   0x04
+#define KEY_HIGH_OFFSET     0x08  // Key[63:32]
+#define KEY_LOW_OFFSET      0x0C  // Key[31:0]
+#define KEY_HIGH2_OFFSET    0x10  // Key[127:96]
+#define KEY_LOW2_OFFSET     0x14  // Key[95:64]
+#define DATA_IN_HIGH_OFFSET 0x18  // Data_In[63:32]
+#define DATA_IN_LOW_OFFSET  0x1C  // Data_In[31:0]
+#define DATA_IN_HIGH2_OFFSET 0x20 // Data_In[127:96]
+#define DATA_IN_LOW2_OFFSET 0x24  // Data_In[95:64]
+#define DATA_OUT_HIGH_OFFSET 0x28 // Data_Out[127:96]
+#define DATA_OUT_MIDHIGH_OFFSET 0x2C // Data_Out[95:64]
+#define DATA_OUT_MIDLOW_OFFSET 0x30  // Data_Out[63:32]
+#define DATA_OUT_LOW_OFFSET 0x34  // Data_Out[31:0]
+
+// Function prototypes
+void aes_encrypt(uint32_t key_high, uint32_t key_low, uint32_t key_high2, uint32_t key_low2,
+                 uint32_t data_high, uint32_t data_low, uint32_t data_high2, uint32_t data_low2);
+void aes_decrypt(uint32_t key_high, uint32_t key_low, uint32_t key_high2, uint32_t key_low2,
+                 uint32_t cipher_high, uint32_t cipher_low, uint32_t cipher_high2, uint32_t cipher_low2);
+void wait_for_done();
+void read_output(uint32_t *high, uint32_t *midhigh, uint32_t *midlow, uint32_t *low);
+
+int main() {
+    // Test vectors from Testbench.vhd
+    uint32_t key_high   = 0x2B7E1516; // Key[63:32]
+    uint32_t key_low    = 0x28AED2A6; // Key[31:0]
+    uint32_t key_high2  = 0xABF71588; // Key[127:96]
+    uint32_t key_low2   = 0x09CF4F3C; // Key[95:64]
+    uint32_t data_high  = 0x3243F6A8; // Data_In[63:32]
+    uint32_t data_low   = 0x885A308D; // Data_In[31:0]
+    uint32_t data_high2 = 0x313198A2; // Data_In[127:96]
+    uint32_t data_low2  = 0xE0370734; // Data_In[95:64]
+
+    // Encryption Test
+    printf("Starting AES Encryption Test\n");
+    aes_encrypt(key_high, key_low, key_high2, key_low2, data_high, data_low, data_high2, data_low2);
+    uint32_t cipher_high, cipher_midhigh, cipher_midlow, cipher_low;
+    read_output(&cipher_high, &cipher_midhigh, &cipher_midlow, &cipher_low);
+    printf("Ciphertext: 0x%08lX 0x%08lX 0x%08lX 0x%08lX\n", cipher_high, cipher_midhigh, cipher_midlow, cipher_low);
+
+    // Decryption Test
+    printf("Starting AES Decryption Test\n");
+    aes_decrypt(key_high, key_low, key_high2, key_low2, cipher_high, cipher_midhigh, cipher_midlow, cipher_low);
+    uint32_t plain_high, plain_midhigh, plain_midlow, plain_low;
+    read_output(&plain_high, &plain_midhigh, &plain_midlow, &plain_low);
+    printf("Plaintext: 0x%08lX 0x%08lX 0x%08lX 0x%08lX\n", plain_high, plain_midhigh, plain_midlow, plain_low);
+
+    // Verify Encryption
+    if (cipher_high == 0x18D753FD && cipher_midhigh == 0xB446681B &&
+        cipher_midlow == 0x42BB3900 && cipher_low == 0xC8538E7F) {
+        printf("SUCCESS: Encryption test passed!\n");
+    } else {
+        printf("FAIL: Encryption test failed!\n");
+    }
+
+    // Verify Decryption
+    if (plain_high == data_high && plain_midhigh == data_high2 &&
+        plain_midlow == data_low && plain_low == data_low2) {
+        printf("SUCCESS: Decryption test passed!\n");
+    } else {
+        printf("FAIL: Decryption test failed!\n");
+    }
+
+    return 0;
+}
+
+void aes_encrypt(uint32_t key_high, uint32_t key_low, uint32_t key_high2, uint32_t key_low2,
+                 uint32_t data_high, uint32_t data_low, uint32_t data_high2, uint32_t data_low2) {
+    Xil_Out32(AES_BASE_ADDR + KEY_HIGH_OFFSET, key_high);
+    Xil_Out32(AES_BASE_ADDR + KEY_LOW_OFFSET, key_low);
+    Xil_Out32(AES_BASE_ADDR + KEY_HIGH2_OFFSET, key_high2);
+    Xil_Out32(AES_BASE_ADDR + KEY_LOW2_OFFSET, key_low2);
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_HIGH_OFFSET, data_high);
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_LOW_OFFSET, data_low);
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_HIGH2_OFFSET, data_high2);
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_LOW2_OFFSET, data_low2);
+    Xil_Out32(AES_BASE_ADDR + CONTROL_REG_OFFSET, 0x00000003); // mode=1 (encrypt), start=1
+    wait_for_done();
+}
+
+void aes_decrypt(uint32_t key_high, uint32_t key_low, uint32_t key_high2, uint32_t key_low2,
+                 uint32_t cipher_high, uint32_t cipher_low, uint32_t cipher_high2, uint32_t cipher_low2) {
+    Xil_Out32(AES_BASE_ADDR + KEY_HIGH_OFFSET, key_high);
+    Xil_Out32(AES_BASE_ADDR + KEY_LOW_OFFSET, key_low);
+    Xil_Out32(AES_BASE_ADDR + KEY_HIGH2_OFFSET, key_high2);
+    Xil_Out32(AES_BASE_ADDR + KEY_LOW2_OFFSET, key_low2);
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_HIGH_OFFSET, cipher_high);
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_LOW_OFFSET, cipher_low);
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_HIGH2_OFFSET, cipher_high2);
+    Xil_Out32(AES_BASE_ADDR + DATA_IN_LOW2_OFFSET, cipher_low2);
+    Xil_Out32(AES_BASE_ADDR + CONTROL_REG_OFFSET, 0x00000001); // mode=0 (decrypt), start=1
+    wait_for_done();
+}
+
+void wait_for_done() {
+    uint32_t status;
+    do {
+        status = Xil_In32(AES_BASE_ADDR + STATUS_REG_OFFSET);
+    } while (!(status & 0x00000001)); // Wait until done bit is set
+}
+
+void read_output(uint32_t *high, uint32_t *midhigh, uint32_t *midlow, uint32_t *low) {
+    *high = Xil_In32(AES_BASE_ADDR + DATA_OUT_HIGH_OFFSET);
+    *midhigh = Xil_In32(AES_BASE_ADDR + DATA_OUT_MIDHIGH_OFFSET);
+    *midlow = Xil_In32(AES_BASE_ADDR + DATA_OUT_MIDLOW_OFFSET);
+    *low = Xil_In32(AES_BASE_ADDR + DATA_OUT_LOW_OFFSET);
+}

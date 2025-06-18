@@ -1,0 +1,30 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Sun Jun 15 03:32:42 2025
+# Process ID: 17268
+# Current directory: C:/embeding_system/project_2_final
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent19724 C:\embeding_system\project_2_final\project_1.xpr
+# Log file: C:/embeding_system/project_2_final/vivado.log
+# Journal file: C:/embeding_system/project_2_final\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/embeding_system/project_2_final/project_1.xpr
+INFO: [Project 1-313] Project file moved from 'D:/project/project_2' since last save.
+WARNING: [filemgmt 56-2] IP Repository Path: Could not find the directory 'C:/embeding_system/ip_repo/myhwip_1.0', nor could it be found using path 'D:/project/ip_repo/myhwip_1.0'.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+WARNING: [IP_Flow 19-2248] Failed to load user IP repository 'c:/embeding_system/ip_repo/myhwip_1.0'; Can't find the specified path.
+If this directory should no longer be in your list of user repositories, go to the IP Settings dialog and remove it.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/xilinx/Vivado/2020.2/data/ip'.
+WARNING: [BD 41-1661] One or more IPs have been locked in the design 'system.bd'. Please run report_ip_status for more details and recommendations on how to fix this issue.
+List of locked IPs:
+system_myhwip_0_0
+
+ERROR: [Vivado 12-106] *** Exception: java.lang.NullPointerException (See C:/embeding_system/project_2_final/vivado_pid17268.debug)
+open_project: Time (s): cpu = 00:00:14 ; elapsed = 00:00:10 . Memory (MB): peak = 1144.496 ; gain = 0.000
+ERROR: [Common 17-39] 'open_project' failed due to earlier errors.
+exit
+INFO: [Common 17-206] Exiting Vivado at Sun Jun 15 03:33:20 2025...

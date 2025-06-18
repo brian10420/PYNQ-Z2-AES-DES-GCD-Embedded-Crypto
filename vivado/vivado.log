@@ -1,0 +1,39 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Mon Jun 16 16:05:09 2025
+# Process ID: 8056
+# Current directory: C:/embeding_system/final_project/vivado
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent12848 C:\embeding_system\final_project\vivado\project_1.xpr
+# Log file: C:/embeding_system/final_project/vivado/vivado.log
+# Journal file: C:/embeding_system/final_project/vivado\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/embeding_system/final_project/vivado/project_1.xpr
+INFO: [Project 1-313] Project file moved from 'C:/embeding_system/project_2_final' since last save.
+WARNING: [Project 1-312] File not found as 'C:/embeding_system/final_project/vivado/lab4.xdc'; using path 'C:/embeding_system/project_2_final/lab4.xdc' instead.
+Scanning sources...
+Finished scanning sources
+WARNING: [Project 1-312] File not found as 'C:/embeding_system/final_project/vivado/lab4.xdc'; using path 'C:/embeding_system/project_2_final/lab4.xdc' instead.
+WARNING: [Project 1-312] File not found as 'C:/embeding_system/final_project/vivado/lab4.xdc'; using path 'C:/embeding_system/project_2_final/lab4.xdc' instead.
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/embeding_system/final_project/vivado/ip_repo'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/xilinx/Vivado/2020.2/data/ip'.
+open_project: Time (s): cpu = 00:00:25 ; elapsed = 00:00:18 . Memory (MB): peak = 1108.332 ; gain = 0.000
+update_compile_order -fileset sources_1
+open_bd_design {C:/embeding_system/final_project/vivado/project_1.srcs/sources_1/bd/system/system.bd}
+Reading block design file <C:/embeding_system/final_project/vivado/project_1.srcs/sources_1/bd/system/system.bd>...
+Adding component instance block -- xilinx.com:ip:processing_system7:5.5 - processing_system7_0
+Adding component instance block -- xilinx.com:ip:axi_interconnect:2.1 - ps7_0_axi_periph
+Adding component instance block -- xilinx.com:ip:axi_crossbar:2.1 - xbar
+Adding component instance block -- xilinx.com:ip:axi_protocol_converter:2.1 - auto_pc
+Adding component instance block -- xilinx.com:ip:proc_sys_reset:5.0 - rst_ps7_0_100M
+Adding component instance block -- xilinx.com:user:inter_ip:1.0 - inter_ip_0
+Adding component instance block -- xilinx.com:user:AES_ip:10.0 - AES_ip_0
+Adding component instance block -- xilinx.com:user:gcdip:1.0 - gcdip_0
+Adding component instance block -- xilinx.com:user:desip:1.0 - desip_0
+Successfully read diagram <system> from block design file <C:/embeding_system/final_project/vivado/project_1.srcs/sources_1/bd/system/system.bd>
+open_bd_design: Time (s): cpu = 00:00:17 ; elapsed = 00:00:15 . Memory (MB): peak = 1244.652 ; gain = 122.043
+exit
+INFO: [Common 17-206] Exiting Vivado at Mon Jun 16 16:06:28 2025...
