@@ -126,7 +126,7 @@ graph TD
 - USB Cable
 - Network Cable (Optional)
 
-### 2. Vivado Project Build
+### 2. Vivado Project Build(lab_1)
 ```bash
 # Open Vivado 2020.2
 cd vivado/
@@ -136,21 +136,21 @@ vivado project_1.xpr
 # Implementation → Generate Bitstream
 ```
 
-### 3. Vitis Standalone Application Test
+### 3. Vitis Standalone Application Test(lab_1)
 ```bash
 cd Vitis/final/
 # Import project in Vitis and compile
 # Download to development board to test IP functions
 ```
 
-### 4. FreeRTOS Multi-task System
+### 4. FreeRTOS Multi-task System(lab_2)
 ```bash
 cd FreeRTOS/testfinalFreeRTOS*/
 # Compile and download FreeRTOS application
 # Observe multi-task execution effects
 ```
 
-### 5. Linux Driver Compilation and Loading
+### 5. Linux Driver Compilation and Loading(lab_3,4)
 ```bash
 # Compile driver module
 cd Linux_driver_and_application/
@@ -198,7 +198,7 @@ cd work_file/
 - [ ] Optimize overall system performance
 - [ ] Add graphical user interface
 
-## Development Experience 💭
+## Development Experience 
 
 ### Technical Challenges
 1. **Hardware-Software Co-design**: Need to master both FPGA design and embedded software development
@@ -206,13 +206,8 @@ cd work_file/
 3. **Real-time System Design**: FreeRTOS multi-task scheduling and synchronization mechanisms
 4. **Driver Development**: Linux kernel module development and debugging
 
-### Summary of Gains
-- Deep understanding of complete embedded system development process
-- Mastery of Xilinx toolchain usage
-- Learning hardware acceleration algorithm design and implementation
-- Improved system-level problem analysis and solving capabilities
 
-## Contributing 🤝
+## Contributing 
 
 Welcome to submit improvement suggestions or Pull Requests to this project:
 
@@ -228,9 +223,9 @@ This project uses MIT License - see [LICENSE](LICENSE) file for details
 
 ## Contact Information 📧
 
-- **Project Author**: Embedded Systems Course Students
-- **Supervising Professor**: [Professor Name]
-- **University**: [University Name]
+
+- **Email**: [S1052016@gm.ncue.edu.tw]
+
 
 ## Acknowledgments 🙏
 
